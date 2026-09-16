@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дизайн и ремонт коммерческих помещений под ключ — CONCEPT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F3EF;
+  --paper-2:#EFEAE3;
+  --white:#FFFFFF;
+  --box:#E3DDD4;
+  --box-2:#D8D1C6;
+  --line:#D9D2C8;
+  --ink:#241F1C;
+  --ink-2:#6F675E;
+  --wine:#500711;
+  --wine-soft:rgba(80,7,17,.06);
+  --brass:#AC8856;
+
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+
+  --wrap:1180px;
+  --pad:40px;
+  --sect:110px;
+}
+@media(max-width:900px){:root{--pad:20px;--sect:68px}}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+section{padding:var(--sect) 0}
+.alt{background:var(--paper-2)}
+
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08}
+h1{font-size:clamp(40px,6vw,82px)}
+h2{font-size:clamp(30px,4.2vw,56px);margin-bottom:16px}
+h3{font-size:clamp(20px,2vw,27px)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin-bottom:22px;display:block}
+.lead{font-size:clamp(16px,1.4vw,19px);color:var(--ink-2);max-width:60ch}
+.sec-top{margin-bottom:52px}
+
+/* заглушки текста */
+.t{background:var(--box);border-radius:2px;height:10px;margin-bottom:8px}
+.t.s{height:9px}
+.w95{width:95%}.w85{width:85%}.w70{width:70%}.w55{width:55%}.w40{width:40%}.w25{width:25%}
+.img{background:repeating-linear-gradient(45deg,var(--box),var(--box) 12px,var(--box-2) 12px,var(--box-2) 24px);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;color:var(--ink-2);text-align:center;padding:16px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:54px;padding:0 32px;
+  font-size:14px;letter-spacing:.04em;border-radius:2px;white-space:nowrap}
+.btn-p{background:var(--wine);color:#fff}
+.btn-g{border:1px solid var(--line);color:var(--ink)}
+.btn-w{width:100%}
+
+/* шапка */
+header{position:sticky;top:0;z-index:30;background:rgba(246,243,239,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:24px;height:82px}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.2em;line-height:1}
+.logo i{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.34em;color:var(--ink-2);font-style:normal;margin-top:5px}
+nav{display:flex;gap:28px}
+nav a{font-size:14px;color:var(--ink-2);text-decoration:none}
+@media(max-width:940px){nav{display:none}}
+
+/* первый экран */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;padding:96px 0 var(--sect)}
+@media(max-width:940px){.hero{grid-template-columns:1fr;gap:36px;padding-top:56px}}
+.hero-img{aspect-ratio:4/5}
+.hero h1{margin-bottom:24px}
+.hero .lead{margin-bottom:34px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+@media(max-width:540px){.cta{flex-direction:column}.cta .btn{width:100%}}
+.under{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);letter-spacing:.04em}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:var(--sect)}
+@media(max-width:760px){.trio{grid-template-columns:1fr;gap:20px}}
+.trio > div{border-top:1px solid var(--brass);padding-top:18px}
+.trio h3{font-size:19px;margin-bottom:10px}
+
+/* калькулятор */
+.calc{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:start}
+@media(max-width:940px){.calc{grid-template-columns:1fr;gap:30px}}
+.card{background:var(--white);border:1px solid var(--line);padding:30px}
+.q{font-size:14px;margin-bottom:12px;color:var(--ink)}
+.opt{border:1px solid var(--line);padding:15px 16px;margin-bottom:10px;font-size:14px;display:flex;gap:11px;align-items:center}
+.opt.on{border-color:var(--wine);background:var(--wine-soft)}
+.dot{width:13px;height:13px;border-radius:50%;border:1px solid var(--line);flex:none}
+.opt.on .dot{border-color:var(--wine);background:var(--wine);box-shadow:inset 0 0 0 3px #fff}
+.inp{height:52px;border:1px solid var(--line);display:flex;align-items:center;padding:0 16px;font-size:14px;color:var(--ink-2);margin-bottom:22px}
+.res{background:var(--wine);color:#fff;padding:24px}
+.res .r{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.16);font-size:14px}
+.res .r:last-child{border:none;padding-top:16px;font-size:20px;font-family:var(--serif)}
+
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid var(--line);padding:13px 15px;font-size:13.5px;text-align:left;vertical-align:top}
+th{background:var(--box);font-weight:500;font-size:12.5px}
+td.c{text-align:center}
+.tnote{font-size:14px;color:var(--ink-2);margin-top:14px}
+
+.mat{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}
+@media(max-width:760px){.mat{grid-template-columns:1fr}}
+
+/* работы */
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:940px){.works{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.works{grid-template-columns:1fr}}
+.work .img{aspect-ratio:4/3;margin-bottom:14px}
+.work h3{font-size:18px;margin-bottom:6px}
+.work .meta{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.03em}
+
+/* услуги */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+@media(max-width:940px){.svc{grid-template-columns:1fr}}
+.svc-c{border:1px solid var(--line);background:var(--white);padding:28px}
+.svc-c h3{font-size:20px;margin-bottom:14px}
+
+/* этапы */
+.stg{display:grid;grid-template-columns:78px 1fr;gap:28px;padding:30px 0;border-top:1px solid var(--line)}
+.stg:last-of-type{border-bottom:1px solid var(--line)}
+@media(max-width:700px){.stg{grid-template-columns:48px 1fr;gap:16px;padding:24px 0}}
+.stg-n{font-family:var(--serif);font-size:42px;color:var(--brass);line-height:.9}
+.stg h3{margin-bottom:10px}
+.sub3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+@media(max-width:860px){.sub3{grid-template-columns:1fr}}
+.sub3 > div{background:var(--white);border:1px solid var(--line);padding:18px}
+.sub3 b{font-size:13.5px;display:block;margin-bottom:9px;font-weight:500}
+
+/* преимущества */
+.adv{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:900px){.adv{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.adv{grid-template-columns:1fr}}
+.adv > div{background:var(--paper);padding:30px}
+.adv h3{font-size:18px;margin-bottom:12px}
+
+/* визуал */
+.gift{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:940px){.gift{grid-template-columns:1fr;gap:32px}}
+.gift .img{aspect-ratio:16/11}
+
+/* о студии */
+.about{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+@media(max-width:940px){.about{grid-template-columns:1fr;gap:32px}}
+.about .img{aspect-ratio:4/5}
+.name{font-family:var(--serif);font-size:26px;margin-bottom:4px}
+.role{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--brass);text-transform:uppercase;margin-bottom:24px}
+
+/* faq */
+.faq{border-top:1px solid var(--line)}
+.faq > div{border-bottom:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.faq h3{font-size:18px;flex:1}
+.faq span{color:var(--brass);font-size:20px;line-height:1.2}
+.faq .open{padding-bottom:26px}
+.faq .ans{margin-top:14px}
+
+/* форма */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:940px){.form{grid-template-columns:1fr;gap:32px}}
+.cnt > div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.cnt .k{color:var(--ink-2)}
+.agree{font-size:12px;color:var(--ink-2);margin:16px 0 18px;line-height:1.5}
+
+footer{background:var(--ink);color:#C9C2B8;padding:56px 0 40px}
+footer .logo{color:#fff}
+footer .logo i{color:#8D857A}
+.fgrid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.fl{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.fbot{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#8D857A;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <div class="logo">CONCEPT<i>interior design studio</i></div>
+    <nav>
+      <a href="#calc">Стоимость</a>
+      <a href="#works">Работы</a>
+      <a href="#svc">Услуги</a>
+      <a href="#how">Как работаем</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a href="#form" class="btn btn-p" style="height:44px;padding:0 22px">Рассчитать</a>
+  </div>
+</header>
+
+<!-- 1 -->
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Дизайн и реализация коммерческих интерьеров</span>
+      <h1>Ведём объект от первой встречи до открытия</h1>
+      <p class="lead">Кафе, салоны, офисы, магазины. Проектирование и ремонт по одному договору с одной командой.</p>
+      <div class="cta">
+        <a href="#calc" class="btn btn-p">Рассчитать стоимость</a>
+        <a href="#works" class="btn btn-g">Посмотреть работы</a>
+      </div>
+      <div class="under">Проектируем удалённо по всей России · Сейчас есть свободный слот на старт</div>
+    </div>
+    <div class="img hero-img">ФОТО ОБЪЕКТА</div>
+  </div>
+
+  <div class="trio">
+    <div>
+      <h3>Один договор от идеи до открытия</h3>
+      <div class="t w95"></div><div class="t w85"></div><div class="t w55"></div>
+    </div>
+    <div>
+      <h3>Открытые цены</h3>
+      <div class="t w95"></div><div class="t w70"></div>
+    </div>
+    <div>
+      <h3>Камера на объекте 24/7</h3>
+      <div class="t w95"></div><div class="t w85"></div><div class="t w40"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<section class="alt" id="calc">
+  <div class="wrap">
+    <div class="sec-top">
+      <h2>Рассчитайте стоимость</h2>
+      <p class="lead">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
+    </div>
+
+    <div class="calc">
+      <div class="card">
+        <div class="q">Что вам нужно</div>
+        <div class="opt on"><i class="dot"></i>Дизайн-проект и ремонт</div>
+        <div class="opt"><i class="dot"></i>Только дизайн-проект</div>
+
+        <div class="q" style="margin-top:22px">Площадь помещения, м²</div>
+        <div class="inp">100</div>
+
+        <div class="res">
+          <div class="r"><span>Дизайн-проект</span><span>350 000 ₽</span></div>
+          <div class="r"><span>Ремонтные работы</span><span>от 2 500 000 ₽</span></div>
+          <div class="r"><span>Итого</span><span>от 2 850 000 ₽</span></div>
+        </div>
+
+        <div style="margin-top:18px"><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div></div>
+        <div style="margin-top:16px"><div class="t s w70"></div></div>
+        <a href="#form" class="btn btn-g btn-w" style="margin-top:18px">Обсудить проект</a>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:18px">Стоимость работ</h3>
+        <table>
+          <tr><th>Площадь объекта</th><th>Дизайн-проект, если ремонт выполняем мы</th><th>Дизайн-проект без ремонта</th></tr>
+          <tr><td>до 100 м²</td><td>3 500 ₽ за м²</td><td>7 000 ₽ за м²</td></tr>
+          <tr><td>от 100 до 200 м²</td><td>2 500 ₽ за м²</td><td>5 000 ₽ за м²</td></tr>
+          <tr><td>от 200 до 500 м²</td><td>2 000 ₽ за м²</td><td>4 000 ₽ за м²</td></tr>
+          <tr><td>от 500 м²</td><td>Обсуждается</td><td>Обсуждается</td></tr>
+        </table>
+
+        <div class="tnote">
+          <b style="font-weight:500">Проект дешевле, если ремонт выполняем мы</b>
+          <div style="margin-top:10px"><div class="t w95"></div><div class="t w95"></div><div class="t w55"></div></div>
+        </div>
+
+        <h3 style="margin:34px 0 16px">Дополнительные направления</h3>
+        <table>
+          <tr><th>Направление</th><th>Стоимость</th><th>Что входит</th></tr>
+          <tr><td>Ремонтные работы</td><td>от 25 000 ₽ за м²</td><td><div class="t s"></div><div class="t s w70"></div></td></tr>
+          <tr><td>Авторский надзор</td><td>50 000 ₽ в месяц</td><td><div class="t s"></div><div class="t s w70"></div></td></tr>
+          <tr><td>Комплектация материалами</td><td>Условия ниже</td><td><div class="t s"></div><div class="t s w70"></div></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:72px">
+      <h2>Как устроены расходы на материалы</h2>
+
+      <div class="mat">
+        <div class="card">
+          <h3 style="font-size:20px;margin-bottom:14px">Черновые материалы</h3>
+          <div class="t w95"></div><div class="t w85"></div>
+          <div style="height:10px"></div>
+          <div class="t w95"></div><div class="t w70"></div>
+          <div style="height:10px"></div>
+          <div class="t w95"></div><div class="t w55"></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:20px;margin-bottom:14px">Чистовые материалы</h3>
+          <div class="t w95"></div><div class="t w85"></div>
+          <div style="height:10px"></div>
+          <div class="t w95"></div><div class="t w95"></div><div class="t w40"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:50px;max-width:74ch">
+        <h3 style="margin-bottom:16px">Как устроена комплектация материалами и почему это выгодно вам</h3>
+        <div class="t w95"></div><div class="t w85"></div>
+        <div style="height:12px"></div>
+        <div class="t w95"></div><div class="t w95"></div><div class="t w70"></div>
+        <div style="height:12px"></div>
+        <div class="t w95"></div><div class="t w55"></div>
+      </div>
+
+      <div style="margin-top:34px">
+        <h3 style="font-size:20px;margin-bottom:16px">Что входит в комплектацию</h3>
+        <div class="t w55"></div><div class="t w40"></div><div class="t w55"></div><div class="t w40"></div><div class="t w40"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="works">
+  <div class="wrap">
+    <div class="sec-top">
+      <h2>Что мы уже сделали</h2>
+      <p class="lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
+    </div>
+
+    <div class="works">
+      <div class="work">
+        <div class="img">ФОТО ОБЪЕКТА</div>
+        <h3>Кофейня, 84 м², Москва</h3>
+        <div class="meta">Дизайн-проект и ремонт · 3 месяца · фотографии готового объекта</div>
+      </div>
+      <div class="work">
+        <div class="img">ВИЗУАЛИЗАЦИЯ</div>
+        <h3>Салон красоты, 120 м²</h3>
+        <div class="meta">Дизайн-проект · визуализации</div>
+      </div>
+      <div class="work">
+        <div class="img">ФОТО ОБЪЕКТА</div>
+        <h3 style="color:var(--box-2)">Название объекта</h3>
+        <div class="meta" style="color:var(--box-2)">формат · срок · тип материалов</div>
+      </div>
+      <div class="work">
+        <div class="img">ФОТО ОБЪЕКТА</div>
+        <h3 style="color:var(--box-2)">Название объекта</h3>
+        <div class="meta" style="color:var(--box-2)">формат · срок · тип материалов</div>
+      </div>
+      <div class="work">
+        <div class="img">ВИЗУАЛИЗАЦИЯ</div>
+        <h3 style="color:var(--box-2)">Название объекта</h3>
+        <div class="meta" style="color:var(--box-2)">формат · срок · тип материалов</div>
+      </div>
+      <div class="work">
+        <div class="img">ФОТО ОБЪЕКТА</div>
+        <h3 style="color:var(--box-2)">Название объекта</h3>
+        <div class="meta" style="color:var(--box-2)">формат · срок · тип материалов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="alt" id="svc">
+  <div class="wrap">
+    <div class="sec-top">
+      <h2>Три формата работы</h2>
+      <p class="lead">Форматы отличаются глубиной участия студии. Ниже перечислено, что входит в каждый.</p>
+    </div>
+
+    <table>
+      <tr>
+        <th style="width:44%">Что входит</th>
+        <th style="text-align:center">Только<br>дизайн-проект</th>
+        <th style="text-align:center">Дизайн-проект<br>+ надзор</th>
+        <th style="text-align:center">Дизайн-проект<br>+ ремонт</th>
+      </tr>
+      <tr><td>Обмеры и фотофиксация объекта</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Техническое задание</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Планировочное решение</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Концепция, материалы, цветовая гамма</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Фотореалистичные визуализации</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Полный комплект рабочих чертежей</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Спецификации материалов и оборудования</td><td class="c">да</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Подбор и закупка чистовых материалов</td><td class="c">—</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Работа с поставщиками, скидки, поставки</td><td class="c">—</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Авторский надзор на объекте</td><td class="c">—</td><td class="c">да</td><td class="c">да</td></tr>
+      <tr><td>Ремонтные работы</td><td class="c">—</td><td class="c">—</td><td class="c">да</td></tr>
+      <tr><td>Организация и контроль работ</td><td class="c">—</td><td class="c">—</td><td class="c">да</td></tr>
+      <tr><td>Видеонаблюдение на объекте</td><td class="c">—</td><td class="c">—</td><td class="c">да</td></tr>
+      <tr><td>Финальная приёмка и сдача</td><td class="c">—</td><td class="c">—</td><td class="c">да</td></tr>
+    </table>
+
+    <div class="svc">
+      <div class="svc-c">
+        <h3>Только дизайн-проект</h3>
+        <div class="t w95"></div><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div>
+      </div>
+      <div class="svc-c">
+        <h3>Проект с авторским надзором</h3>
+        <div class="t w95"></div><div class="t w95"></div><div class="t w95"></div><div class="t w95"></div><div class="t w70"></div>
+      </div>
+      <div class="svc-c">
+        <h3>Дизайн-проект и ремонт</h3>
+        <div class="t w95"></div><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-top">
+      <h2>Шесть этапов от знакомства до сдачи</h2>
+      <p class="lead">Каждый этап заканчивается согласованием. Следующий начинается только после того, как предыдущий вас устроил.</p>
+    </div>
+
+    <div class="stg">
+      <div class="stg-n">1</div>
+      <div><h3>Знакомство</h3><div class="t w95"></div><div class="t w95"></div><div class="t w70"></div></div>
+    </div>
+    <div class="stg">
+      <div class="stg-n">2</div>
+      <div><h3>Проектирование</h3><div class="t w95"></div><div class="t w95"></div><div class="t w85"></div></div>
+    </div>
+    <div class="stg">
+      <div class="stg-n">3</div>
+      <div><h3>Визуализация</h3><div class="t w95"></div><div class="t w95"></div><div class="t w70"></div></div>
+    </div>
+    <div class="stg">
+      <div class="stg-n">4</div>
+      <div><h3>Документация</h3><div class="t w95"></div><div class="t w95"></div><div class="t w55"></div></div>
+    </div>
+    <div class="stg">
+      <div class="stg-n">5</div>
+      <div>
+        <h3>Реализация</h3>
+        <div class="t w70"></div>
+        <div class="sub3">
+          <div><b>Дизайн-проект и ремонт</b><div class="t"></div><div class="t w95"></div><div class="t w55"></div></div>
+          <div><b>Проект с авторским надзором</b><div class="t"></div><div class="t w95"></div><div class="t w40"></div></div>
+          <div><b>Только дизайн-проект</b><div class="t"></div><div class="t w95"></div><div class="t w40"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stg">
+      <div class="stg-n">6</div>
+      <div><h3>Сдача</h3><div class="t w95"></div><div class="t w95"></div><div class="t w55"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-top">
+      <h2>Инструменты, которые снимают с вас лишние задачи</h2>
+      <p class="lead">Ремонт коммерческого помещения требует постоянного внимания. Вот что мы делаем, чтобы вам не приходилось держать всё под личным контролем.</p>
+    </div>
+
+    <div class="adv">
+      <div><h3>Камера на объекте круглосуточно</h3><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div></div>
+      <div><h3>Проект в рамках вашего бюджета</h3><div class="t w95"></div><div class="t w95"></div><div class="t w70"></div></div>
+      <div><h3>Один договор на дизайн-проект и ремонт</h3><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div></div>
+      <div><h3>Понятный порядок оплаты</h3><div class="t w95"></div><div class="t w70"></div></div>
+      <div><h3>Авторский надзор</h3><div class="t w95"></div><div class="t w85"></div><div class="t w55"></div></div>
+      <div><h3>Согласование на каждом этапе</h3><div class="t w95"></div><div class="t w85"></div><div class="t w40"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <div class="wrap">
+    <div class="gift">
+      <div>
+        <h2>Показываем направление работ до подписания договора</h2>
+        <div style="margin-top:22px;max-width:56ch">
+          <div class="t w95"></div><div class="t w85"></div>
+          <div style="height:12px"></div>
+          <div class="t w95"></div><div class="t w95"></div><div class="t w70"></div>
+          <div style="height:12px"></div>
+          <div class="t w85"></div>
+        </div>
+        <h3 style="margin-top:34px;margin-bottom:14px">Зачем это нужно</h3>
+        <div style="max-width:56ch"><div class="t w95"></div><div class="t w95"></div><div class="t w55"></div></div>
+      </div>
+      <div class="img">ПРИМЕР НАБРОСКА</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="alt">
+  <div class="wrap">
+    <div class="about">
+      <div class="img">ФОТО ОСНОВАТЕЛЯ</div>
+      <div>
+        <h2 style="margin-bottom:28px">Кто ведёт ваш объект</h2>
+        <div class="name">Никита Финько</div>
+        <div class="role">Основатель студии</div>
+        <div style="max-width:58ch">
+          <div class="t w95"></div><div class="t w70"></div>
+          <div style="height:12px"></div>
+          <div class="t w95"></div><div class="t w95"></div><div class="t w55"></div>
+        </div>
+        <h3 style="margin-top:32px;margin-bottom:14px">Мой подход</h3>
+        <div style="max-width:58ch"><div class="t w95"></div><div class="t w95"></div><div class="t w95"></div><div class="t w40"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-top"><h2>Что обычно спрашивают</h2></div>
+
+    <div class="faq">
+      <div class="open">
+        <div style="flex:1">
+          <h3>Сколько стоит дизайн-проект?</h3>
+          <div class="ans" style="max-width:70ch"><div class="t w95"></div><div class="t w95"></div><div class="t w55"></div></div>
+        </div>
+        <span>−</span>
+      </div>
+      <div><h3>Сколько времени занимает дизайн-проект?</h3><span>+</span></div>
+      <div><h3>Можно заказать только дизайн без ремонта?</h3><span>+</span></div>
+      <div><h3>Можно ли заказать всё под ключ?</h3><span>+</span></div>
+      <div><h3>Как понять, сколько будет стоить сам ремонт?</h3><span>+</span></div>
+      <div><h3>Вы учитываете мой бюджет при проектировании?</h3><span>+</span></div>
+      <div><h3>Что делать, если я не знаю, какой стиль хочу?</h3><span>+</span></div>
+      <div><h3>Сколько вариантов планировки вы предлагаете?</h3><span>+</span></div>
+      <div><h3>Можно ли вносить изменения в проект?</h3><span>+</span></div>
+      <div><h3>Кто закупает материалы и мебель?</h3><span>+</span></div>
+      <div><h3>Зачем нужен авторский надзор?</h3><span>+</span></div>
+      <div><h3>Вы работаете только в Москве?</h3><span>+</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="alt" id="form">
+  <div class="wrap">
+    <div class="form">
+      <div>
+        <h2>Расскажите про объект</h2>
+        <p class="lead">Напишите пару слов о помещении и задаче. Свяжемся, ответим на вопросы и предложим подходящий формат работы.</p>
+
+        <div class="cnt" style="margin-top:36px">
+          <div><span class="k">Телефон</span><span>+7 (905) 408-70-00</span></div>
+          <div><span class="k">WhatsApp</span><span>+7 (905) 408-70-00</span></div>
+          <div><span class="k">Telegram</span><span>@Finko8800</span></div>
+          <div><span class="k">Instagram</span><span>@studio.design.concept</span></div>
+        </div>
+
+        <div class="under" style="margin-top:22px">Отвечаем в рабочее время с 9 до 20, воскресенье — выходной</div>
+      </div>
+
+      <div class="card">
+        <div class="inp">Имя</div>
+        <div class="inp">Телефон или мессенджер</div>
+        <div class="inp">Тип объекта</div>
+        <div class="inp">Площадь</div>
+        <div class="inp" style="height:96px;align-items:flex-start;padding-top:16px">Что нужно сделать</div>
+        <div class="agree">Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности и обработкой персональных данных.</div>
+        <div class="btn btn-p btn-w">Отправить</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo">CONCEPT<i>interior design studio</i></div>
+        <div style="margin-top:18px;font-size:14px;max-width:34ch">Студия дизайна и реализации коммерческих интерьеров. Проектируем по всей России.</div>
+      </div>
+      <div class="fl">
+        <span>Стоимость</span><span>Работы</span><span>Услуги</span><span>Как работаем</span><span>Вопросы</span>
+      </div>
+      <div class="fl">
+        <span>+7 (905) 408-70-00</span><span>@Finko8800</span><span>@studio.design.concept</span>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>Реквизиты</span>
+      <span>Политика конфиденциальности · Согласие на обработку персональных данных</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
