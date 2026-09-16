@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Дизайн и ремонт коммерческих помещений под ключ — CONCEPT</title>
+<link rel="icon" href="assets/logo-mark.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -62,8 +63,12 @@ h3{font-size:clamp(20px,2vw,27px)}
 /* шапка */
 header{position:sticky;top:0;z-index:30;background:rgba(246,243,239,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;justify-content:space-between;gap:24px;height:82px}
-.logo{font-family:var(--serif);font-size:24px;letter-spacing:.2em;line-height:1}
+.logo{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit}
+.logo img{height:40px;width:auto;display:block}
+.logo span{font-family:var(--serif);font-size:24px;letter-spacing:.2em;line-height:1}
 .logo i{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.34em;color:var(--ink-2);font-style:normal;margin-top:5px}
+.logo--f img{height:46px}
+@media(max-width:620px){.logo img{height:32px}.logo span{font-size:19px}}
 nav{display:flex;gap:28px}
 nav a{font-size:14px;color:var(--ink-2);text-decoration:none}
 @media(max-width:940px){nav{display:none}}
@@ -166,7 +171,7 @@ td.c{text-align:center}
 .agree{font-size:12px;color:var(--ink-2);margin:16px 0 18px;line-height:1.5}
 
 footer{background:var(--ink);color:#C9C2B8;padding:56px 0 40px}
-footer .logo{color:#fff}
+footer .logo span{color:#fff}
 footer .logo i{color:#8D857A}
 .fgrid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
 .fl{display:flex;flex-direction:column;gap:10px;font-size:14px}
@@ -177,7 +182,10 @@ footer .logo i{color:#8D857A}
 
 <header>
   <div class="wrap hd">
-    <div class="logo">CONCEPT<i>interior design studio</i></div>
+    <a href="#top" class="logo">
+      <img src="assets/logo-mark.png" alt="CONCEPT">
+      <span>CONCEPT<i>interior design studio</i></span>
+    </a>
     <nav>
       <a href="#calc">Стоимость</a>
       <a href="#works">Работы</a>
@@ -190,7 +198,7 @@ footer .logo i{color:#8D857A}
 </header>
 
 <!-- 1 -->
-<div class="wrap">
+<div class="wrap" id="top">
   <div class="hero">
     <div>
       <span class="eyebrow">Дизайн и реализация коммерческих интерьеров</span>
@@ -569,7 +577,10 @@ footer .logo i{color:#8D857A}
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="logo">CONCEPT<i>interior design studio</i></div>
+        <div class="logo logo--f">
+          <img src="assets/logo-mark-white.png" alt="CONCEPT">
+          <span>CONCEPT<i>interior design studio</i></span>
+        </div>
         <div style="margin-top:18px;font-size:14px;max-width:34ch">Студия дизайна и реализации коммерческих интерьеров. Проектируем по всей России.</div>
       </div>
       <div class="fl">
