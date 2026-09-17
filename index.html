@@ -7,97 +7,97 @@
 <meta name="description" content="Разрабатываем дизайн-проекты и выполняем ремонт коммерческих помещений. Один договор от идеи до открытия, открытые цены, видеонаблюдение на объекте. Дизайн-проект от 2 000 ₽ за м².">
 <link rel="icon" href="assets/logo/concept.svg" type="image/svg+xml">
 
-<link rel="preload" href="assets/fonts/Cormorant-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GolosText-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/krasnov.css">
 </head>
 <body>
+
+<!-- Служебная строка: два варианта подачи лежат рядом -->
+<div class="variant">
+  <div class="wrap">
+    <span>Вариант подачи 2 — krasnov</span>
+    <a href="balcon/index.html">Открыть вариант 1 — balcon</a>
+  </div>
+</div>
+
+<main id="top">
 
 <!-- ============================================================
      БЛОК 1 — ПЕРВЫЙ ЭКРАН
      ============================================================ -->
-<header class="header on-dark">
-  <div class="wrap header__inner">
-    <a class="header__logo" href="#top" aria-label="CONCEPT — на главную">
-      <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="75" height="46">
-    </a>
-
-    <nav class="nav" aria-label="Основная навигация">
-      <a href="#calc-section">Расчёт стоимости</a>
-      <a href="#works">Работы</a>
-      <a href="#services">Услуги</a>
-      <a href="#process">Как работаем</a>
-      <a href="#about">О студии</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-
-    <a class="header__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
-
-    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false">
-      <span></span>
-    </button>
-  </div>
-</header>
-
-<main id="top">
-
 <section class="hero on-dark">
   <div class="hero__media">
     <img src="assets/photo/hero.jpg" alt="Интерьер бара: барная стойка с латунной отделкой, мягкие диваны, тёплый свет" fetchpriority="high" width="2000" height="1250">
   </div>
 
-  <div class="wrap hero__inner">
-    <div class="hero__grid">
+  <div class="wrap hero__top">
+    <a class="hero__brand" href="#top" aria-label="CONCEPT — на главную">CONCEPT</a>
+    <a class="hero__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
+  </div>
 
-      <div class="hero__left">
-        <p class="eyebrow">Дизайн и реализация коммерческих интерьеров</p>
-        <h1 class="h1">Ведём объект от первой встречи до открытия</h1>
-        <p class="hero__note">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
+  <div class="wrap hero__bottom">
+    <div>
+      <p class="eyebrow">Дизайн и реализация коммерческих интерьеров</p>
+      <h1 class="h1 hero__title" style="margin-top:22px">Ведём объект от первой встречи до открытия</h1>
+      <p class="hero__note">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
+    </div>
+
+    <div class="hero__aside">
+      <p>Кафе, салоны, офисы, магазины. Проектирование и ремонт по одному договору с одной командой.</p>
+
+      <nav class="hero__nav" aria-label="Основная навигация">
+        <a href="#calc-section">Расчёт стоимости</a>
+        <a href="#works">Работы</a>
+        <a href="#services">Услуги</a>
+        <a href="#process">Как работаем</a>
+        <a href="#about">О студии</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="hero__actions">
+        <a class="btn" href="#calc-section">Рассчитать стоимость</a>
+        <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
       </div>
-
-      <div class="hero__right">
-        <div class="hero__card">
-          <p>Кафе, салоны, офисы, магазины. Проектирование и ремонт по одному договору с одной командой.</p>
-          <a class="btn btn--primary" href="#calc-section">Рассчитать стоимость</a>
-          <a class="btn btn--outline" href="#works">Посмотреть работы</a>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
 <section class="section usp">
   <div class="wrap">
+    <p class="eyebrow">Как мы работаем</p>
 
-    <div class="usp__row">
-      <h2 class="h3">Один договор от идеи до открытия</h2>
-      <p>Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
+    <div class="usp__grid">
+      <div class="usp__item">
+        <h2 class="h3">Один договор от идеи до открытия</h2>
+        <p>Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
+      </div>
+      <div class="usp__item">
+        <h2 class="h3">Открытые цены</h2>
+        <p>Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
+      </div>
+      <div class="usp__item">
+        <h2 class="h3">Камера на объекте 24/7</h2>
+        <p>Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
+      </div>
     </div>
-
-    <div class="usp__row">
-      <h2 class="h3">Открытые цены</h2>
-      <p>Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
-    </div>
-
-    <div class="usp__row">
-      <h2 class="h3">Камера на объекте 24/7</h2>
-      <p>Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
-    </div>
-
   </div>
 </section>
 
 <!-- ============================================================
      БЛОК 2 — РАСЧЁТ СТОИМОСТИ И ЦЕНЫ
      ============================================================ -->
-<section class="section section--beige" id="calc-section">
+<section class="section section--grey" id="calc-section">
   <div class="wrap">
 
     <div class="sec-head">
-      <h2 class="h2">Рассчитайте стоимость</h2>
-      <p class="lead">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
+      <div>
+        <p class="eyebrow">Расчёт стоимости</p>
+        <h2 class="h2">Рассчитайте стоимость</h2>
+      </div>
+      <div class="sec-head__aside">
+        <p class="lead">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
+      </div>
     </div>
 
     <form class="calc" id="calc" novalidate>
@@ -169,126 +169,142 @@
       <p class="note calc__disclaimer">Это ориентировочный расчёт. Точную стоимость назовём после обмеров и согласования объёма работ.</p>
 
       <div class="calc__cta">
-        <a class="btn btn--primary" href="#contacts">Обсудить проект</a>
+        <a class="btn" href="#contacts">Обсудить проект</a>
       </div>
     </form>
 
-    <!-- Стоимость работ -->
-    <div class="table-block">
-      <h3 class="h3">Стоимость работ</h3>
-      <table class="ptable">
-        <thead>
-          <tr>
-            <th scope="col">Площадь объекта</th>
-            <th scope="col">Дизайн-проект, если ремонт выполняем мы</th>
-            <th scope="col">Дизайн-проект без ремонта</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">до 100 м²</th>
-            <td class="num" data-label="Если ремонт выполняем мы">3 500 ₽ за м²</td>
-            <td class="num" data-label="Без ремонта">7 000 ₽ за м²</td>
-          </tr>
-          <tr>
-            <th scope="row">от 100 до 200 м²</th>
-            <td class="num" data-label="Если ремонт выполняем мы">2 500 ₽ за м²</td>
-            <td class="num" data-label="Без ремонта">5 000 ₽ за м²</td>
-          </tr>
-          <tr>
-            <th scope="row">от 200 до 500 м²</th>
-            <td class="num" data-label="Если ремонт выполняем мы">2 000 ₽ за м²</td>
-            <td class="num" data-label="Без ремонта">4 000 ₽ за м²</td>
-          </tr>
-          <tr>
-            <th scope="row">от 500 м²</th>
-            <td class="num" data-label="Если ремонт выполняем мы">Обсуждается</td>
-            <td class="num" data-label="Без ремонта">Обсуждается</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="explain">
-        <h4 class="h4">Проект дешевле, если ремонт выполняем мы</h4>
-        <p>Когда мы делаем и проект, и ремонт, часть работы окупается на самом ремонте — поэтому проектирование стоит дешевле. Если ремонт выполняет ваша бригада, стоимость считается по второй колонке.</p>
+    <!-- Цены строками-аккордеонами, как в референсе -->
+    <div class="price">
+      <div class="price__head">
+        <span>Цены</span>
+        <span>Стоимость</span>
       </div>
-    </div>
 
-    <!-- Дополнительные направления -->
-    <div class="table-block">
-      <h3 class="h3">Дополнительные направления</h3>
-      <table class="ptable">
-        <thead>
-          <tr>
-            <th scope="col">Направление</th>
-            <th scope="col">Стоимость</th>
-            <th scope="col">Что входит</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Ремонтные работы</th>
-            <td class="num" data-label="Стоимость">от 25 000 ₽ за м²</td>
-            <td data-label="Что входит">Только работы. Материалы оплачиваются дополнительно</td>
-          </tr>
-          <tr>
-            <th scope="row">Авторский надзор</th>
-            <td class="num" data-label="Стоимость">50 000 ₽ в месяц</td>
-            <td data-label="Что входит">Регулярные выезды на объект, контроль соответствия проекту</td>
-          </tr>
-          <tr>
-            <th scope="row">Комплектация материалами</th>
-            <td class="num" data-label="Стоимость">Условия ниже</td>
-            <td data-label="Что входит">Подбор, согласование и закупка чистовых материалов</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <details class="price__row" open>
+        <summary>
+          <span class="price__name">Стоимость работ</span>
+          <span class="price__sum">от 2 000 ₽ за м²</span>
+          <span class="price__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="price__body">
+          <table class="ptable">
+            <thead>
+              <tr>
+                <th scope="col">Площадь объекта</th>
+                <th scope="col">Дизайн-проект, если ремонт выполняем мы</th>
+                <th scope="col">Дизайн-проект без ремонта</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">до 100 м²</th>
+                <td class="num" data-label="Если ремонт выполняем мы">3 500 ₽ за м²</td>
+                <td class="num" data-label="Без ремонта">7 000 ₽ за м²</td>
+              </tr>
+              <tr>
+                <th scope="row">от 100 до 200 м²</th>
+                <td class="num" data-label="Если ремонт выполняем мы">2 500 ₽ за м²</td>
+                <td class="num" data-label="Без ремонта">5 000 ₽ за м²</td>
+              </tr>
+              <tr>
+                <th scope="row">от 200 до 500 м²</th>
+                <td class="num" data-label="Если ремонт выполняем мы">2 000 ₽ за м²</td>
+                <td class="num" data-label="Без ремонта">4 000 ₽ за м²</td>
+              </tr>
+              <tr>
+                <th scope="row">от 500 м²</th>
+                <td class="num" data-label="Если ремонт выполняем мы">Обсуждается</td>
+                <td class="num" data-label="Без ремонта">Обсуждается</td>
+              </tr>
+            </tbody>
+          </table>
 
-    <!-- Материалы -->
-    <div class="table-block">
-      <h3 class="h3">Как устроены расходы на материалы</h3>
-
-      <h4 class="h4">Черновые и чистовые материалы</h4>
-
-      <div class="split">
-        <div class="split__col">
-          <h4>Черновые материалы</h4>
-          <p>Шпаклёвка, цемент, штукатурка, гипсокартон, кабель, профиль, крепёж.</p>
-          <p>Всё, что скрыто в стенах, полах и потолках. Закупаются по себестоимости, без наценки.</p>
-          <p>Покупать можете сами, а можем закупать мы и отчитываться чеками.</p>
+          <h4 class="h4" style="margin-top:26px">Проект дешевле, если ремонт выполняем мы</h4>
+          <p class="note" style="margin-top:10px">Когда мы делаем и проект, и ремонт, часть работы окупается на самом ремонте — поэтому проектирование стоит дешевле. Если ремонт выполняет ваша бригада, стоимость считается по второй колонке.</p>
         </div>
-        <div class="split__col">
-          <h4>Чистовые материалы</h4>
-          <p>Керамогранит, паркет, краска, сантехника, свет, мебель, оборудование.</p>
-          <p>Всё, что видно в готовом интерьере. Покупаются в рамках комплектации: мы подбираем позиции и согласовываем каждую с вами.</p>
+      </details>
+
+      <details class="price__row">
+        <summary>
+          <span class="price__name">Дополнительные направления</span>
+          <span class="price__sum">от 25 000 ₽ за м²</span>
+          <span class="price__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="price__body">
+          <table class="ptable">
+            <thead>
+              <tr>
+                <th scope="col">Направление</th>
+                <th scope="col">Стоимость</th>
+                <th scope="col">Что входит</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Ремонтные работы</th>
+                <td class="num" data-label="Стоимость">от 25 000 ₽ за м²</td>
+                <td data-label="Что входит">Только работы. Материалы оплачиваются дополнительно</td>
+              </tr>
+              <tr>
+                <th scope="row">Авторский надзор</th>
+                <td class="num" data-label="Стоимость">50 000 ₽ в месяц</td>
+                <td data-label="Что входит">Регулярные выезды на объект, контроль соответствия проекту</td>
+              </tr>
+              <tr>
+                <th scope="row">Комплектация материалами</th>
+                <td class="num" data-label="Стоимость">Условия ниже</td>
+                <td data-label="Что входит">Подбор, согласование и закупка чистовых материалов</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
+      </details>
 
-    <!-- Комплектация -->
-    <div class="table-block">
-      <h3 class="h3">Комплектация</h3>
-
-      <div class="explain" style="margin-top:0">
-        <h4 class="h4">Как устроена комплектация материалами и почему это выгодно вам</h4>
-        <div class="prose">
-          <p>Мы работаем с крупными поставщиками по дизайнерским условиям — с той скидкой, которую они дают студиям и не дают частным покупателям.</p>
-          <p>Эта скидка делится: часть переходит вам, часть остаётся студии как оплата работы по подбору и закупке. Отсчёт идёт от обычной розничной цены поставщика, и её можно проверить на его сайте в любой момент.</p>
-          <p>В результате вы покупаете дешевле, чем купили бы самостоятельно, и не тратите время на объезд салонов, сверку артикулов и контроль поставок.</p>
+      <details class="price__row">
+        <summary>
+          <span class="price__name">Как устроены расходы на материалы</span>
+          <span class="price__sum">по себестоимости</span>
+          <span class="price__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="price__body">
+          <div class="split">
+            <div class="split__col">
+              <h4>Черновые материалы</h4>
+              <p>Шпаклёвка, цемент, штукатурка, гипсокартон, кабель, профиль, крепёж.</p>
+              <p>Всё, что скрыто в стенах, полах и потолках. Закупаются по себестоимости, без наценки.</p>
+              <p>Покупать можете сами, а можем закупать мы и отчитываться чеками.</p>
+            </div>
+            <div class="split__col">
+              <h4>Чистовые материалы</h4>
+              <p>Керамогранит, паркет, краска, сантехника, свет, мебель, оборудование.</p>
+              <p>Всё, что видно в готовом интерьере. Покупаются в рамках комплектации: мы подбираем позиции и согласовываем каждую с вами.</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <div class="explain">
-        <h4 class="h4">Что входит в комплектацию</h4>
-        <ul class="ticks">
-          <li>подбор всех позиций по цветам, фактурам и характеристикам</li>
-          <li>согласование каждой позиции с вами</li>
-          <li>работа с поставщиками и получение предложений</li>
-          <li>контроль наличия, сроков и комплектности</li>
-          <li>организация поставок на объект</li>
-        </ul>
-      </div>
+      <details class="price__row">
+        <summary>
+          <span class="price__name">Комплектация</span>
+          <span class="price__sum">по дизайнерским условиям</span>
+          <span class="price__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="price__body">
+          <h4 class="h4">Как устроена комплектация материалами и почему это выгодно вам</h4>
+          <p class="note" style="margin-top:12px">Мы работаем с крупными поставщиками по дизайнерским условиям — с той скидкой, которую они дают студиям и не дают частным покупателям.</p>
+          <p class="note">Эта скидка делится: часть переходит вам, часть остаётся студии как оплата работы по подбору и закупке. Отсчёт идёт от обычной розничной цены поставщика, и её можно проверить на его сайте в любой момент.</p>
+          <p class="note">В результате вы покупаете дешевле, чем купили бы самостоятельно, и не тратите время на объезд салонов, сверку артикулов и контроль поставок.</p>
+
+          <h4 class="h4" style="margin-top:26px">Что входит в комплектацию</h4>
+          <ul class="ticks" style="margin-top:8px">
+            <li>подбор всех позиций по цветам, фактурам и характеристикам</li>
+            <li>согласование каждой позиции с вами</li>
+            <li>работа с поставщиками и получение предложений</li>
+            <li>контроль наличия, сроков и комплектности</li>
+            <li>организация поставок на объект</li>
+          </ul>
+        </div>
+      </details>
     </div>
 
   </div>
@@ -305,12 +321,18 @@
   <div class="wrap">
 
     <div class="sec-head">
-      <h2 class="h2">Что мы уже сделали</h2>
-      <p class="lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
+      <div>
+        <p class="eyebrow">Познакомьтесь с проектами</p>
+        <h2 class="h2">Что мы уже сделали</h2>
+      </div>
+      <div class="sec-head__aside">
+        <p class="lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
+      </div>
     </div>
 
-    <div class="works__row">
-      <article class="work work--wide">
+    <div class="works__list">
+
+      <article class="work work--full">
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
         </div>
@@ -320,29 +342,29 @@
         </div>
       </article>
 
-      <article class="work work--tall">
-        <div class="work__media">
-          <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
-        </div>
-        <div class="work__caption">
-          <h3 class="work__title">Кальянная, 180 м², Москва</h3>
-          <p class="work__meta">Дизайн-проект и ремонт · 4 месяца · визуализации</p>
-        </div>
-      </article>
-    </div>
+      <div class="works__pair">
+        <article class="work">
+          <div class="work__media">
+            <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
+          </div>
+          <div class="work__caption">
+            <h3 class="work__title">Кальянная, 180 м², Москва</h3>
+            <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
+          </div>
+        </article>
 
-    <div class="works__row works__row--reverse">
-      <article class="work work--tall">
-        <div class="work__media">
-          <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
-        </div>
-        <div class="work__caption">
-          <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
-          <p class="work__meta">Дизайн-проект · визуализации</p>
-        </div>
-      </article>
+        <article class="work">
+          <div class="work__media">
+            <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
+          </div>
+          <div class="work__caption">
+            <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
+            <p class="work__meta">Дизайн-проект · визуализации</p>
+          </div>
+        </article>
+      </div>
 
-      <article class="work work--wide">
+      <article class="work work--full">
         <div class="work__media">
           <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy" width="1600" height="1067">
         </div>
@@ -351,6 +373,11 @@
           <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
         </div>
       </article>
+
+    </div>
+
+    <div class="works__cta">
+      <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
     </div>
 
   </div>
