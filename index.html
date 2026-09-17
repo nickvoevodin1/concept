@@ -72,9 +72,9 @@
 
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M32 6 L58 46 H6 Z" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M32 6 V46" stroke="#000" stroke-width="1.4"/>
-          <path d="M6 46 L32 34 L58 46" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M32 6 L58 46 H6 Z" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M32 6 V46" stroke="#500711" stroke-width="1.4"/>
+          <path d="M6 46 L32 34 L58 46" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
         </svg>
         <h2 class="h3 usp__title">Один договор от идеи до открытия</h2>
         <p class="usp__desc">Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
@@ -82,11 +82,11 @@
 
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M24 24 H40 V40 H24 Z" stroke="#000" stroke-width="1.4"/>
-          <path d="M24 24 L32 12 L40 24" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M40 24 L52 32 L40 40" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M40 40 L32 52 L24 40" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M24 40 L12 32 L24 24" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M24 24 H40 V40 H24 Z" stroke="#500711" stroke-width="1.4"/>
+          <path d="M24 24 L32 12 L40 24" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M40 24 L52 32 L40 40" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M40 40 L32 52 L24 40" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M24 40 L12 32 L24 24" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
         </svg>
         <h2 class="h3 usp__title">Открытые цены</h2>
         <p class="usp__desc">Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
@@ -94,9 +94,9 @@
 
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M32 8 L56 32 L32 56 L8 32 Z" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
-          <circle cx="32" cy="32" r="11" stroke="#000" stroke-width="1.4"/>
-          <circle cx="32" cy="32" r="3.5" stroke="#000" stroke-width="1.4"/>
+          <path d="M32 8 L56 32 L32 56 L8 32 Z" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <circle cx="32" cy="32" r="11" stroke="#500711" stroke-width="1.4"/>
+          <circle cx="32" cy="32" r="3.5" stroke="#500711" stroke-width="1.4"/>
         </svg>
         <h2 class="h3 usp__title">Камера на объекте 24/7</h2>
         <p class="usp__desc">Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
@@ -109,7 +109,7 @@
 <!-- ============================================================
      БЛОК 2 — РАСЧЁТ СТОИМОСТИ И ЦЕНЫ
      ============================================================ -->
-<section class="section section--grey" id="calc-section">
+<section class="section section--sand" id="calc-section">
   <div class="wrap">
 
     <div class="sec-head">
@@ -124,46 +124,53 @@
 
     <form class="calc" id="calc" novalidate>
 
+      <!-- Левая половина: только текст, без рамок -->
       <div class="calc__fields">
-        <fieldset style="border:0;padding:0;margin:0;min-width:0">
-          <legend class="calc__q">Что вам нужно</legend>
-          <div class="calc__options">
-            <label class="opt">
-              <input type="radio" name="format" value="full" checked>
-              <span class="opt__box">
-                <span class="opt__title">Дизайн-проект и ремонт</span>
-                <span class="opt__desc">проектируем и выполняем ремонт</span>
-              </span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="format" value="design">
-              <span class="opt__box">
-                <span class="opt__title">Только дизайн-проект</span>
-                <span class="opt__desc">ремонт выполняет ваша бригада</span>
-              </span>
-            </label>
-          </div>
-        </fieldset>
+        <div class="calc__grid">
 
-        <div class="calc__area">
-          <label class="calc__q" for="calc-area-number">Площадь помещения, м²</label>
-          <span class="calc__field">
-            <input type="number" id="calc-area-number" value="100" min="20" max="600" step="1" inputmode="numeric" aria-describedby="calc-area-hint">
-            <span>м²</span>
-          </span>
-          <span class="calc__slider">
-            <input type="range" id="calc-area-range" value="100" min="20" max="600" step="5" aria-label="Площадь помещения, м²">
-            <span class="calc__scale"><span>20 м²</span><span>300 м²</span><span>600 м²</span></span>
-          </span>
-          <p class="visually-hidden" id="calc-area-hint">Укажите площадь от 20 до 600 квадратных метров.</p>
+          <fieldset style="border:0;padding:0;margin:0;min-width:0">
+            <legend class="calc__q">Что вам нужно</legend>
+            <div class="calc__opts">
+              <label class="opt">
+                <input type="radio" name="format" value="full" checked>
+                <span class="opt__box">
+                  <span class="opt__title">Дизайн-проект и ремонт</span>
+                  <span class="opt__desc">проектируем и выполняем ремонт</span>
+                </span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="format" value="design">
+                <span class="opt__box">
+                  <span class="opt__title">Только дизайн-проект</span>
+                  <span class="opt__desc">ремонт выполняет ваша бригада</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div>
+            <label class="calc__label" for="calc-area-number">Площадь помещения, м²</label>
+            <span class="calc__field">
+              <input type="number" id="calc-area-number" value="100" min="20" max="600" step="1" inputmode="numeric" aria-describedby="calc-area-hint">
+              <span>м²</span>
+            </span>
+            <p class="visually-hidden" id="calc-area-hint">Укажите площадь от 20 до 600 квадратных метров.</p>
+          </div>
+
         </div>
+
+        <span class="calc__slider">
+          <input type="range" id="calc-area-range" value="100" min="20" max="600" step="5" aria-label="Площадь помещения, м²">
+          <span class="calc__scale"><span>20 м²</span><span>300 м²</span><span>600 м²</span></span>
+        </span>
       </div>
 
+      <!-- Правая половина: тёмная фигура с расчётом -->
       <div class="calc__panel">
+        <div class="calc__panel-head"><span class="calc__kicker">Расчёт стоимости</span></div>
 
         <!-- Результат при выборе «дизайн-проект и ремонт» -->
         <div id="calc-result-full" aria-live="polite">
-          <span class="calc__q">Итого</span>
           <div class="calc__total" id="sum-total">от 2 850 000 ₽</div>
           <div class="calc__rows">
             <div class="calc__row">
@@ -184,105 +191,115 @@
 
         <!-- Результат при выборе «только дизайн-проект» -->
         <div id="calc-result-design" aria-live="polite" hidden>
-          <span class="calc__q">Дизайн-проект</span>
           <div class="calc__total" id="sum-design-solo">700 000 ₽</div>
           <p class="note">Вы получаете полный комплект документации, ремонт выполняет ваша бригада. Если решите доверить ремонт нам, стоимость проекта пересчитается по дополнительному соглашению.</p>
         </div>
 
-        <p class="note">Это ориентировочный расчёт. Точную стоимость назовём после обмеров и согласования объёма работ.</p>
-        <a class="btn" href="#contacts">Обсудить проект</a>
+        <div class="calc__ask">
+          <p class="note">Это ориентировочный расчёт. Точную стоимость назовём после обмеров и согласования объёма работ.</p>
+          <a class="btn btn--light" href="#contacts">Обсудить проект</a>
+        </div>
       </div>
 
     </form>
 
-    <!-- Цены -->
+    <!-- Цены: маленькая подпись слева, крупные строки справа -->
     <div class="price">
-      <div class="price__head">
-        <span>Цены</span>
-        <span>Стоимость</span>
+      <div class="price__aside">
+        <p class="eyebrow">Цены</p>
+        <div class="price__mark" aria-hidden="true">
+          <img src="assets/logo/concept.svg" alt="" width="220" height="220">
+        </div>
       </div>
 
-      <details class="price__row" open>
-        <summary>
-          <span class="price__name">Стоимость работ</span>
-          <span class="price__sum">от 2 000 ₽ за м²</span>
-          <span class="price__plus" aria-hidden="true"></span>
-        </summary>
-        <div class="price__body">
-          <ul class="plist">
-            <li><b>до 100 м²</b><span>3 500 ₽ за м² с ремонтом&nbsp;· 7 000 ₽ за м² без ремонта</span></li>
-            <li><b>от 100 до 200 м²</b><span>2 500 ₽ за м² с ремонтом&nbsp;· 5 000 ₽ за м² без ремонта</span></li>
-            <li><b>от 200 до 500 м²</b><span>2 000 ₽ за м² с ремонтом&nbsp;· 4 000 ₽ за м² без ремонта</span></li>
-            <li><b>от 500 м²</b><span>Обсуждается</span></li>
-          </ul>
-          <h4 class="h4">Проект дешевле, если ремонт выполняем мы</h4>
-          <p class="note">Когда мы делаем и проект, и ремонт, часть работы окупается на самом ремонте — поэтому проектирование стоит дешевле. Если ремонт выполняет ваша бригада, стоимость считается по второй колонке.</p>
-          <a class="btn" href="#contacts">Обсудить проект</a>
+      <div class="price__rows">
+        <div class="price__head">
+          <span>Что входит</span>
+          <span>Стоимость</span>
         </div>
-      </details>
 
-      <details class="price__row">
-        <summary>
-          <span class="price__name">Дополнительные направления</span>
-          <span class="price__sum">от 25 000 ₽ за м²</span>
-          <span class="price__plus" aria-hidden="true"></span>
-        </summary>
-        <div class="price__body">
-          <ul class="plist">
-            <li><b>Ремонтные работы</b><span class="plist__note">Только работы. Материалы оплачиваются дополнительно</span><span>от 25 000 ₽ за м²</span></li>
-            <li><b>Авторский надзор</b><span class="plist__note">Регулярные выезды на объект, контроль соответствия проекту</span><span>50 000 ₽ в месяц</span></li>
-            <li><b>Комплектация материалами</b><span class="plist__note">Подбор, согласование и закупка чистовых материалов</span><span>Условия ниже</span></li>
-          </ul>
-          <a class="btn" href="#contacts">Обсудить проект</a>
-        </div>
-      </details>
+        <details class="price__row" open>
+          <summary>
+            <span class="price__name">Стоимость работ</span>
+            <span class="price__sum">от 2 000 ₽ за м²</span>
+            <span class="price__plus" aria-hidden="true"></span>
+          </summary>
+          <div class="price__body">
+            <ul class="plist">
+              <li><b>до 100 м²</b><span>3 500 ₽ за м² с ремонтом&nbsp;· 7 000 ₽ за м² без ремонта</span></li>
+              <li><b>от 100 до 200 м²</b><span>2 500 ₽ за м² с ремонтом&nbsp;· 5 000 ₽ за м² без ремонта</span></li>
+              <li><b>от 200 до 500 м²</b><span>2 000 ₽ за м² с ремонтом&nbsp;· 4 000 ₽ за м² без ремонта</span></li>
+              <li><b>от 500 м²</b><span>Обсуждается</span></li>
+            </ul>
+            <h4 class="h4">Проект дешевле, если ремонт выполняем мы</h4>
+            <p class="note">Когда мы делаем и проект, и ремонт, часть работы окупается на самом ремонте — поэтому проектирование стоит дешевле. Если ремонт выполняет ваша бригада, стоимость считается по второй колонке.</p>
+            <a class="btn" href="#contacts">Обсудить проект</a>
+          </div>
+        </details>
 
-      <details class="price__row">
-        <summary>
-          <span class="price__name">Как устроены расходы на материалы</span>
-          <span class="price__sum">по себестоимости</span>
-          <span class="price__plus" aria-hidden="true"></span>
-        </summary>
-        <div class="price__body">
-          <div class="split">
-            <div class="split__col">
-              <h4>Черновые материалы</h4>
-              <p>Шпаклёвка, цемент, штукатурка, гипсокартон, кабель, профиль, крепёж.</p>
-              <p>Всё, что скрыто в стенах, полах и потолках. Закупаются по себестоимости, без наценки.</p>
-              <p>Покупать можете сами, а можем закупать мы и отчитываться чеками.</p>
-            </div>
-            <div class="split__col">
-              <h4>Чистовые материалы</h4>
-              <p>Керамогранит, паркет, краска, сантехника, свет, мебель, оборудование.</p>
-              <p>Всё, что видно в готовом интерьере. Покупаются в рамках комплектации: мы подбираем позиции и согласовываем каждую с вами.</p>
+        <details class="price__row">
+          <summary>
+            <span class="price__name">Дополнительные направления</span>
+            <span class="price__sum">от 25 000 ₽ за м²</span>
+            <span class="price__plus" aria-hidden="true"></span>
+          </summary>
+          <div class="price__body">
+            <ul class="plist">
+              <li><b>Ремонтные работы</b><span class="plist__note">Только работы. Материалы оплачиваются дополнительно</span><span>от 25 000 ₽ за м²</span></li>
+              <li><b>Авторский надзор</b><span class="plist__note">Регулярные выезды на объект, контроль соответствия проекту</span><span>50 000 ₽ в месяц</span></li>
+              <li><b>Комплектация материалами</b><span class="plist__note">Подбор, согласование и закупка чистовых материалов</span><span>Условия ниже</span></li>
+            </ul>
+            <a class="btn" href="#contacts">Обсудить проект</a>
+          </div>
+        </details>
+
+        <details class="price__row">
+          <summary>
+            <span class="price__name">Как устроены расходы на материалы</span>
+            <span class="price__sum">по себестоимости</span>
+            <span class="price__plus" aria-hidden="true"></span>
+          </summary>
+          <div class="price__body">
+            <div class="split">
+              <div class="split__col">
+                <h4>Черновые материалы</h4>
+                <p>Шпаклёвка, цемент, штукатурка, гипсокартон, кабель, профиль, крепёж.</p>
+                <p>Всё, что скрыто в стенах, полах и потолках. Закупаются по себестоимости, без наценки.</p>
+                <p>Покупать можете сами, а можем закупать мы и отчитываться чеками.</p>
+              </div>
+              <div class="split__col">
+                <h4>Чистовые материалы</h4>
+                <p>Керамогранит, паркет, краска, сантехника, свет, мебель, оборудование.</p>
+                <p>Всё, что видно в готовом интерьере. Покупаются в рамках комплектации: мы подбираем позиции и согласовываем каждую с вами.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </details>
+        </details>
 
-      <details class="price__row">
-        <summary>
-          <span class="price__name">Комплектация</span>
-          <span class="price__sum">по дизайнерским условиям</span>
-          <span class="price__plus" aria-hidden="true"></span>
-        </summary>
-        <div class="price__body">
-          <h4 class="h4">Как устроена комплектация материалами и почему это выгодно вам</h4>
-          <p class="note">Мы работаем с крупными поставщиками по дизайнерским условиям — с той скидкой, которую они дают студиям и не дают частным покупателям.</p>
-          <p class="note">Эта скидка делится: часть переходит вам, часть остаётся студии как оплата работы по подбору и закупке. Отсчёт идёт от обычной розничной цены поставщика, и её можно проверить на его сайте в любой момент.</p>
-          <p class="note">В результате вы покупаете дешевле, чем купили бы самостоятельно, и не тратите время на объезд салонов, сверку артикулов и контроль поставок.</p>
+        <details class="price__row">
+          <summary>
+            <span class="price__name">Комплектация</span>
+            <span class="price__sum">по дизайнерским условиям</span>
+            <span class="price__plus" aria-hidden="true"></span>
+          </summary>
+          <div class="price__body">
+            <h4 class="h4">Как устроена комплектация материалами и почему это выгодно вам</h4>
+            <p class="note">Мы работаем с крупными поставщиками по дизайнерским условиям — с той скидкой, которую они дают студиям и не дают частным покупателям.</p>
+            <p class="note">Эта скидка делится: часть переходит вам, часть остаётся студии как оплата работы по подбору и закупке. Отсчёт идёт от обычной розничной цены поставщика, и её можно проверить на его сайте в любой момент.</p>
+            <p class="note">В результате вы покупаете дешевле, чем купили бы самостоятельно, и не тратите время на объезд салонов, сверку артикулов и контроль поставок.</p>
 
-          <h4 class="h4">Что входит в комплектацию</h4>
-          <ul class="ticks">
-            <li>подбор всех позиций по цветам, фактурам и характеристикам</li>
-            <li>согласование каждой позиции с вами</li>
-            <li>работа с поставщиками и получение предложений</li>
-            <li>контроль наличия, сроков и комплектности</li>
-            <li>организация поставок на объект</li>
-          </ul>
-          <a class="btn" href="#contacts">Обсудить проект</a>
-        </div>
-      </details>
+            <h4 class="h4">Что входит в комплектацию</h4>
+            <ul class="ticks">
+              <li>подбор всех позиций по цветам, фактурам и характеристикам</li>
+              <li>согласование каждой позиции с вами</li>
+              <li>работа с поставщиками и получение предложений</li>
+              <li>контроль наличия, сроков и комплектности</li>
+              <li>организация поставок на объект</li>
+            </ul>
+            <a class="btn" href="#contacts">Обсудить проект</a>
+          </div>
+        </details>
+      </div>
     </div>
 
   </div>
@@ -297,17 +314,42 @@
      ============================================================ -->
 <section class="section works" id="works">
 
-  <!-- Фоновые фигуры: закрывают пустоты между кейсами -->
-  <svg class="works__shapes" viewBox="0 0 1440 1800" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <circle cx="1210" cy="250" r="230" fill="#F3F3F1"/>
-    <circle cx="1210" cy="250" r="150" fill="none" stroke="rgba(0,0,0,.07)" stroke-width="1.5"/>
-    <path d="M980 640 a210 210 0 1 1 210 210" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="56"/>
-    <circle cx="210" cy="900" r="180" fill="#F5F4F2"/>
-    <path d="M120 1180 h300 v300 h-300 Z" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="1.5"/>
-    <circle cx="760" cy="1420" r="260" fill="#F4F3F1"/>
-    <path d="M1120 1300 a200 200 0 1 0 200 200" fill="none" stroke="rgba(0,0,0,.055)" stroke-width="48"/>
-    <circle cx="540" cy="180" r="120" fill="none" stroke="rgba(0,0,0,.07)" stroke-width="1.5"/>
-  </svg>
+  <!-- Фон: градиентные свечения и тонкие узоры в пустотах -->
+  <div class="works__bg" aria-hidden="true">
+    <span class="glow glow--a"></span>
+    <span class="glow glow--b"></span>
+    <span class="glow glow--c"></span>
+
+    <svg class="ornament ornament--a" viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="96" stroke="#500711" stroke-width=".7" opacity=".5"/>
+      <circle cx="100" cy="100" r="74" stroke="#AB8756" stroke-width=".7"/>
+      <circle cx="100" cy="100" r="52" stroke="#500711" stroke-width=".7" opacity=".6"/>
+      <g stroke="#AB8756" stroke-width=".7">
+        <path d="M100 4v192M4 100h192M32 32l136 136M168 32L32 168"/>
+      </g>
+      <circle cx="100" cy="100" r="16" stroke="#500711" stroke-width="1"/>
+    </svg>
+
+    <svg class="ornament ornament--b" viewBox="0 0 200 200" fill="none">
+      <g stroke="#500711" stroke-width=".7" opacity=".7">
+        <rect x="26" y="26" width="148" height="148"/>
+        <rect x="26" y="26" width="148" height="148" transform="rotate(15 100 100)"/>
+        <rect x="26" y="26" width="148" height="148" transform="rotate(30 100 100)"/>
+        <rect x="26" y="26" width="148" height="148" transform="rotate(45 100 100)"/>
+      </g>
+      <circle cx="100" cy="100" r="46" stroke="#AB8756" stroke-width=".9"/>
+    </svg>
+
+    <svg class="ornament ornament--c" viewBox="0 0 200 200" fill="none">
+      <g stroke="#AB8756" stroke-width=".7">
+        <path d="M100 8 L182 54 V146 L100 192 L18 146 V54 Z"/>
+        <path d="M100 42 L152 72 V132 L100 162 L48 132 V72 Z"/>
+        <path d="M18 54 L182 146M182 54L18 146M100 8v184"/>
+      </g>
+      <circle cx="100" cy="100" r="28" stroke="#500711" stroke-width=".9"/>
+      <circle cx="100" cy="100" r="6" fill="#500711" opacity=".5"/>
+    </svg>
+  </div>
 
   <div class="wrap">
 
@@ -323,7 +365,7 @@
 
     <div class="works__grid">
 
-      <article class="work work--wide">
+      <article class="work work--wide w1">
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
         </div>
@@ -331,7 +373,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца · визуализации</p>
       </article>
 
-      <article class="work work--tall work--in">
+      <article class="work work--tall w2">
         <div class="work__media">
           <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
         </div>
@@ -339,7 +381,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
       </article>
 
-      <article class="work work--square">
+      <article class="work work--square w3">
         <div class="work__media">
           <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
         </div>
@@ -347,7 +389,7 @@
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
-      <article class="work work--flat work--in-l">
+      <article class="work work--flat w4">
         <div class="work__media">
           <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy" width="1600" height="1067">
         </div>
@@ -355,7 +397,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
       </article>
 
-      <article class="work work--tall">
+      <article class="work work--square w5">
         <div class="work__media">
           <img src="assets/photo/works/hookah-bar/02.jpg" alt="Кальянная: зал с мягкой мебелью и декоративными панелями" loading="lazy" width="1050" height="1400">
         </div>
@@ -363,7 +405,7 @@
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
-      <article class="work work--wide work--in">
+      <article class="work work--wide w6">
         <div class="work__media">
           <img src="assets/photo/works/sales-office/02.jpg" alt="Офис продаж: зона ожидания с мягкими креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
         </div>
@@ -371,7 +413,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца</p>
       </article>
 
-      <article class="work work--square work--in-l">
+      <article class="work work--square w7">
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/02.jpg" alt="Кофейня: барная стойка и витрина с десертами" loading="lazy" width="1400" height="1400">
         </div>
@@ -379,7 +421,7 @@
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
-      <article class="work work--flat">
+      <article class="work work--flat w8">
         <div class="work__media">
           <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1600" height="1000">
         </div>
@@ -387,7 +429,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев</p>
       </article>
 
-      <article class="work work--tall work--in">
+      <article class="work work--tall w9">
         <div class="work__media">
           <img src="assets/photo/works/sales-office/03.jpg" alt="Офис продаж: рабочая зона с мягким светом и панелями из дерева" loading="lazy" width="1050" height="1400">
         </div>
@@ -395,7 +437,7 @@
         <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
       </article>
 
-      <article class="work work--wide">
+      <article class="work work--wide w10">
         <div class="work__media">
           <img src="assets/photo/works/hookah-bar/04.jpg" alt="Кальянная: зал с барной зоной и тёплой подсветкой стен" loading="lazy" width="1600" height="1067">
         </div>
