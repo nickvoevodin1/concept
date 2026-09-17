@@ -1,0 +1,210 @@
+<!--
+  CONCEPT — калькулятор стоимости.
+  Самодостаточный блок для Tilda: вставляется целиком в блок T123 (HTML-код).
+  Внутри свои стили и скрипт, все классы с префиксом cpt-, чтобы не конфликтовать
+  с оформлением Tilda.
+
+  Ставки — из документа «Тексты CONCEPT», раздел 2.
+  Источник правды — /index.html в репозитории; при правке ставок меняйте оба места.
+
+  Шрифты: блок наследует Cormorant и Golos Text, если они подключены в настройках
+  сайта (Настройки сайта → Шрифты → Google Fonts). Если нет — подставятся системные.
+-->
+
+<div class="cpt-calc-root">
+<style>
+.cpt-calc-root{
+  --cpt-cream:#EDE8E1; --cpt-card:#F5F2ED; --cpt-ink:#1A1A18; --cpt-muted:#5E5851;
+  --cpt-wine:#500711; --cpt-rule:rgba(26,26,24,.14); --cpt-rule-2:rgba(26,26,24,.28);
+  --cpt-display:'Cormorant','Times New Roman',Georgia,serif;
+  --cpt-text:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-family:var(--cpt-text); color:var(--cpt-ink); font-size:17px; line-height:1.6;
+}
+.cpt-calc-root *,.cpt-calc-root *::before,.cpt-calc-root *::after{ box-sizing:border-box; }
+.cpt-calc{ background:var(--cpt-card); border:1px solid var(--cpt-rule); padding:clamp(26px,3.4vw,52px); }
+.cpt-calc fieldset{ border:0; padding:0; margin:0; min-width:0; }
+.cpt-q{ margin:0 0 18px; font-size:14px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--cpt-muted); display:block; }
+
+.cpt-options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.cpt-opt{ position:relative; display:block; cursor:pointer; margin:0; }
+.cpt-opt input{ position:absolute; opacity:0; width:0; height:0; }
+.cpt-opt-box{ display:block; height:100%; padding:22px 24px; background:var(--cpt-cream); border:1px solid var(--cpt-rule); transition:border-color .2s,background-color .2s; }
+.cpt-opt-title{ display:block; font-size:18px; font-weight:500; }
+.cpt-opt-desc{ display:block; margin-top:6px; font-size:15px; color:var(--cpt-muted); }
+.cpt-opt:hover .cpt-opt-box{ border-color:var(--cpt-rule-2); }
+.cpt-opt input:checked + .cpt-opt-box{ border-color:var(--cpt-wine); background:#fff; box-shadow:inset 0 0 0 1px var(--cpt-wine); }
+.cpt-opt input:focus-visible + .cpt-opt-box{ outline:2px solid var(--cpt-wine); outline-offset:3px; }
+
+.cpt-area{ margin-top:38px; }
+.cpt-area-row{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.cpt-field{ display:flex; align-items:baseline; gap:8px; border-bottom:1px solid var(--cpt-rule-2); padding-bottom:6px; }
+.cpt-field input{ width:5ch; padding:0; border:0; background:none; color:inherit; font-family:var(--cpt-display); font-size:44px; font-weight:400; line-height:1; font-variant-numeric:lining-nums; -moz-appearance:textfield; }
+.cpt-field input::-webkit-outer-spin-button,.cpt-field input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+.cpt-field span{ font-size:16px; color:var(--cpt-muted); }
+.cpt-slider{ flex:1 1 320px; min-width:220px; }
+.cpt-slider input[type=range]{ width:100%; height:44px; margin:0; background:none; cursor:pointer; -webkit-appearance:none; appearance:none; }
+.cpt-slider input[type=range]::-webkit-slider-runnable-track{ height:1px; background:var(--cpt-rule-2); }
+.cpt-slider input[type=range]::-moz-range-track{ height:1px; background:var(--cpt-rule-2); }
+.cpt-slider input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; margin-top:-11px; border:0; border-radius:50%; background:var(--cpt-wine); }
+.cpt-slider input[type=range]::-moz-range-thumb{ width:22px; height:22px; border:0; border-radius:50%; background:var(--cpt-wine); }
+.cpt-scale{ display:flex; justify-content:space-between; font-size:13px; color:var(--cpt-muted); }
+
+.cpt-result{ margin-top:38px; border-top:1px solid var(--cpt-rule); }
+.cpt-row{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto; gap:16px; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--cpt-rule); }
+.cpt-row-name{ font-size:17px; }
+.cpt-row-how{ font-size:15px; color:var(--cpt-muted); }
+.cpt-row-sum{ font-family:var(--cpt-display); font-size:clamp(24px,2.4vw,32px); font-variant-numeric:lining-nums; white-space:nowrap; text-align:right; }
+.cpt-row--total{ border-bottom:0; padding-bottom:0; }
+.cpt-row--total .cpt-row-name{ font-weight:500; }
+.cpt-row--total .cpt-row-sum{ color:var(--cpt-wine); font-size:clamp(30px,3.4vw,46px); }
+.cpt-note{ margin:0; font-size:15px; line-height:1.55; color:var(--cpt-muted); }
+.cpt-after{ margin-top:26px; max-width:70ch; }
+.cpt-disclaimer{ margin-top:22px; padding-top:22px; border-top:1px solid var(--cpt-rule); max-width:70ch; }
+.cpt-cta{ margin-top:30px; }
+.cpt-btn{ display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 34px; background:var(--cpt-wine); color:#fff; border:1px solid transparent; font-size:15px; font-weight:500; letter-spacing:.04em; text-decoration:none; cursor:pointer; transition:background-color .2s; }
+.cpt-btn:hover{ background:#3B050D; color:#fff; }
+.cpt-hidden{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+@media (max-width:760px){
+  .cpt-options{ grid-template-columns:1fr; }
+  .cpt-row{ grid-template-columns:1fr auto; }
+  .cpt-row-how{ grid-column:1 / -1; order:3; }
+}
+</style>
+
+<form class="cpt-calc" id="cptCalc" novalidate>
+  <fieldset>
+    <legend class="cpt-q">Что вам нужно</legend>
+    <div class="cpt-options">
+      <label class="cpt-opt">
+        <input type="radio" name="cptFormat" value="full" checked>
+        <span class="cpt-opt-box">
+          <span class="cpt-opt-title">Дизайн-проект и ремонт</span>
+          <span class="cpt-opt-desc">проектируем и выполняем ремонт</span>
+        </span>
+      </label>
+      <label class="cpt-opt">
+        <input type="radio" name="cptFormat" value="design">
+        <span class="cpt-opt-box">
+          <span class="cpt-opt-title">Только дизайн-проект</span>
+          <span class="cpt-opt-desc">ремонт выполняет ваша бригада</span>
+        </span>
+      </label>
+    </div>
+  </fieldset>
+
+  <div class="cpt-area">
+    <label class="cpt-q" for="cptAreaNumber">Площадь помещения, м²</label>
+    <div class="cpt-area-row">
+      <span class="cpt-field">
+        <input type="number" id="cptAreaNumber" value="100" min="20" max="600" step="1" inputmode="numeric" aria-describedby="cptAreaHint">
+        <span>м²</span>
+      </span>
+      <span class="cpt-slider">
+        <input type="range" id="cptAreaRange" value="100" min="20" max="600" step="5" aria-label="Площадь помещения, м²">
+        <span class="cpt-scale"><span>20 м²</span><span>600 м²</span></span>
+      </span>
+    </div>
+    <p class="cpt-hidden" id="cptAreaHint">Укажите площадь от 20 до 600 квадратных метров.</p>
+  </div>
+
+  <div class="cpt-result" id="cptResultFull" aria-live="polite">
+    <div class="cpt-row">
+      <span class="cpt-row-name">Дизайн-проект</span>
+      <span class="cpt-row-how">по ставке при заказе вместе с ремонтом</span>
+      <span class="cpt-row-sum" id="cptSumDesignFull">350 000 ₽</span>
+    </div>
+    <div class="cpt-row">
+      <span class="cpt-row-name">Ремонтные работы</span>
+      <span class="cpt-row-how">от 25 000 ₽ за м²</span>
+      <span class="cpt-row-sum" id="cptSumRepair">от 2 500 000 ₽</span>
+    </div>
+    <div class="cpt-row cpt-row--total">
+      <span class="cpt-row-name">Итого</span>
+      <span class="cpt-row-how">сумма двух строк</span>
+      <span class="cpt-row-sum" id="cptSumTotal">от 2 850 000 ₽</span>
+    </div>
+    <p class="cpt-note cpt-after">В расчёт входят проектирование и ремонтные работы. Материалы, мебель и оборудование оплачиваются дополнительно: их стоимость зависит от того, что вы выберете на этапе комплектации.</p>
+  </div>
+
+  <div class="cpt-result" id="cptResultDesign" aria-live="polite" hidden>
+    <div class="cpt-row cpt-row--total">
+      <span class="cpt-row-name">Дизайн-проект</span>
+      <span class="cpt-row-how">по ставке для проекта без ремонта</span>
+      <span class="cpt-row-sum" id="cptSumDesignSolo">700 000 ₽</span>
+    </div>
+    <p class="cpt-note cpt-after">Вы получаете полный комплект документации, ремонт выполняет ваша бригада. Если решите доверить ремонт нам, стоимость проекта пересчитается по дополнительному соглашению.</p>
+  </div>
+
+  <p class="cpt-note cpt-disclaimer">Это ориентировочный расчёт. Точную стоимость назовём после обмеров и согласования объёма работ.</p>
+
+  <div class="cpt-cta">
+    <!-- Подставьте ссылку на блок с формой заявки, например #rec123456789 -->
+    <a class="cpt-btn" href="#contacts">Обсудить проект</a>
+  </div>
+</form>
+
+<script>
+(function () {
+  'use strict';
+  var RATES = {
+    full:   [{ upto: 100, rate: 3500 }, { upto: 200, rate: 2500 }, { upto: 500, rate: 2000 }],
+    design: [{ upto: 100, rate: 7000 }, { upto: 200, rate: 5000 }, { upto: 500, rate: 4000 }]
+  };
+  var REPAIR_RATE = 25000;
+  var MAX_TABLE_AREA = 500;
+
+  var form = document.getElementById('cptCalc');
+  if (!form) return;
+  var number = document.getElementById('cptAreaNumber');
+  var range = document.getElementById('cptAreaRange');
+  var resFull = document.getElementById('cptResultFull');
+  var resDesign = document.getElementById('cptResultDesign');
+  var MIN = Number(range.min), MAX = Number(range.max);
+
+  function rateFor(format, area) {
+    if (area > MAX_TABLE_AREA) return null;
+    var bands = RATES[format];
+    for (var i = 0; i < bands.length; i++) { if (area <= bands[i].upto) return bands[i].rate; }
+    return null;
+  }
+  function money(v) {
+    return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
+  }
+  function set(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+  function clamp(v) { if (!isFinite(v) || v < MIN) return MIN; if (v > MAX) return MAX; return Math.round(v); }
+
+  function render() {
+    var area = clamp(Number(number.value));
+    var isFull = form.querySelector('input[name="cptFormat"]:checked').value === 'full';
+    resFull.hidden = !isFull;
+    resDesign.hidden = isFull;
+    if (isFull) {
+      var r = rateFor('full', area);
+      if (r === null) { set('cptSumDesignFull','Обсуждается'); set('cptSumRepair','Обсуждается'); set('cptSumTotal','Обсуждается'); }
+      else {
+        var project = area * r, repair = area * REPAIR_RATE;
+        set('cptSumDesignFull', money(project));
+        set('cptSumRepair', 'от ' + money(repair));
+        set('cptSumTotal', 'от ' + money(project + repair));
+      }
+    } else {
+      var s = rateFor('design', area);
+      set('cptSumDesignSolo', s === null ? 'Обсуждается' : money(area * s));
+    }
+  }
+
+  range.addEventListener('input', function () { number.value = range.value; render(); });
+  number.addEventListener('input', function () {
+    var v = Number(number.value);
+    if (isFinite(v) && v >= MIN && v <= MAX) { range.value = v; render(); }
+  });
+  number.addEventListener('blur', function () {
+    number.value = clamp(Number(number.value)); range.value = number.value; render();
+  });
+  form.addEventListener('change', function (e) { if (e.target.name === 'cptFormat') render(); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  render();
+})();
+</script>
+</div>
