@@ -14,28 +14,6 @@
 </head>
 <body>
 
-<!-- ============================================================
-     ШАПКА-ОСТРОВОК
-     ============================================================ -->
-<header class="hdr">
-  <div class="hdr__inner">
-    <a class="hdr__logo" href="#top" aria-label="CONCEPT — на главную">
-      <img src="assets/logo/concept-lockup.svg" alt="CONCEPT — студия дизайна интерьеров" width="65" height="40">
-    </a>
-
-    <nav class="hdr__nav" aria-label="Основная навигация">
-      <a class="is-key" href="#calc-section">Расчёт стоимости</a>
-      <a class="is-key" href="#works">Работы</a>
-      <a href="#services">Услуги</a>
-      <a href="#process">Как работаем</a>
-      <a href="#about">О студии</a>
-    </nav>
-
-    <a class="hdr__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
-    <a class="btn btn--sm" href="#contacts">Обсудить проект</a>
-  </div>
-</header>
-
 <main id="top">
 
 <!-- ============================================================
@@ -45,6 +23,26 @@
   <div class="hero__media">
     <img src="assets/photo/hero.jpg" alt="Интерьер бара: барная стойка с латунной отделкой, мягкие диваны, тёплый свет" fetchpriority="high" width="2000" height="1250">
   </div>
+
+  <!-- Шапка-островок лежит на первом экране -->
+  <header class="hdr">
+    <div class="hdr__inner">
+      <a class="hdr__logo" href="#top" aria-label="CONCEPT — на главную">
+        <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="68" height="42">
+      </a>
+
+      <nav class="hdr__nav" aria-label="Основная навигация">
+        <a href="#calc-section">Расчёт стоимости</a>
+        <a href="#works">Работы</a>
+        <a href="#services">Услуги</a>
+        <a href="#process">Как работаем</a>
+        <a href="#about">О студии</a>
+      </nav>
+
+      <a class="hdr__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
+      <a class="btn btn--sm" href="#contacts">Обсудить проект</a>
+    </div>
+  </header>
 
   <div class="wrap hero__bottom">
     <div>
@@ -70,33 +68,47 @@
 
     <div class="usp__grid">
 
+      <!-- Один договор: лист договора с печатью -->
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M32 6 L58 46 H6 Z" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M32 6 V46" stroke="#500711" stroke-width="1.4"/>
-          <path d="M6 46 L32 34 L58 46" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M16 6h22l10 10v42H16z"/>
+            <path d="M38 6v10h10"/>
+            <path d="M23 26h18M23 33h18M23 40h11"/>
+            <circle cx="42" cy="45" r="8"/>
+            <path d="M42 39v12M36 45h12"/>
+          </g>
         </svg>
         <h2 class="h3 usp__title">Один договор от идеи до открытия</h2>
         <p class="usp__desc">Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
       </article>
 
+      <!-- Открытые цены: ценник со знаком рубля -->
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M24 24 H40 V40 H24 Z" stroke="#500711" stroke-width="1.4"/>
-          <path d="M24 24 L32 12 L40 24" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M40 24 L52 32 L40 40" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M40 40 L32 52 L24 40" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M24 40 L12 32 L24 24" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
+          <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M22 12h28a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4H22L8 32z"/>
+            <circle cx="20" cy="32" r="3.2"/>
+            <path d="M33 43V22h7a6 6 0 0 1 0 12h-7"/>
+            <path d="M28 38h11"/>
+          </g>
         </svg>
         <h2 class="h3 usp__title">Открытые цены</h2>
         <p class="usp__desc">Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
       </article>
 
+      <!-- Камера 24/7: камера на кронштейне и часы -->
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
-          <path d="M32 8 L56 32 L32 56 L8 32 Z" stroke="#500711" stroke-width="1.4" stroke-linejoin="round"/>
-          <circle cx="32" cy="32" r="11" stroke="#500711" stroke-width="1.4"/>
-          <circle cx="32" cy="32" r="3.5" stroke="#500711" stroke-width="1.4"/>
+          <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M11 16h26v13H11z"/>
+            <circle cx="45" cy="22.5" r="7"/>
+            <circle cx="45" cy="22.5" r="2.5"/>
+            <path d="M24 29v7M18 36h12"/>
+            <path d="M50 8a13 13 0 0 1 6 5M53 4a19 19 0 0 1 8 7"/>
+            <circle cx="20" cy="49" r="9"/>
+            <path d="M20 43v6h4"/>
+          </g>
         </svg>
         <h2 class="h3 usp__title">Камера на объекте 24/7</h2>
         <p class="usp__desc">Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
@@ -112,20 +124,15 @@
 <section class="section section--sand" id="calc-section">
   <div class="wrap">
 
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">Расчёт стоимости</p>
-        <h2 class="h2">Рассчитайте стоимость</h2>
-      </div>
-      <div class="sec-head__aside">
-        <p class="lead">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
-      </div>
-    </div>
-
     <form class="calc" id="calc" novalidate>
 
-      <!-- Левая половина: только текст, без рамок -->
+      <!-- Левая половина: заголовок и поля без рамок -->
       <div class="calc__fields">
+        <div class="calc__head">
+          <p class="eyebrow">Расчёт стоимости</p>
+          <h2 class="h2">Рассчитайте стоимость</h2>
+        </div>
+
         <div class="calc__grid">
 
           <fieldset style="border:0;padding:0;margin:0;min-width:0">
@@ -163,6 +170,8 @@
           <input type="range" id="calc-area-range" value="100" min="20" max="600" step="5" aria-label="Площадь помещения, м²">
           <span class="calc__scale"><span>20 м²</span><span>300 м²</span><span>600 м²</span></span>
         </span>
+
+        <p class="note">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
       </div>
 
       <!-- Правая половина: тёмная фигура с расчётом -->
@@ -203,12 +212,12 @@
 
     </form>
 
-    <!-- Цены: маленькая подпись слева, крупные строки справа -->
+    <!-- Цены -->
     <div class="price">
       <div class="price__aside">
         <p class="eyebrow">Цены</p>
         <div class="price__mark" aria-hidden="true">
-          <img src="assets/logo/concept.svg" alt="" width="220" height="220">
+          <img src="assets/logo/concept-mark.svg" alt="" width="300" height="298">
         </div>
       </div>
 
@@ -365,84 +374,76 @@
 
     <div class="works__grid">
 
-      <article class="work work--wide w1">
+      <article class="work work--wide work--r w1" tabindex="0">
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
+        </div>
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/krym-cafe/01.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/krym-cafe/02.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Кофейня, 84 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца · визуализации</p>
       </article>
 
-      <article class="work work--tall w2">
+      <article class="work work--tall work--l w2" tabindex="0">
         <div class="work__media">
           <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
+        </div>
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/hookah-bar/02.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/hookah-bar/03.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Кальянная, 180 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
       </article>
 
-      <article class="work work--square w3">
+      <article class="work work--square work--r w3" tabindex="0">
         <div class="work__media">
           <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
+        </div>
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/sales-office/02.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/sales-office/03.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
-      <article class="work work--flat w4">
+      <article class="work work--flat work--l w4" tabindex="0">
         <div class="work__media">
           <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy" width="1600" height="1067">
+        </div>
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/mid-lounge/02.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Кальянная, 210 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
       </article>
 
-      <article class="work work--square w5">
+      <article class="work work--flat work--r w5" tabindex="0">
         <div class="work__media">
-          <img src="assets/photo/works/hookah-bar/02.jpg" alt="Кальянная: зал с мягкой мебелью и декоративными панелями" loading="lazy" width="1050" height="1400">
+          <img src="assets/photo/works/krym-cafe/03.jpg" alt="Кофейня: барная стойка и витрина с десертами" loading="lazy" width="1600" height="1000">
         </div>
-        <h3 class="work__title">Кальянная, 120 м², Москва</h3>
-        <p class="work__meta">Дизайн-проект · визуализации</p>
-      </article>
-
-      <article class="work work--wide w6">
-        <div class="work__media">
-          <img src="assets/photo/works/sales-office/02.jpg" alt="Офис продаж: зона ожидания с мягкими креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
-        </div>
-        <h3 class="work__title">Офис продаж, 200 м², Москва</h3>
-        <p class="work__meta">Дизайн-проект и ремонт · 3 месяца</p>
-      </article>
-
-      <article class="work work--square w7">
-        <div class="work__media">
-          <img src="assets/photo/works/krym-cafe/02.jpg" alt="Кофейня: барная стойка и витрина с десертами" loading="lazy" width="1400" height="1400">
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/krym-cafe/04.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/krym-cafe/wide.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Кофейня, 120 м², Сочи</h3>
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
-      <article class="work work--flat w8">
+      <article class="work work--tall work--l w6" tabindex="0">
         <div class="work__media">
-          <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1600" height="1000">
+          <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1050" height="1400">
+        </div>
+        <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/mid-lounge/wide.jpg" alt="" loading="lazy">
         </div>
         <h3 class="work__title">Кальянная, 240 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев</p>
-      </article>
-
-      <article class="work work--tall w9">
-        <div class="work__media">
-          <img src="assets/photo/works/sales-office/03.jpg" alt="Офис продаж: рабочая зона с мягким светом и панелями из дерева" loading="lazy" width="1050" height="1400">
-        </div>
-        <h3 class="work__title">Офис продаж, 110 м², Москва</h3>
-        <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
-      </article>
-
-      <article class="work work--wide w10">
-        <div class="work__media">
-          <img src="assets/photo/works/hookah-bar/04.jpg" alt="Кальянная: зал с барной зоной и тёплой подсветкой стен" loading="lazy" width="1600" height="1067">
-        </div>
-        <h3 class="work__title">Кальянная, 150 м², Москва</h3>
-        <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
 
     </div>
@@ -463,10 +464,6 @@
   </div>
 </div>
 
-<!-- Служебная ссылка: рядом лежит первый вариант подачи -->
-<a class="variant" href="balcon/index.html">Вариант 2 — krasnov · открыть вариант 1</a>
-
-<script src="assets/js/ui.js"></script>
 <script src="assets/js/calc.js"></script>
 </body>
 </html>
