@@ -402,32 +402,44 @@ button,input{ font:inherit; color:inherit; }
 
 .works__grid{
   display:grid;
-  grid-template-columns:7fr 5fr;
-  gap:clamp(24px,3vw,48px);
+  grid-template-columns:repeat(12,1fr);
+  gap:clamp(36px,4.4vw,72px) clamp(24px,2.4vw,36px);
   align-items:start;
 }
-.works__col--right{ margin-top:clamp(40px,7vw,120px); }
-.works__col{ display:grid; gap:clamp(40px,5vw,84px); }
-@media (max-width:900px){
-  .works__grid{ grid-template-columns:1fr; }
-  .works__col--right{ margin-top:0; }
-}
 
-.work{ display:block; }
+/* Сетка рассчитана на горизонтальные кадры 3:2 — их у студии большинство.
+   Первый ряд: крупная ведущая карточка и бордовая плашка во всю его высоту.
+   Второй ряд: три карточки поуже. */
+.work{ display:block; grid-column:span 4; }
+.work--lead{ grid-column:span 8; }
+
 .work__media{ overflow:hidden; background:var(--cream-2); }
-.work__media img{ width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
+.work__media img{ width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; }
 .work__caption{ margin-top:20px; }
-.work__title{ margin:0; font-family:var(--display); font-size:clamp(22px,2vw,28px); font-weight:400; }
-.work__meta{
-  margin:8px 0 0; font-size:14px; letter-spacing:.02em; color:var(--ink-muted);
-}
+.work__title{ margin:0; font-family:var(--display); font-size:clamp(21px,1.8vw,27px); font-weight:400; }
+.work--lead .work__title{ font-size:clamp(24px,2.2vw,33px); }
+.work__meta{ margin:8px 0 0; font-size:14px; letter-spacing:.02em; color:var(--ink-muted); }
 
-/* Бордовая плашка — тот же приём, что в их инстаграм-сетке */
+/* Бордовая плашка — тот же приём, что в их инстаграм-сетке.
+   Тянется на всю высоту ведущей карточки, поэтому ряд читается как единое целое. */
 .work--brand{
+  grid-column:span 4; align-self:stretch;
   display:flex; align-items:center; justify-content:center;
-  aspect-ratio:4/5; background:var(--wine); padding:clamp(28px,4vw,56px);
+  min-height:100%; background:var(--wine); padding:clamp(28px,3vw,52px);
 }
-.work--brand img{ width:min(72%,260px); height:auto; }
+.work--brand img{ width:min(78%,300px); height:auto; }
+
+@media (max-width:1100px){
+  .works__grid{ grid-template-columns:repeat(6,1fr); }
+  .work{ grid-column:span 3; }
+  .work--lead{ grid-column:span 6; }
+  .work--brand{ grid-column:span 3; }
+}
+@media (max-width:640px){
+  .works__grid{ grid-template-columns:1fr; }
+  .work,.work--lead,.work--brand{ grid-column:1 / -1; }
+  .work--brand{ aspect-ratio:3/2; min-height:0; }
+}
 
 /* ============================================================
    ПОДВАЛ-ЗАГЛУШКА (блоки 4–11 ещё не собраны)
