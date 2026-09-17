@@ -14,6 +14,26 @@
 </head>
 <body>
 
+<!-- Шапка-островок: закреплена на экране -->
+<header class="hdr">
+  <div class="hdr__inner">
+    <a class="hdr__logo" href="#top" aria-label="CONCEPT — на главную">
+      <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="68" height="42">
+    </a>
+
+    <nav class="hdr__nav" aria-label="Основная навигация">
+      <a href="#calc-section">Расчёт стоимости</a>
+      <a href="#works">Работы</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Как работаем</a>
+      <a href="#about">О студии</a>
+    </nav>
+
+    <a class="hdr__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
+    <a class="btn btn--sm" href="#contacts">Обсудить проект</a>
+  </div>
+</header>
+
 <main id="top">
 
 <!-- ============================================================
@@ -24,25 +44,6 @@
     <img src="assets/photo/hero.jpg" alt="Интерьер бара: барная стойка с латунной отделкой, мягкие диваны, тёплый свет" fetchpriority="high" width="2000" height="1250">
   </div>
 
-  <!-- Шапка-островок лежит на первом экране -->
-  <header class="hdr">
-    <div class="hdr__inner">
-      <a class="hdr__logo" href="#top" aria-label="CONCEPT — на главную">
-        <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="68" height="42">
-      </a>
-
-      <nav class="hdr__nav" aria-label="Основная навигация">
-        <a href="#calc-section">Расчёт стоимости</a>
-        <a href="#works">Работы</a>
-        <a href="#services">Услуги</a>
-        <a href="#process">Как работаем</a>
-        <a href="#about">О студии</a>
-      </nav>
-
-      <a class="hdr__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
-      <a class="btn btn--sm" href="#contacts">Обсудить проект</a>
-    </div>
-  </header>
 
   <div class="wrap hero__bottom">
     <div>
@@ -176,6 +177,7 @@
 
       <!-- Правая половина: тёмная фигура с расчётом -->
       <div class="calc__panel">
+        <span class="calc__cut" aria-hidden="true"></span>
         <div class="calc__panel-head"><span class="calc__kicker">Расчёт стоимости</span></div>
 
         <!-- Результат при выборе «дизайн-проект и ремонт» -->
@@ -464,6 +466,7 @@
   </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 <script src="assets/js/calc.js"></script>
 </body>
 </html>

@@ -52,6 +52,8 @@ ul{ padding:0; list-style:none }
 
 .wrap{ width:100%; max-width:var(--wrap); margin:0 auto; padding-inline:var(--gut) }
 .section{ padding-block:var(--sect) }
+/* Шапка закреплена: якоря не должны уезжать под неё */
+[id]{ scroll-margin-top:calc(var(--hdr) + 44px) }
 .section--sand{ background:var(--sand) }
 
 .visually-hidden{
@@ -126,7 +128,7 @@ ul{ padding:0; list-style:none }
    ============================================================ */
 
 .hdr{
-  position:absolute; z-index:20; top:22px; left:0; right:0;
+  position:fixed; z-index:60; top:22px; left:0; right:0;
   padding-inline:var(--gut);
   display:flex; pointer-events:none;
 }
@@ -140,7 +142,11 @@ ul{ padding:0; list-style:none }
   -webkit-backdrop-filter:blur(30px);
           backdrop-filter:blur(30px);
   color:#fff;
+  transition:background .3s ease;
 }
+/* Ниже первого экрана фон светлый, поэтому стекло уплотняется —
+   иначе белый текст на нём не прочитать. */
+.hdr.is-stuck .hdr__inner{ background:rgba(0,0,0,.72) }
 .hdr__logo{ flex:none; display:flex; align-items:center }
 .hdr__logo img{ height:42px; width:auto }
 
@@ -243,8 +249,8 @@ ul{ padding:0; list-style:none }
 .usp__card:hover .usp__icon [stroke]{ stroke:#fff }
 .usp__card:hover .usp__title,
 .usp__card:focus-within .usp__title{
-  font-size:clamp(20px,2.1vw,28px);
-  transform:translateY(clamp(-78px,-7.4vw,-48px));
+  font-size:clamp(18px,1.9vw,24px);
+  transform:translateY(clamp(-74px,-7vw,-46px));
 }
 .usp__card:hover .usp__desc,
 .usp__card:focus-within .usp__desc{ opacity:1; transform:translateY(0) }
@@ -339,12 +345,25 @@ ul{ padding:0; list-style:none }
   background:radial-gradient(circle, rgba(171,135,86,.55) 0%, rgba(80,7,17,.35) 45%, transparent 70%);
   filter:blur(28px);
 }
-.calc__panel::after{
-  content:''; position:absolute; left:0; top:0;
-  width:clamp(64px,7vw,104px); height:clamp(26px,2.4vw,36px);
+/* Вырез в левом верхнем углу: сам вырез и два вогнутых сопряжения */
+.calc__panel > .calc__cut{
+  --cut-w:clamp(84px,9vw,132px);
+  --cut-h:clamp(30px,3vw,44px);
+  --cut-r:18px;
+  position:absolute; left:0; top:0; z-index:2;
+  width:var(--cut-w); height:var(--cut-h);
   background:var(--sand);
-  border-top-left-radius:26px; border-bottom-right-radius:18px;
+  border-top-left-radius:26px;
 }
+.calc__panel > .calc__cut::before,
+.calc__panel > .calc__cut::after{
+  content:''; position:absolute;
+  width:var(--cut-r); height:var(--cut-r);
+  background:var(--sand);
+  border-bottom-right-radius:var(--cut-r);
+}
+.calc__panel > .calc__cut::before{ left:100%; top:0 }
+.calc__panel > .calc__cut::after{ left:0; top:100% }
 .calc__panel > *{ position:relative }
 .calc__panel-head{ padding-left:clamp(70px,7.4vw,112px); min-height:clamp(26px,2.4vw,36px) }
 .calc__kicker{ font-size:13px; color:rgba(255,255,255,.7) }
@@ -382,7 +401,7 @@ ul{ padding:0; list-style:none }
 }
 .price__aside{ position:sticky; top:40px; align-self:start }
 .price__mark{ margin-top:clamp(28px,4vw,52px); width:100%; max-width:300px }
-.price__mark img{ width:100% }
+.price__mark img{ width:100%; opacity:.15 }
 
 .price__rows > .price__head{
   display:flex; align-items:baseline; justify-content:space-between; gap:20px;
@@ -561,7 +580,7 @@ ul{ padding:0; list-style:none }
   .usp__grid{ grid-template-columns:1fr }
   .calc__grid{ grid-template-columns:1fr }
   .calc__panel-head{ padding-left:0 }
-  .calc__panel::after{ display:none }
+  .calc__panel > .calc__cut{ display:none }
 
   .works__grid{ display:block }
   .work + .work{ margin-top:clamp(28px,7vw,48px) }
