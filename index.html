@@ -20,7 +20,7 @@
 <header class="header on-dark">
   <div class="wrap header__inner">
     <a class="header__logo" href="#top" aria-label="CONCEPT — на главную">
-      <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="91" height="56">
+      <img src="assets/logo/concept-lockup-light.svg" alt="CONCEPT — студия дизайна интерьеров" width="75" height="46">
     </a>
 
     <nav class="nav" aria-label="Основная навигация">
@@ -48,48 +48,54 @@
   </div>
 
   <div class="wrap hero__inner">
-    <div class="hero__content">
-      <p class="overline">Дизайн и реализация коммерческих интерьеров</p>
-      <h1 class="h1">Ведём объект от первой встречи до открытия</h1>
+    <div class="hero__grid">
+
+      <div class="hero__left">
+        <p class="eyebrow">Дизайн и реализация коммерческих интерьеров</p>
+        <h1 class="h1">Ведём объект от первой встречи до открытия</h1>
+        <p class="hero__note">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
+      </div>
+
+      <div class="hero__right">
+        <div class="hero__card">
+          <p>Кафе, салоны, офисы, магазины. Проектирование и ремонт по одному договору с одной командой.</p>
+          <a class="btn btn--primary" href="#calc-section">Рассчитать стоимость</a>
+          <a class="btn btn--outline" href="#works">Посмотреть работы</a>
+        </div>
+      </div>
+
     </div>
-
-    <p class="hero__sub">Кафе, салоны, офисы, магазины. Проектирование и ремонт по одному договору с одной командой.</p>
-
-    <div class="hero__actions">
-      <a class="btn btn--primary" href="#calc-section">Рассчитать стоимость</a>
-      <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
-    </div>
-
-    <p class="hero__foot">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
   </div>
 </section>
 
 <section class="section usp">
   <div class="wrap">
-    <div class="usp__grid">
-      <div class="usp__item">
-        <h2 class="h3">Один договор от идеи до открытия</h2>
-        <p>Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
-      </div>
-      <div class="usp__item">
-        <h2 class="h3">Открытые цены</h2>
-        <p>Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
-      </div>
-      <div class="usp__item">
-        <h2 class="h3">Камера на объекте 24/7</h2>
-        <p>Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
-      </div>
+
+    <div class="usp__row">
+      <h2 class="h3">Один договор от идеи до открытия</h2>
+      <p>Проектирование и ремонт в одних руках. Ответственность за результат не делится между подрядчиками.</p>
     </div>
+
+    <div class="usp__row">
+      <h2 class="h3">Открытые цены</h2>
+      <p>Стоимость дизайн-проекта можно рассчитать на этой странице, не оставляя контактов.</p>
+    </div>
+
+    <div class="usp__row">
+      <h2 class="h3">Камера на объекте 24/7</h2>
+      <p>Ремонт идёт под наблюдением. Вы открываете камеру в любой момент и видите, что происходит на объекте прямо сейчас.</p>
+    </div>
+
   </div>
 </section>
 
 <!-- ============================================================
      БЛОК 2 — РАСЧЁТ СТОИМОСТИ И ЦЕНЫ
      ============================================================ -->
-<section class="section section--alt" id="calc-section">
+<section class="section section--beige" id="calc-section">
   <div class="wrap">
 
-    <div class="section-head">
+    <div class="sec-head">
       <h2 class="h2">Рассчитайте стоимость</h2>
       <p class="lead">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
     </div>
@@ -243,9 +249,7 @@
     <div class="table-block">
       <h3 class="h3">Как устроены расходы на материалы</h3>
 
-      <div class="explain" style="margin-top:0">
-        <h4 class="h4">Черновые и чистовые материалы</h4>
-      </div>
+      <h4 class="h4">Черновые и чистовые материалы</h4>
 
       <div class="split">
         <div class="split__col">
@@ -265,15 +269,18 @@
     <!-- Комплектация -->
     <div class="table-block">
       <h3 class="h3">Комплектация</h3>
-      <div class="explain" style="margin-top:22px">
+
+      <div class="explain" style="margin-top:0">
         <h4 class="h4">Как устроена комплектация материалами и почему это выгодно вам</h4>
-        <div class="prose" style="margin-top:18px">
+        <div class="prose">
           <p>Мы работаем с крупными поставщиками по дизайнерским условиям — с той скидкой, которую они дают студиям и не дают частным покупателям.</p>
           <p>Эта скидка делится: часть переходит вам, часть остаётся студии как оплата работы по подбору и закупке. Отсчёт идёт от обычной розничной цены поставщика, и её можно проверить на его сайте в любой момент.</p>
           <p>В результате вы покупаете дешевле, чем купили бы самостоятельно, и не тратите время на объезд салонов, сверку артикулов и контроль поставок.</p>
         </div>
+      </div>
 
-        <h4 class="h4" style="margin-top:34px">Что входит в комплектацию</h4>
+      <div class="explain">
+        <h4 class="h4">Что входит в комплектацию</h4>
         <ul class="ticks">
           <li>подбор всех позиций по цветам, фактурам и характеристикам</li>
           <li>согласование каждой позиции с вами</li>
@@ -297,14 +304,13 @@
 <section class="section" id="works">
   <div class="wrap">
 
-    <div class="section-head">
+    <div class="sec-head">
       <h2 class="h2">Что мы уже сделали</h2>
       <p class="lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
     </div>
 
-    <div class="works__grid">
-
-      <article class="work work--lead">
+    <div class="works__row">
+      <article class="work work--wide">
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
         </div>
@@ -314,23 +320,21 @@
         </div>
       </article>
 
-      <div class="work work--brand" aria-hidden="true">
-        <img src="assets/logo/concept-light.svg" alt="" width="300" height="212">
-      </div>
-
-      <article class="work">
+      <article class="work work--tall">
         <div class="work__media">
-          <img src="assets/photo/works/hookah-bar/wide.jpg" alt="Кальянная: кирпичная стена с подсветкой и мягкие диваны" loading="lazy" width="1600" height="1067">
+          <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
         </div>
         <div class="work__caption">
           <h3 class="work__title">Кальянная, 180 м², Москва</h3>
           <p class="work__meta">Дизайн-проект и ремонт · 4 месяца · визуализации</p>
         </div>
       </article>
+    </div>
 
-      <article class="work">
+    <div class="works__row works__row--reverse">
+      <article class="work work--tall">
         <div class="work__media">
-          <img src="assets/photo/works/sales-office/wide.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1600" height="1067">
+          <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
         </div>
         <div class="work__caption">
           <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
@@ -338,7 +342,7 @@
         </div>
       </article>
 
-      <article class="work">
+      <article class="work work--wide">
         <div class="work__media">
           <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy" width="1600" height="1067">
         </div>
@@ -347,7 +351,6 @@
           <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
         </div>
       </article>
-
     </div>
 
   </div>
