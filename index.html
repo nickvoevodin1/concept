@@ -30,6 +30,14 @@
     </nav>
 
     <a class="hdr__phone" href="tel:+79054087000">+7 (905) 408-70-00</a>
+    <!-- TODO: подставить ссылку на профиль студии в Instagram -->
+    <a class="hdr__ig" href="#contacts" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>
+      </svg>
+    </a>
     <a class="btn btn--sm" href="#contacts">Обсудить проект</a>
   </div>
 </header>
@@ -40,8 +48,12 @@
      БЛОК 1 — ПЕРВЫЙ ЭКРАН
      ============================================================ -->
 <section class="hero on-dark">
+  <!-- Кадры сменяют друг друга по кругу -->
   <div class="hero__media">
     <img src="assets/photo/hero.jpg" alt="Интерьер бара: барная стойка с латунной отделкой, мягкие диваны, тёплый свет" fetchpriority="high" width="2000" height="1250">
+    <img src="assets/photo/hero-2.jpg" alt="" loading="lazy" width="2000" height="1250">
+    <img src="assets/photo/hero-3.jpg" alt="" loading="lazy" width="2000" height="1250">
+    <img src="assets/photo/hero-4.jpg" alt="" loading="lazy" width="2000" height="1250">
   </div>
 
 
@@ -73,11 +85,11 @@
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
           <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
-            <path d="M16 6h22l10 10v42H16z"/>
-            <path d="M38 6v10h10"/>
-            <path d="M23 26h18M23 33h18M23 40h11"/>
-            <circle cx="42" cy="45" r="8"/>
-            <path d="M42 39v12M36 45h12"/>
+            <path d="M7 5h18l9 9v40H7z"/>
+            <path d="M25 5v9h9"/>
+            <path d="M13 24h15M13 31h15M13 38h9"/>
+            <circle cx="49" cy="46" r="11"/>
+            <path d="M49 40v12M43 46h12"/>
           </g>
         </svg>
         <h2 class="h3 usp__title">Один договор от идеи до открытия</h2>
@@ -102,13 +114,14 @@
       <article class="usp__card" tabindex="0">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
           <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
-            <path d="M11 16h26v13H11z"/>
-            <circle cx="45" cy="22.5" r="7"/>
-            <circle cx="45" cy="22.5" r="2.5"/>
-            <path d="M24 29v7M18 36h12"/>
-            <path d="M50 8a13 13 0 0 1 6 5M53 4a19 19 0 0 1 8 7"/>
-            <circle cx="20" cy="49" r="9"/>
-            <path d="M20 43v6h4"/>
+            <path d="M16 7h24"/>
+            <path d="M28 7v7"/>
+            <path d="M8 14h29a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H8z"/>
+            <circle cx="15" cy="21.5" r="4.5"/>
+            <circle cx="15" cy="21.5" r="1.6"/>
+            <path d="M46 11a10 10 0 0 1 7 7M50 6a16 16 0 0 1 10 10"/>
+            <circle cx="45" cy="46" r="10"/>
+            <path d="M45 39v7h5"/>
           </g>
         </svg>
         <h2 class="h3 usp__title">Камера на объекте 24/7</h2>
@@ -341,7 +354,7 @@
       <circle cx="100" cy="100" r="16" stroke="#500711" stroke-width="1"/>
     </svg>
 
-    <svg class="ornament ornament--b" viewBox="0 0 200 200" fill="none">
+    <svg class="ornament ornament--b" viewBox="-14 -14 228 228" fill="none">
       <g stroke="#500711" stroke-width=".7" opacity=".7">
         <rect x="26" y="26" width="148" height="148"/>
         <rect x="26" y="26" width="148" height="148" transform="rotate(15 100 100)"/>
@@ -383,7 +396,10 @@
         <div class="work__extra" aria-hidden="true">
           <img src="assets/photo/works/krym-cafe/01.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/krym-cafe/02.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/krym-cafe/03.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/krym-cafe/04.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Кофейня, 84 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца · визуализации</p>
       </article>
@@ -395,7 +411,10 @@
         <div class="work__extra" aria-hidden="true">
           <img src="assets/photo/works/hookah-bar/02.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/hookah-bar/03.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/hookah-bar/04.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/hookah-bar/wide.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Кальянная, 180 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
       </article>
@@ -407,7 +426,10 @@
         <div class="work__extra" aria-hidden="true">
           <img src="assets/photo/works/sales-office/02.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/sales-office/03.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/sales-office/04.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/sales-office/wide.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
@@ -419,7 +441,10 @@
         <div class="work__extra" aria-hidden="true">
           <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/mid-lounge/02.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/mid-lounge/03.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Кальянная, 210 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
       </article>
@@ -429,9 +454,12 @@
           <img src="assets/photo/works/krym-cafe/03.jpg" alt="Кофейня: барная стойка и витрина с десертами" loading="lazy" width="1600" height="1000">
         </div>
         <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/krym-cafe/01.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/krym-cafe/02.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/krym-cafe/04.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Кофейня, 120 м², Сочи</h3>
         <p class="work__meta">Дизайн-проект · визуализации</p>
       </article>
@@ -441,9 +469,12 @@
           <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1050" height="1400">
         </div>
         <div class="work__extra" aria-hidden="true">
+          <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
+          <img src="assets/photo/works/mid-lounge/02.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
           <img src="assets/photo/works/mid-lounge/wide.jpg" alt="" loading="lazy">
         </div>
+        <a class="work__more" href="#works">Посмотреть все фото</a>
         <h3 class="work__title">Кальянная, 240 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев</p>
       </article>

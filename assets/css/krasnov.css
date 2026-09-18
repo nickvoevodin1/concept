@@ -165,6 +165,14 @@ ul{ padding:0; list-style:none }
   margin-inline-start:clamp(16px,2vw,32px);
 }
 .hdr__phone:hover{ color:var(--brass) }
+.hdr__ig{
+  flex:none; margin-inline-start:clamp(12px,1.4vw,20px);
+  display:grid; place-items:center; width:38px; height:38px;
+  border:1px solid var(--rule-light); border-radius:8px;
+  transition:color .2s, border-color .2s;
+}
+.hdr__ig svg{ width:20px; height:20px }
+.hdr__ig:hover{ color:var(--brass); border-color:var(--brass) }
 .hdr .btn{ flex:none; margin-inline-start:16px; white-space:nowrap }
 
 /* ============================================================
@@ -177,7 +185,21 @@ ul{ padding:0; list-style:none }
   background:var(--black); color:#fff; overflow:hidden;
 }
 .hero__media{ position:absolute; inset:0 }
-.hero__media img{ width:100%; height:100%; object-fit:cover }
+.hero__media img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; animation:heroFade 32s linear infinite;
+}
+.hero__media img:nth-child(1){ animation-delay:-1s }
+.hero__media img:nth-child(2){ animation-delay:7s }
+.hero__media img:nth-child(3){ animation-delay:15s }
+.hero__media img:nth-child(4){ animation-delay:23s }
+@keyframes heroFade{
+  0%{ opacity:0 } 3%{ opacity:1 } 25%{ opacity:1 } 28%{ opacity:0 } 100%{ opacity:0 }
+}
+@media (prefers-reduced-motion:reduce){
+  .hero__media img{ animation:none }
+  .hero__media img:nth-child(1){ opacity:1 }
+}
 .hero__media::after{
   content:''; position:absolute; inset:0;
   background:
@@ -242,18 +264,31 @@ ul{ padding:0; list-style:none }
   transition:opacity .35s ease .1s, transform .5s cubic-bezier(.4,0,.2,1) .05s;
 }
 
-.usp__card:hover,
-.usp__card:focus-within{ background:var(--wine); color:#fff }
-.usp__card:hover .usp__icon,
-.usp__card:focus-within .usp__icon{ transform:translateY(-230%); opacity:0 }
-.usp__card:hover .usp__icon [stroke]{ stroke:#fff }
-.usp__card:hover .usp__title,
-.usp__card:focus-within .usp__title{
+.usp__card:focus-within,
+.usp__card.is-open{ background:var(--wine); color:#fff }
+.usp__card:focus-within .usp__icon,
+.usp__card.is-open .usp__icon{ transform:translateY(-230%); opacity:0 }
+.usp__card:focus-within .usp__icon [stroke],
+.usp__card.is-open .usp__icon [stroke]{ stroke:#fff }
+.usp__card:focus-within .usp__title,
+.usp__card.is-open .usp__title{
   font-size:clamp(18px,1.9vw,24px);
   transform:translateY(clamp(-74px,-7vw,-46px));
 }
-.usp__card:hover .usp__desc,
-.usp__card:focus-within .usp__desc{ opacity:1; transform:translateY(0) }
+.usp__card:focus-within .usp__desc,
+.usp__card.is-open .usp__desc{ opacity:1; transform:translateY(0) }
+
+/* Наведение — только там, где есть мышь: на тач-экране :hover залипает */
+@media (hover:hover){
+  .usp__card:hover{ background:var(--wine); color:#fff }
+  .usp__card:hover .usp__icon{ transform:translateY(-230%); opacity:0 }
+  .usp__card:hover .usp__icon [stroke]{ stroke:#fff }
+  .usp__card:hover .usp__title{
+    font-size:clamp(18px,1.9vw,24px);
+    transform:translateY(clamp(-74px,-7vw,-46px));
+  }
+  .usp__card:hover .usp__desc{ opacity:1; transform:translateY(0) }
+}
 
 @media (prefers-reduced-motion:reduce){
   .usp__icon,.usp__title,.usp__desc{ transition:none }
@@ -504,20 +539,22 @@ ul{ padding:0; list-style:none }
 
 /* Кадры объекта, которые выезжают сбоку при наведении */
 .work__extra{
-  position:absolute; top:0; width:38%; z-index:2;
-  display:flex; flex-direction:column; gap:clamp(10px,1.2vw,18px);
+  position:absolute; top:0; width:44%; z-index:2;
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(8px,.9vw,14px);
   opacity:0; pointer-events:none;
   transition:opacity .4s ease, transform .55s cubic-bezier(.22,1,.36,1);
 }
 .work__extra img{ width:100%; aspect-ratio:4/3; object-fit:cover }
+.work__more{ display:none }
 .work--r .work__extra{ left:100%; margin-left:clamp(10px,1.4vw,22px); transform:translateX(-18px) }
 .work--l .work__extra{ right:100%; margin-right:clamp(10px,1.4vw,22px); transform:translateX(18px) }
 .work:hover .work__extra,
-.work:focus-within .work__extra{ opacity:1; transform:translateX(0) }
+.work:focus-within .work__extra,
+.work.is-open .work__extra{ opacity:1; transform:translateX(0) }
 
 .w1{ grid-column:1 / 6;  grid-row:1 }
 .w2{ grid-column:8 / 12; grid-row:1; margin-top:clamp(40px,8vw,140px) }
-.w3{ grid-column:2 / 6;  grid-row:2 }
+.w3{ grid-column:2 / 6;  grid-row:2; margin-top:clamp(-80px,-5vw,-24px) }
 .w4{ grid-column:8 / 13; grid-row:2; margin-top:clamp(20px,4vw,70px) }
 .w5{ grid-column:1 / 6;  grid-row:3 }
 .w6{ grid-column:8 / 12; grid-row:3; margin-top:clamp(30px,5vw,90px) }
@@ -549,6 +586,7 @@ ul{ padding:0; list-style:none }
 @media (max-width:1240px){
   .hdr__nav a:nth-child(n+5){ display:none }
   .work__extra{ display:none }
+  .w3{ margin-top:0 }
 }
 
 @media (max-width:1024px){
@@ -577,18 +615,52 @@ ul{ padding:0; list-style:none }
   .hero{ min-height:auto }
   .hero__bottom{ padding-top:calc(var(--hdr) + 90px); padding-bottom:44px }
 
-  .usp__grid{ grid-template-columns:1fr }
+  /* Карточки были слишком высокими для телефона */
+  .usp__grid{ grid-template-columns:1fr; gap:12px }
+  .usp__card{ min-height:236px; padding:22px 20px; border-radius:12px }
+  .usp__icon{ width:54px; height:54px }
+  .usp__title{ margin-top:14px }
+  .usp__desc{ left:20px; right:20px; bottom:20px }
+  .usp__card:focus-within .usp__title,
+  .usp__card.is-open .usp__title{ font-size:21px; transform:translateY(-62px) }
   .calc__grid{ grid-template-columns:1fr }
   .calc__panel-head{ padding-left:0 }
   .calc__panel > .calc__cut{ display:none }
 
   .works__grid{ display:block }
-  .work + .work{ margin-top:clamp(28px,7vw,48px) }
+  .work + .work{ margin-top:clamp(52px,13vw,76px) }
   .work{ margin-top:0 !important }
   .ornament,.glow{ opacity:.35 }
 
-  .price__row > summary{ flex-wrap:wrap }
-  .price__sum{ order:3; flex:1 0 100%; margin-top:8px }
+  /* Остальные кадры объекта выезжают под фотографией, когда карточка
+     оказывается в центре экрана; рядом — кнопка на всю галерею. */
+  .work__extra{
+    display:grid; position:static; width:100%;
+    grid-auto-flow:column; grid-auto-columns:42%; grid-template-columns:none;
+    gap:8px; margin-top:8px; padding-bottom:2px;
+    overflow-x:auto; overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    transform:none; opacity:0; max-height:0;
+    transition:opacity .4s ease, max-height .5s cubic-bezier(.22,1,.36,1);
+  }
+  .work__extra::-webkit-scrollbar{ display:none }
+  .work.is-open .work__extra{ opacity:1; max-height:200px; pointer-events:auto }
+
+  .work__more{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:12px; padding:8px 14px;
+    border:1px solid var(--rule-strong);
+    font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    opacity:0; transform:translateY(6px); pointer-events:none;
+    transition:opacity .4s ease .1s, transform .4s ease .1s;
+  }
+  .work.is-open .work__more{ opacity:1; transform:translateY(0); pointer-events:auto }
+
+  /* Плюс всегда в правом верхнем углу, заголовок переносится по строкам */
+  .price__row > summary{ display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:16px }
+  .price__name{ grid-column:1; grid-row:1 }
+  .price__plus{ grid-column:2; grid-row:1; align-self:start }
+  .price__sum{ grid-column:1; grid-row:2; margin-top:10px; white-space:normal }
   .plist li{ flex-direction:column; gap:6px }
   .plist span{ text-align:left; white-space:normal }
   .split{ grid-template-columns:1fr }
