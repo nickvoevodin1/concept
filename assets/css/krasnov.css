@@ -163,13 +163,13 @@ ul{ padding:0; list-style:none }
                max-width .6s cubic-bezier(.4,0,.2,1),
                margin-inline-start .6s cubic-bezier(.4,0,.2,1);
   }
-  /* В сжатом виде остаются логотип, Instagram и кнопка */
+  /* В сжатом виде остаются логотип, Telegram и кнопка */
   .hdr-shrink-mode .hdr.is-shrink .hdr__nav a,
   .hdr-shrink-mode .hdr.is-shrink .hdr__phone{
     opacity:0; max-width:0; margin-inline-start:0; pointer-events:none;
   }
   .hdr-shrink-mode .hdr.is-shrink .hdr__nav{ padding-inline-start:0 }
-  /* Ширина под оставшийся набор: логотип, Instagram и кнопка.
+  /* Ширина под оставшийся набор: логотип, Telegram и кнопка.
      Уже — и кнопка выезжает за правый край островка. */
   .hdr-shrink-mode .hdr.is-shrink .hdr__inner{
     max-width:clamp(392px,30vw,440px);
@@ -197,14 +197,14 @@ ul{ padding:0; list-style:none }
   margin-inline-start:clamp(16px,2vw,32px);
 }
 .hdr__phone:hover{ color:var(--brass) }
-.hdr__ig{
+.hdr__tg{
   flex:none; margin-inline-start:clamp(12px,1.4vw,20px);
   display:grid; place-items:center; width:38px; height:38px;
   border:1px solid var(--rule-light); border-radius:8px;
   transition:color .2s, border-color .2s;
 }
-.hdr__ig svg{ width:20px; height:20px }
-.hdr__ig:hover{ color:var(--brass); border-color:var(--brass) }
+.hdr__tg svg{ width:20px; height:20px }
+.hdr__tg:hover{ color:var(--brass); border-color:var(--brass) }
 .hdr .btn{ flex:none; margin-inline-start:20px; white-space:nowrap }
 
 /* ============================================================
@@ -714,7 +714,7 @@ ul{ padding:0; list-style:none }
 
 @media (max-width:480px){
   .hdr__phone{ display:none }
-  .hdr__ig{ margin-inline-start:auto }
+  .hdr__tg{ margin-inline-start:auto }
   .hdr .btn{ margin-inline-start:10px; padding:0 16px; font-size:10px }
 }
 
@@ -790,7 +790,7 @@ ul{ padding:0; list-style:none }
 
 /* ---------- Плитки поверх кадра ------------------------------
    Клетки квадратные, расставляет их скрипт под размер экрана.
-   Кадр читается сквозь сетку. По мере прокрутки плитки бледнеют
+   Заливка 10 %, цвета вразнобой — кадр читается сквозь сетку. По мере прокрутки плитки бледнеют
    ступенями и вразнобой; примерно треть остаётся до конца — еле
    заметными, но видимыми.                                        */
 .heroseq__grid{
@@ -800,16 +800,18 @@ ul{ padding:0; list-style:none }
   grid-template-columns:repeat(var(--cols,12), 1fr);
 }
 .heroseq__grid i{
+  --a:.1;                       /* заливка 10 %: кадр читается почти целиком */
   display:block;
-  opacity:var(--a,.4);
+  opacity:var(--a);
   transition:opacity .8s cubic-bezier(.4,0,.2,1);
 }
 /* Ступени угасания: плитка не пропадает с первой прокрутки, а бледнеет
-   шаг за шагом. Ступень выставляет скрипт, у каждой плитки свой темп. */
-.heroseq__grid i[data-k="1"]{ opacity:calc(var(--a,.4) * .62) }
-.heroseq__grid i[data-k="2"]{ opacity:calc(var(--a,.4) * .38) }
-.heroseq__grid i[data-k="3"]{ opacity:calc(var(--a,.4) * .22) }
-.heroseq__grid i[data-k="4"]{ opacity:calc(var(--a,.4) * .16) }
+   шаг за шагом. Ступень выставляет скрипт, у каждой плитки свой темп.
+   Лесенка пологая — от 10 % падать резко уже некуда. */
+.heroseq__grid i[data-k="1"]{ opacity:calc(var(--a) * .78) }
+.heroseq__grid i[data-k="2"]{ opacity:calc(var(--a) * .58) }
+.heroseq__grid i[data-k="3"]{ opacity:calc(var(--a) * .42) }
+.heroseq__grid i[data-k="4"]{ opacity:calc(var(--a) * .3) }
 .heroseq__grid i[data-k="5"]{ opacity:0 }
 
 .heroseq__grid i[data-t="0"]{ background:var(--wine) }
@@ -981,14 +983,14 @@ ul{ padding:0; list-style:none }
 .corner__mark--dark{ top:0 }
 .corner__word--dark{ bottom:0 }
 
-.corner__ig{
+.corner__tg{
   right:var(--pad); top:var(--pad);
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid rgba(255,255,255,.45); border-radius:8px;
   transition:color .2s, border-color .2s;
 }
-.corner__ig svg{ width:20px; height:20px }
-.corner__ig:hover{ color:var(--brass); border-color:var(--brass) }
+.corner__tg svg{ width:20px; height:20px }
+.corner__tg:hover{ color:var(--brass); border-color:var(--brass) }
 
 .corner__side{
   top:50%; writing-mode:vertical-rl;
@@ -1013,7 +1015,7 @@ ul{ padding:0; list-style:none }
 .corner.is-light .corner__word{ opacity:0 }
 .corner.is-light .corner__mark--dark,
 .corner.is-light .corner__word--dark{ opacity:1 }
-.corner.is-light .corner__ig{ border-color:rgba(80,7,17,.45) }
+.corner.is-light .corner__tg{ border-color:rgba(80,7,17,.45) }
 
 /* В этом варианте шапка-островок не нужна: её роль играет угловое меню */
 .hero-corner-mode .hdr{ display:none }
@@ -1062,7 +1064,7 @@ ul{ padding:0; list-style:none }
      их вплотную к краю, чтобы они умещались в поля страницы */
   .corner{ --pad:10px }
   .corner__logo{ width:46px; left:16px; top:16px }
-  .corner__ig{ right:16px; top:16px; width:36px; height:36px }
+  .corner__tg{ right:16px; top:16px; width:36px; height:36px }
   .corner__side{ font-size:10px; letter-spacing:.12em }
   .corner__letter{ font-size:44px }
   .hero-corner-mode .switch{ bottom:76px }

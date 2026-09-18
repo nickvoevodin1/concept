@@ -155,9 +155,9 @@
 
     var html = '';
     for (var i = 0; i < total; i++) {
-      /* Заливка плотная, но кадр за сеткой всё же читается */
-      var alpha = (0.34 + scatter(i + 31) * 0.24).toFixed(3);
-      html += '<i data-t="' + (i % 5) + '" data-k="0" style="--a:' + alpha + '"></i>';
+      /* Цвет вразнобой: по порядку получались бы диагональные полосы */
+      var tone = Math.floor(scatter(i + 991) * 5);
+      html += '<i data-t="' + tone + '" data-k="0"></i>';
     }
     grid.innerHTML = html;
 
