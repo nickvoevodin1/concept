@@ -14,9 +14,13 @@
 
   function syncHeader() {
     if (!hdr) return;
-    var first = document.querySelector('.variants > [data-variant].is-active, .hero');
+    /* именно активный вариант: у скрытых соседей rect пустой,
+       а :first-of-type в списке селекторов взял бы первый по разметке */
+    var first = document.querySelector('.variants > [data-variant].is-active') ||
+                document.querySelector('.hero');
     var edge = first ? first.getBoundingClientRect().bottom : 0;
     hdr.classList.toggle('is-stuck', edge < 140);
+    hdr.classList.toggle('is-shrink', window.scrollY > 120);
   }
   window.addEventListener('scroll', syncHeader, { passive: true });
   window.addEventListener('resize', syncHeader);
@@ -38,6 +42,10 @@
     });
     group.setAttribute('data-ready', '');
     chosen[group.dataset.block] = index;
+    if (group.dataset.block === 'hero') {
+      document.body.classList.toggle('hdr-shrink-mode', index === 1);
+      document.body.classList.toggle('hero-corner-mode', index === 2);
+    }
     try { localStorage.setItem(STORE, JSON.stringify(chosen)); } catch (e) { /* приватный режим */ }
     syncHeader();
     syncSequence();
@@ -83,8 +91,10 @@
       if (!button) return;
       var block = button.closest('.switch__row').dataset.block;
       var group = multi.filter(function (g) { return g.dataset.block === block; })[0];
-      applyVariant(group, Number(button.dataset.set));
-      markActive();
+      chosen[group.dataset.block] = Number(button.dataset.set);
+      try { localStorage.setItem(STORE, JSON.stringify(chosen)); } catch (e) { /* приватный режим */ }
+      window.scrollTo(0, 0);
+      location.reload();
     });
 
     toggle.addEventListener('click', function () {
@@ -113,12 +123,25 @@
     if (span <= 0) return;
 
     var progress = Math.min(Math.max(-track.getBoundingClientRect().top / span, 0), 1);
-    var step = progress < 0.24 ? 1 : progress < 0.48 ? 2 : progress < 0.72 ? 3 : 4;
+    var step = progress < 0.34 ? 1 : progress < 0.67 ? 2 : 3;
     if (seq.dataset.step !== String(step)) seq.dataset.step = String(step);
   }
   window.addEventListener('scroll', syncSequence, { passive: true });
   window.addEventListener('resize', syncSequence);
+
+  /* ------------------------------------------------------------------
+     Первый экран, вариант 3: центральная и нижняя подписи уходят,
+     как только страницу начинают листать.
+     ------------------------------------------------------------------ */
+  function syncFull() {
+    var full = document.querySelector('.herofull.is-active');
+    if (!full) return;
+    full.classList.toggle('is-past', window.scrollY > window.innerHeight * 0.12);
+  }
+  window.addEventListener('scroll', syncFull, { passive: true });
+
   syncSequence();
+  syncFull();
   syncHeader();
 
   /* ------------------------------------------------------------------
@@ -157,13 +180,20 @@
      ------------------------------------------------------------------ */
   if (!isTouch || !('IntersectionObserver' in window)) return;
 
-  function revealOnScroll(selector, band, tapToggles) {
+  function revealOnScroll(selector, band, tapToggles, once) {
     var items = document.querySelectorAll(selector);
     if (!items.length) return;
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         var el = entry.target;
+        if (once) {                       // раскрылось один раз и осталось
+          if (entry.isIntersecting) {
+            el.classList.add('is-open');
+            observer.unobserve(el);
+          }
+          return;
+        }
         if (!entry.isIntersecting) delete el.dataset.touched;   // ушёл с экрана — снова слушаем прокрутку
         if (el.dataset.touched) return;                          // им управляли касанием
         el.classList.toggle('is-open', entry.isIntersecting);
@@ -182,5 +212,5 @@
   }
 
   revealOnScroll('.usp__card', '-45% 0px -45% 0px', true);
-  revealOnScroll('.work', '-32% 0px -32% 0px', false);
+  revealOnScroll('.work', '-32% 0px -32% 0px', false, true);
 })();
