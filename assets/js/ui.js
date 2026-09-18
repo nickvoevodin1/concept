@@ -96,10 +96,16 @@
       if (!button) return;
       var block = button.closest('.switch__row').dataset.block;
       var group = multi.filter(function (g) { return g.dataset.block === block; })[0];
-      chosen[group.dataset.block] = Number(button.dataset.set);
-      try { localStorage.setItem(STORE, JSON.stringify(chosen)); } catch (e) { /* приватный режим */ }
+      /* Блок меняется на месте: соседние блоки остаются как есть,
+         поэтому варианты можно смешивать. Прокрутка сбрасывается —
+         высота у вариантов разная. */
       window.scrollTo(0, 0);
-      location.reload();
+      applyVariant(group, Number(button.dataset.set));
+      markActive();
+      buildGrid();
+      syncSequence();
+      syncFull();
+      syncHeader();
     });
 
     toggle.addEventListener('click', function () {
@@ -121,8 +127,8 @@
      Первый экран, вариант 2: кадр и строка меняются по мере прокрутки,
      а сетка плиток гаснет поштучно.
      ------------------------------------------------------------------ */
-  var tiles = [];          // клетки, отсортированные по моменту угасания
-  var tilesGone = 0;       // сколько уже погасло
+  var tiles = [];          // клетки со своим темпом угасания
+  var LEVELS = 5;          // ступеней от полной заливки до нуля
 
   /* Одна и та же последовательность при каждой сборке: плитки гаснут
      вразнобой, но предсказуемо, без дёрганья при изменении размера. */
@@ -149,33 +155,38 @@
 
     var html = '';
     for (var i = 0; i < total; i++) {
-      var r = scatter(i);
-      /* Примерно каждая двенадцатая клетка остаётся до конца */
-      var last = scatter(i + 7777) > 0.92;
-      /* Заливка слабая, чтобы кадр читался сквозь сетку */
-      var alpha = (0.16 + scatter(i + 31) * 0.2).toFixed(3);
-      html += '<i data-t="' + (i % 5) +
-              '" style="--a:' + alpha + '"' +
-              (last ? ' class="is-last"' : '') + '></i>';
+      /* Заливка плотная, но кадр за сеткой всё же читается */
+      var alpha = (0.34 + scatter(i + 31) * 0.24).toFixed(3);
+      html += '<i data-t="' + (i % 5) + '" data-k="0" style="--a:' + alpha + '"></i>';
     }
     grid.innerHTML = html;
 
     tiles = [].slice.call(grid.children).map(function (el, i) {
-      /* Плитки с пометкой is-last не гаснут: порог заведомо больше единицы */
-      return { el: el, at: el.classList.contains('is-last') ? 2 : 0.04 + scatter(i) * 0.92 };
-    }).sort(function (a, b) { return a.at - b.at; });
-    tilesGone = 0;
+      return {
+        el: el,
+        /* с какой прокрутки плитка начинает бледнеть */
+        from: 0.02 + scatter(i) * 0.44,
+        /* насколько прокрутки хватает на одну ступень */
+        step: 0.07 + scatter(i + 517) * 0.06,
+        /* примерно треть плиток не гаснет совсем: к финалу они
+           остаются на последней видимой ступени */
+        floor: scatter(i + 7777) < 0.36 ? LEVELS - 1 : LEVELS,
+        k: 0
+      };
+    });
   }
 
   function fadeTiles(progress) {
     if (!tiles || !tiles.length) return;
-    while (tilesGone < tiles.length && tiles[tilesGone].at <= progress) {
-      tiles[tilesGone].el.classList.add('is-gone');
-      tilesGone++;
-    }
-    while (tilesGone > 0 && tiles[tilesGone - 1].at > progress) {
-      tilesGone--;
-      tiles[tilesGone].el.classList.remove('is-gone');
+    for (var i = 0; i < tiles.length; i++) {
+      var t = tiles[i];
+      var k = Math.floor((progress - t.from) / t.step);
+      if (k < 0) k = 0;
+      if (k > t.floor) k = t.floor;
+      if (k !== t.k) {
+        t.k = k;
+        t.el.setAttribute('data-k', String(k));
+      }
     }
   }
 

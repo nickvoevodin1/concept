@@ -169,8 +169,11 @@ ul{ padding:0; list-style:none }
     opacity:0; max-width:0; margin-inline-start:0; pointer-events:none;
   }
   .hdr-shrink-mode .hdr.is-shrink .hdr__nav{ padding-inline-start:0 }
+  /* Ширина под оставшийся набор: логотип, Instagram и кнопка.
+     Уже — и кнопка выезжает за правый край островка. */
   .hdr-shrink-mode .hdr.is-shrink .hdr__inner{
-    max-width:clamp(300px,26vw,360px);
+    max-width:clamp(392px,30vw,440px);
+    padding-inline:26px 22px;
   }
 }
 /* Ниже первого экрана фон светлый, поэтому стекло уплотняется —
@@ -810,8 +813,9 @@ ul{ padding:0; list-style:none }
 
 /* ---------- Плитки поверх кадра ------------------------------
    Клетки квадратные, расставляет их скрипт под размер экрана.
-   Заливка слабая — кадр читается сквозь сетку. По мере прокрутки
-   плитки гаснут поштучно, к последнему кадру остаются единицы.   */
+   Кадр читается сквозь сетку. По мере прокрутки плитки бледнеют
+   ступенями и вразнобой; примерно треть остаётся до конца — еле
+   заметными, но видимыми.                                        */
 .heroseq__grid{
   position:absolute; inset:0; z-index:1; overflow:hidden;
   display:grid;
@@ -820,12 +824,16 @@ ul{ padding:0; list-style:none }
 }
 .heroseq__grid i{
   display:block;
-  opacity:var(--a,.26);
-  transition:opacity .7s cubic-bezier(.4,0,.2,1);
+  opacity:var(--a,.4);
+  transition:opacity .8s cubic-bezier(.4,0,.2,1);
 }
-.heroseq__grid i.is-gone{ opacity:0 }
-/* Плитки, которые остаются до конца, к финалу еле заметны */
-.heroseq[data-step="3"] .heroseq__grid i.is-last{ opacity:calc(var(--a,.26) * .45) }
+/* Ступени угасания: плитка не пропадает с первой прокрутки, а бледнеет
+   шаг за шагом. Ступень выставляет скрипт, у каждой плитки свой темп. */
+.heroseq__grid i[data-k="1"]{ opacity:calc(var(--a,.4) * .62) }
+.heroseq__grid i[data-k="2"]{ opacity:calc(var(--a,.4) * .38) }
+.heroseq__grid i[data-k="3"]{ opacity:calc(var(--a,.4) * .22) }
+.heroseq__grid i[data-k="4"]{ opacity:calc(var(--a,.4) * .16) }
+.heroseq__grid i[data-k="5"]{ opacity:0 }
 
 .heroseq__grid i[data-t="0"]{ background:var(--wine) }
 .heroseq__grid i[data-t="1"]{ background:var(--brass) }
@@ -839,8 +847,8 @@ ul{ padding:0; list-style:none }
 
 /* ---------- Подсказка «листайте вниз» ------------------------ */
 .scrollcue{
-  position:absolute; z-index:3; left:50%; bottom:clamp(18px,2.4vw,34px);
-  width:clamp(40px,3.4vw,50px); height:clamp(40px,3.4vw,50px);
+  position:absolute; z-index:3; left:50%; bottom:clamp(40px,5vw,72px);
+  width:clamp(56px,4.6vw,70px); height:clamp(56px,4.6vw,70px);
   transform:translateX(-50%); color:#fff; pointer-events:none;
   opacity:.9; transition:opacity .5s ease;
 }
