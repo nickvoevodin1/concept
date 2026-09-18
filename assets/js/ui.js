@@ -45,6 +45,11 @@
     if (group.dataset.block === 'hero') {
       document.body.classList.toggle('hdr-shrink-mode', index === 1);
       document.body.classList.toggle('hero-corner-mode', index === 2);
+      var chrome = document.querySelector('.corner');
+      if (chrome) {
+        if (index === 2) chrome.removeAttribute('hidden');
+        else chrome.setAttribute('hidden', '');
+      }
     }
     try { localStorage.setItem(STORE, JSON.stringify(chosen)); } catch (e) { /* приватный режим */ }
     syncHeader();
@@ -133,12 +138,19 @@
      Первый экран, вариант 3: центральная и нижняя подписи уходят,
      как только страницу начинают листать.
      ------------------------------------------------------------------ */
+  var corner = document.querySelector('.corner');
+
   function syncFull() {
     var full = document.querySelector('.herofull.is-active');
     if (!full) return;
-    full.classList.toggle('is-past', window.scrollY > window.innerHeight * 0.12);
+    var past = window.scrollY > window.innerHeight * 0.12;
+    full.classList.toggle('is-past', past);
+    /* Угловое меню закреплено на весь сайт, но ниже первого экрана
+       фон светлый — белый набор там не читается. */
+    if (corner) corner.classList.toggle('is-light', full.getBoundingClientRect().bottom < 120);
   }
   window.addEventListener('scroll', syncFull, { passive: true });
+  window.addEventListener('resize', syncFull);
 
   syncSequence();
   syncFull();
