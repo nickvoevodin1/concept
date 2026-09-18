@@ -537,20 +537,30 @@ ul{ padding:0; list-style:none }
 .work--flat   .work__media{ aspect-ratio:16/10 }
 .work--square .work__media{ aspect-ratio:1/1 }
 
-/* Кадры объекта, которые выезжают сбоку при наведении */
-.work__extra{
-  position:absolute; top:0; width:44%; z-index:2;
-  display:grid; grid-template-columns:1fr 1fr; gap:clamp(8px,.9vw,14px);
+/* Фотокарточки объекта: выезжают поверх нижнего края фото и вбок,
+   в свободное место сетки. Клик открывает полный кадр. */
+.work__cards{
+  position:absolute; left:clamp(10px,1.4vw,18px); bottom:clamp(10px,1.4vw,18px);
+  z-index:3; display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(8px,.9vw,14px); width:clamp(240px,21vw,300px);
   opacity:0; pointer-events:none;
+  transform:translateY(14px);
   transition:opacity .4s ease, transform .55s cubic-bezier(.22,1,.36,1);
 }
-.work__extra img{ width:100%; aspect-ratio:4/3; object-fit:cover }
-.work__more{ display:none }
-.work--r .work__extra{ left:100%; margin-left:clamp(10px,1.4vw,22px); transform:translateX(-18px) }
-.work--l .work__extra{ right:100%; margin-right:clamp(10px,1.4vw,22px); transform:translateX(18px) }
-.work:hover .work__extra,
-.work:focus-within .work__extra,
-.work.is-open .work__extra{ opacity:1; transform:translateX(0) }
+.work--l .work__cards{ left:auto; right:clamp(10px,1.4vw,18px) }
+.work--r .work__cards{ transform:translate(14px,14px) }
+
+.work__card{
+  display:block; padding:0; border:0; border-radius:0; cursor:pointer;
+  background:var(--white); box-shadow:0 10px 30px rgba(0,0,0,.28);
+  overflow:hidden; transition:transform .25s ease;
+}
+.work__card img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block }
+.work__card:hover{ transform:scale(1.04) }
+
+.work:hover .work__cards,
+.work:focus-within .work__cards,
+.work.is-open .work__cards{ opacity:1; transform:translate(0,0); pointer-events:auto }
 
 .w1{ grid-column:1 / 6;  grid-row:1 }
 .w2{ grid-column:8 / 12; grid-row:1; margin-top:clamp(40px,8vw,140px) }
@@ -560,13 +570,16 @@ ul{ padding:0; list-style:none }
 .w6{ grid-column:8 / 12; grid-row:3; margin-top:clamp(30px,5vw,90px) }
 
 .work__title{
-  margin-top:14px;
+  margin-bottom:6px;
   font-size:clamp(14px,1.25vw,18px); font-weight:600;
   letter-spacing:-.005em; text-transform:uppercase;
   transition:color .25s;
 }
 .work:hover .work__title{ color:var(--wine) }
-.work__meta{ margin-top:6px; font-size:13px; line-height:1.45; color:var(--muted) }
+.work__meta{
+  margin-bottom:clamp(14px,1.6vw,22px);
+  font-size:13px; line-height:1.45; color:var(--muted);
+}
 
 .works__cta{ margin-top:clamp(30px,4vw,56px) }
 
@@ -585,7 +598,7 @@ ul{ padding:0; list-style:none }
 
 @media (max-width:1240px){
   .hdr__nav a:nth-child(n+5){ display:none }
-  .work__extra{ display:none }
+  .work__cards{ display:none }
   .w3{ margin-top:0 }
 }
 
@@ -622,7 +635,11 @@ ul{ padding:0; list-style:none }
   .usp__title{ margin-top:14px }
   .usp__desc{ left:20px; right:20px; bottom:20px }
   .usp__card:focus-within .usp__title,
-  .usp__card.is-open .usp__title{ font-size:21px; transform:translateY(-62px) }
+  .usp__card.is-open .usp__title{ font-size:21px; transform:translateY(-52px) }
+  /* Описание поднимается к середине карточки, а не висит у нижнего края */
+  .usp__desc{ top:50%; bottom:auto; transform:translateY(26px) }
+  .usp__card:focus-within .usp__desc,
+  .usp__card.is-open .usp__desc{ transform:translateY(2px) }
   .calc__grid{ grid-template-columns:1fr }
   .calc__panel-head{ padding-left:0 }
   .calc__panel > .calc__cut{ display:none }
@@ -632,31 +649,20 @@ ul{ padding:0; list-style:none }
   .work{ margin-top:0 !important }
   .ornament,.glow{ opacity:.35 }
 
-  /* Остальные кадры объекта выезжают под фотографией, когда карточка
-     оказывается в центре экрана; рядом — кнопка на всю галерею. */
-  .work__extra{
-    display:grid; position:static; width:100%;
-    grid-auto-flow:column; grid-auto-columns:42%; grid-template-columns:none;
-    gap:8px; margin-top:8px; padding-bottom:2px;
-    overflow-x:auto; overscroll-behavior-x:contain;
+  /* Фотокарточки объекта выезжают поверх нижнего края фото,
+     когда карточка оказывается в центре экрана. */
+  .work__cards{
+    display:grid; position:absolute;
+    left:10px; right:10px; bottom:10px; width:auto;
+    grid-auto-flow:column; grid-auto-columns:34%; grid-template-columns:none;
+    gap:8px; overflow-x:auto; overscroll-behavior-x:contain;
     -webkit-overflow-scrolling:touch; scrollbar-width:none;
-    transform:none; opacity:0; max-height:0;
-    transition:opacity .4s ease, max-height .5s cubic-bezier(.22,1,.36,1);
   }
-  .work__extra::-webkit-scrollbar{ display:none }
-  .work.is-open .work__extra{ opacity:1; max-height:200px; pointer-events:auto }
+  .work__cards::-webkit-scrollbar{ display:none }
+  .work--l .work__cards{ right:10px; left:10px }
+  .work--r .work__cards{ transform:translateY(14px) }
+  .work.is-open .work__cards{ transform:translateY(0) }
 
-  .work__more{
-    display:inline-flex; align-items:center; gap:8px;
-    margin-top:12px; padding:8px 14px;
-    border:1px solid var(--rule-strong);
-    font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-    opacity:0; transform:translateY(6px); pointer-events:none;
-    transition:opacity .4s ease .1s, transform .4s ease .1s;
-  }
-  .work.is-open .work__more{ opacity:1; transform:translateY(0); pointer-events:auto }
-
-  /* Плюс всегда в правом верхнем углу, заголовок переносится по строкам */
   .price__row > summary{ display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:16px }
   .price__name{ grid-column:1; grid-row:1 }
   .price__plus{ grid-column:2; grid-row:1; align-self:start }
@@ -671,5 +677,204 @@ ul{ padding:0; list-style:none }
 
 @media (max-width:480px){
   .hdr__phone{ display:none }
-  .hdr .btn{ margin-inline-start:auto; padding:0 16px; font-size:10px }
+  .hdr__ig{ margin-inline-start:auto }
+  .hdr .btn{ margin-inline-start:10px; padding:0 16px; font-size:10px }
+}
+
+/* ============================================================
+   ВАРИАНТЫ БЛОКОВ
+
+   В разметке рядом лежат несколько версий одного блока.
+   Скрипт показывает выбранную, остальные прячет.
+   ============================================================ */
+
+.variants > [data-variant]{ display:none }
+/* Пока скрипт не отработал, показываем первый вариант */
+.variants:not([data-ready]) > [data-variant="1"]{ display:flex }
+.variants > [data-variant].is-active{ display:flex }
+.variants > .herosplit[data-variant].is-active{ display:grid }
+.variants > .heroseq[data-variant].is-active{ display:block }
+
+/* ---------- Кнопка переключения ---------------------------- */
+
+.switch{ position:fixed; right:16px; bottom:16px; z-index:80; display:flex; flex-direction:column; align-items:flex-end; gap:10px }
+.switch__toggle{
+  border:0; cursor:pointer;
+  padding:11px 18px; background:var(--wine); color:#fff;
+  font:inherit; font-size:11px; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  box-shadow:0 10px 30px rgba(0,0,0,.28);
+}
+.switch__toggle:hover{ background:var(--wine-deep) }
+.switch__panel{
+  background:var(--near); color:#fff; padding:18px 20px;
+  box-shadow:0 18px 50px rgba(0,0,0,.4); min-width:250px;
+}
+.switch__title{
+  font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:rgba(255,255,255,.6); margin-bottom:14px;
+}
+.switch__row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
+.switch__row + .switch__row{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,.14) }
+.switch__row span{ font-size:13px }
+.switch__btns{ display:flex; gap:6px }
+.switch__btns button{
+  width:30px; height:30px; cursor:pointer;
+  border:1px solid rgba(255,255,255,.28); background:none; color:#fff;
+  font:inherit; font-size:12px; font-weight:600;
+  transition:background .2s, border-color .2s, color .2s;
+}
+.switch__btns button:hover{ border-color:#fff }
+.switch__btns button[aria-pressed="true"]{ background:#fff; border-color:#fff; color:var(--black) }
+
+/* ============================================================
+   ПЕРВЫЙ ЭКРАН — ВАРИАНТ 2 (прокрутка)
+   ============================================================ */
+
+.heroseq{ position:relative; background:var(--black); color:#fff }
+.heroseq__track{ height:400svh }
+.heroseq__stage{
+  position:sticky; top:0; height:100svh; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end;
+}
+
+.heroseq__media{
+  position:absolute; inset:0;
+  transition:transform .9s cubic-bezier(.22,1,.36,1);
+}
+.heroseq__media img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .9s ease;
+}
+.heroseq__media::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(8,7,7,.5) 0%, rgba(8,7,7,.45) 55%, rgba(30,4,9,.72) 100%);
+}
+.heroseq[data-step="1"] .heroseq__media img:nth-of-type(1),
+.heroseq[data-step="2"] .heroseq__media img:nth-of-type(2),
+.heroseq[data-step="3"] .heroseq__media img:nth-of-type(3),
+.heroseq[data-step="4"] .heroseq__media img:nth-of-type(3){ opacity:1 }
+/* На последнем шаге кадр уезжает вниз и открывает карточку */
+.heroseq[data-step="4"] .heroseq__media{ transform:translateY(50%) }
+
+/* Полупрозрачные квадраты поверх кадра */
+.heroseq__grid{
+  position:absolute; inset:0; z-index:1;
+  display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(5,1fr);
+}
+.heroseq__grid span{ animation:tileBreathe 9s ease-in-out infinite }
+.heroseq__grid span:nth-child(3n)  { background:rgba(80,7,17,.30) }
+.heroseq__grid span:nth-child(3n+1){ background:rgba(171,135,86,.20) }
+.heroseq__grid span:nth-child(5n)  { background:rgba(0,0,0,.34) }
+.heroseq__grid span:nth-child(7n)  { background:rgba(255,255,255,.07) }
+.heroseq__grid span:nth-child(4n)  { background:transparent }
+.heroseq__grid span:nth-child(2n)  { animation-delay:-3s }
+.heroseq__grid span:nth-child(3n)  { animation-delay:-6s }
+@keyframes tileBreathe{ 0%,100%{ opacity:.85 } 50%{ opacity:.35 } }
+@media (prefers-reduced-motion:reduce){ .heroseq__grid span{ animation:none } }
+
+.heroseq__text{
+  position:relative; z-index:2;
+  flex:1 1 auto; display:grid; place-items:center;
+  padding-top:calc(var(--hdr) + 40px); padding-bottom:20px;
+  text-align:center;
+}
+.heroseq__line{
+  grid-area:1 / 1;
+  max-width:18ch;
+  font-family:var(--display); font-weight:500;
+  font-size:clamp(34px,5vw,74px); line-height:1.02;
+  letter-spacing:.005em; text-transform:uppercase; text-wrap:balance;
+  opacity:0; transform:translateY(26px);
+  transition:opacity .6s ease, transform .8s cubic-bezier(.22,1,.36,1);
+}
+.heroseq[data-step="1"] .heroseq__line[data-line="1"],
+.heroseq[data-step="2"] .heroseq__line[data-line="2"],
+.heroseq[data-step="3"] .heroseq__line[data-line="3"],
+.heroseq[data-step="4"] .heroseq__line[data-line="3"]{ opacity:1; transform:translateY(0) }
+/* Третья строка длиннее и набирается спокойнее */
+.heroseq__line[data-line="3"]{ max-width:24ch; font-size:clamp(26px,3.4vw,50px) }
+
+.heroseq__foot{
+  position:relative; z-index:2;
+  padding-bottom:clamp(28px,5vw,64px);
+  display:flex; justify-content:center;
+  opacity:0; transform:translateY(40px); pointer-events:none;
+  transition:opacity .5s ease, transform .7s cubic-bezier(.22,1,.36,1);
+}
+.heroseq[data-step="4"] .heroseq__foot{ opacity:1; transform:translateY(0); pointer-events:auto }
+.heroseq__card{
+  background:var(--white); color:var(--black);
+  border-top:3px solid var(--wine);
+  padding:clamp(22px,2.4vw,32px);
+  max-width:760px; width:100%;
+  display:flex; flex-direction:column; gap:18px; text-align:center;
+}
+.heroseq__card p{ font-size:16px; line-height:1.55 }
+/* Карточка белая, хотя лежит внутри .on-dark: возвращаем тёмный контур */
+.heroseq__card .btn--ghost{ color:var(--black); border-color:var(--rule-strong) }
+.heroseq__card .btn--ghost:hover{ background:var(--wine); color:#fff; border-color:var(--wine) }
+.heroseq__btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+
+/* ============================================================
+   ПЕРВЫЙ ЭКРАН — ВАРИАНТ 3 (пополам)
+   ============================================================ */
+
+.herosplit{
+  min-height:100svh;
+  grid-template-columns:1fr 1fr;
+  background:var(--sand);
+}
+.herosplit__media{ position:relative; overflow:hidden }
+.herosplit__media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.herosplit__body{
+  display:flex; flex-direction:column; justify-content:center;
+  padding:calc(var(--hdr) + 60px) clamp(24px,4vw,72px) clamp(40px,5vw,72px);
+}
+.herosplit__title{ margin-top:20px }
+.herosplit__note{
+  margin-top:20px; font-size:13px; letter-spacing:.04em; color:var(--muted);
+}
+.herosplit__lead{
+  margin-top:26px; padding-top:22px; border-top:1px solid var(--rule-strong);
+  font-size:16px; line-height:1.55; max-width:44ch;
+}
+.herosplit__btns{ margin-top:26px; display:flex; gap:12px; flex-wrap:wrap }
+
+/* ============================================================
+   ПОЛНОЕ ФОТО ОБЪЕКТА
+   ============================================================ */
+
+.lightbox{
+  position:fixed; inset:0; z-index:90;
+  display:grid; place-items:center; overflow:hidden;
+  grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(0,1fr);
+  background:rgba(8,7,7,.92); padding:clamp(16px,4vw,56px);
+}
+.lightbox[hidden]{ display:none }
+.is-lightbox .hdr,
+.is-lightbox .switch{ opacity:0; pointer-events:none }
+.lightbox__img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain }
+.lightbox__close{
+  position:absolute; top:clamp(12px,2vw,24px); right:clamp(12px,2vw,24px);
+  width:46px; height:46px; cursor:pointer;
+  border:1px solid rgba(255,255,255,.4); background:none; color:#fff;
+  font-size:26px; line-height:1;
+}
+.lightbox__close:hover{ background:#fff; color:var(--black) }
+
+@media (max-width:1024px){
+  .herosplit{ grid-template-columns:1fr }
+  .herosplit__media{ min-height:52svh }
+}
+
+@media (max-width:760px){
+  .switch{ right:12px; bottom:12px }
+  .switch__panel{ min-width:0; width:min(80vw,280px) }
+  .heroseq__track{ height:360svh }
+  .heroseq__grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(7,1fr) }
+  .heroseq__card{ text-align:left }
+  .heroseq__btns{ flex-direction:column }
+  .heroseq__btns .btn{ width:100% }
+  .herosplit__btns .btn{ width:100% }
 }
