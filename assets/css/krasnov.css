@@ -221,18 +221,20 @@ ul{ padding:0; list-style:none }
 .hero__media{ position:absolute; inset:0; overflow:hidden }
 .hero__media img{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  transform:translateX(100%); animation:heroSlide 32s cubic-bezier(.7,0,.2,1) infinite;
+  transform:translateX(100%); animation:heroSlide 9s cubic-bezier(.7,0,.2,1) infinite;
 }
-.hero__media img:nth-child(1){ animation-delay:-2s }
-.hero__media img:nth-child(2){ animation-delay:6s }
-.hero__media img:nth-child(3){ animation-delay:14s }
-.hero__media img:nth-child(4){ animation-delay:22s }
+.hero__media img:nth-child(1){ animation-delay:-0.75s }
+.hero__media img:nth-child(2){ animation-delay:2.25s }
+.hero__media img:nth-child(3){ animation-delay:5.25s }
+/* Три кадра по кругу: 9 с на круг, значит по 3 с на фото.
+   Кадр уходит ровно тогда, когда следующий встаёт на место
+   (33.3 % шага + 6.7 % въезда = 40 %), иначе между ними мигает пустота. */
 @keyframes heroSlide{
-  0%   { transform:translateX(100%) }
-  5%   { transform:translateX(0) }     /* въехал  */
-  25%  { transform:translateX(0) }     /* стоит   */
-  30%  { transform:translateX(-100%) } /* ушёл    */
-  100% { transform:translateX(-100%) }
+  0%    { transform:translateX(100%) }
+  6.7%  { transform:translateX(0) }     /* въехал  */
+  33.3% { transform:translateX(0) }     /* стоит   */
+  40%   { transform:translateX(-100%) } /* ушёл    */
+  100%  { transform:translateX(-100%) }
 }
 @media (prefers-reduced-motion:reduce){
   .hero__media img{ animation:none; transform:none; opacity:0 }
@@ -278,7 +280,7 @@ ul{ padding:0; list-style:none }
 }
 .usp__card{
   position:relative; overflow:hidden;
-  min-height:clamp(250px,21vw,300px);
+  min-height:clamp(196px,16vw,232px);
   background:var(--sand); border-radius:14px;
   padding:clamp(22px,2.2vw,32px);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -648,9 +650,9 @@ ul{ padding:0; list-style:none }
      остаются только заголовок и описание, поэтому отступ между ними
      одинаковый у всех пунктов и не зависит от длины заголовка. */
   .usp__grid{ grid-template-columns:1fr; gap:12px }
-  .usp__card{ min-height:190px; padding:20px 18px; border-radius:12px }
+  .usp__card{ min-height:142px; padding:16px 16px; border-radius:12px }
   .usp__icon{
-    width:48px; height:48px; margin-bottom:14px; overflow:hidden;
+    width:40px; height:40px; margin-bottom:12px; overflow:hidden;
     transition:height .45s cubic-bezier(.4,0,.2,1),
                margin-bottom .45s cubic-bezier(.4,0,.2,1),
                opacity .3s ease, transform .45s cubic-bezier(.4,0,.2,1);
@@ -907,12 +909,11 @@ ul{ padding:0; list-style:none }
 .herofull__media{ position:absolute; inset:0; overflow:hidden }
 .herofull__media img{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  transform:translateX(100%); animation:heroSlide 32s cubic-bezier(.7,0,.2,1) infinite;
+  transform:translateX(100%); animation:heroSlide 9s cubic-bezier(.7,0,.2,1) infinite;
 }
-.herofull__media img:nth-child(1){ animation-delay:-2s }
-.herofull__media img:nth-child(2){ animation-delay:6s }
-.herofull__media img:nth-child(3){ animation-delay:14s }
-.herofull__media img:nth-child(4){ animation-delay:22s }
+.herofull__media img:nth-child(1){ animation-delay:-0.75s }
+.herofull__media img:nth-child(2){ animation-delay:2.25s }
+.herofull__media img:nth-child(3){ animation-delay:5.25s }
 @media (prefers-reduced-motion:reduce){
   .herofull__media img{ animation:none; transform:none; opacity:0 }
   .herofull__media img:nth-child(1){ opacity:1 }
