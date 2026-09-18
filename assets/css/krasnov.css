@@ -403,7 +403,7 @@ ul{ padding:0; list-style:none }
 .calc__scale span:last-child{ text-align:right }
 .calc__fields .note{ margin-top:clamp(18px,2vw,26px) }
 
-/* Тёмная фигура со срезанным углом и свечением */
+/* Тёмная плашка со скруглёнными углами и свечением */
 .calc__panel{
   position:relative; isolation:isolate;
   background:var(--near); color:#fff;
@@ -418,28 +418,6 @@ ul{ padding:0; list-style:none }
   background:radial-gradient(circle, rgba(171,135,86,.55) 0%, rgba(80,7,17,.35) 45%, transparent 70%);
   filter:blur(28px);
 }
-/* Вырез в левом верхнем углу: сам вырез и два вогнутых сопряжения */
-.calc__panel > .calc__cut{
-  --cut-w:clamp(84px,9vw,132px);
-  --cut-h:clamp(30px,3vw,44px);
-  --cut-r:18px;
-  position:absolute; left:0; top:0; z-index:2;
-  width:var(--cut-w); height:var(--cut-h);
-  background:var(--sand);
-  border-top-left-radius:26px;
-}
-.calc__panel > .calc__cut::before,
-.calc__panel > .calc__cut::after{
-  content:''; position:absolute;
-  width:var(--cut-r); height:var(--cut-r);
-  background:var(--sand);
-  border-bottom-right-radius:var(--cut-r);
-}
-.calc__panel > .calc__cut::before{ left:100%; top:0 }
-.calc__panel > .calc__cut::after{ left:0; top:100% }
-.calc__panel > *{ position:relative }
-/* Первая строка результата не должна залезать под вырез */
-.calc__panel > [id^="calc-result"]{ padding-top:clamp(18px,1.8vw,26px) }
 .calc__total{
   font-family:var(--display); font-weight:500;
   font-size:clamp(38px,4.2vw,62px); line-height:1; letter-spacing:.005em;
@@ -695,7 +673,6 @@ ul{ padding:0; list-style:none }
   .usp__card:focus-within .usp__desc,
   .usp__card.is-open .usp__desc{ opacity:1; max-height:260px; margin-top:18px; transform:none }
   .calc__grid{ grid-template-columns:1fr }
-  .calc__panel > .calc__cut{ display:none }
 
   .works__grid{ display:block }
   /* Сбрасываем разножку сетки десктопа и разводим объекты по вертикали,
