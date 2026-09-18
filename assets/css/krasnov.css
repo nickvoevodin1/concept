@@ -792,7 +792,7 @@ ul{ padding:0; list-style:none }
 
 /* ---------- Плитки поверх кадра ------------------------------
    Клетки квадратные, расставляет их скрипт под размер экрана.
-   Заливка 10 %, цвета вразнобой — кадр читается сквозь сетку. По мере прокрутки плитки бледнеют
+   До прокрутки почти непрозрачные, цвета вразнобой. По мере прокрутки плитки бледнеют
    ступенями и вразнобой; примерно треть остаётся до конца — еле
    заметными, но видимыми.                                        */
 .heroseq__grid{
@@ -802,25 +802,24 @@ ul{ padding:0; list-style:none }
   grid-template-columns:repeat(var(--cols,12), 1fr);
 }
 .heroseq__grid i{
-  --a:.1;                       /* заливка 10 %: кадр читается почти целиком */
+  --a:.9;                       /* до прокрутки плитки почти непрозрачные */
   display:block;
   opacity:var(--a);
   transition:opacity .8s cubic-bezier(.4,0,.2,1);
 }
 /* Ступени угасания: плитка не пропадает с первой прокрутки, а бледнеет
    шаг за шагом. Ступень выставляет скрипт, у каждой плитки свой темп.
-   Лесенка пологая — от 10 % падать резко уже некуда. */
-.heroseq__grid i[data-k="1"]{ opacity:calc(var(--a) * .78) }
-.heroseq__grid i[data-k="2"]{ opacity:calc(var(--a) * .58) }
-.heroseq__grid i[data-k="3"]{ opacity:calc(var(--a) * .42) }
-.heroseq__grid i[data-k="4"]{ opacity:calc(var(--a) * .3) }
+   От 90 % до еле заметных 6 % — к финалу треть плиток остаётся здесь. */
+.heroseq__grid i[data-k="1"]{ opacity:calc(var(--a) * .55) }
+.heroseq__grid i[data-k="2"]{ opacity:calc(var(--a) * .32) }
+.heroseq__grid i[data-k="3"]{ opacity:calc(var(--a) * .18) }
+.heroseq__grid i[data-k="4"]{ opacity:calc(var(--a) * .07) }
 .heroseq__grid i[data-k="5"]{ opacity:0 }
 
 .heroseq__grid i[data-t="0"]{ background:var(--wine) }
 .heroseq__grid i[data-t="1"]{ background:var(--brass) }
 .heroseq__grid i[data-t="2"]{ background:var(--near) }
 .heroseq__grid i[data-t="3"]{ background:var(--wine-deep) }
-.heroseq__grid i[data-t="4"]{ background:var(--sand) }
 
 @media (prefers-reduced-motion:reduce){
   .heroseq__grid i{ transition:none }
@@ -853,13 +852,14 @@ ul{ padding:0; list-style:none }
   padding-bottom:clamp(28px,5vw,64px);
   text-align:center;
 }
-/* Чем меньше остаётся плиток, тем сильнее нужна подложка под текстом */
+/* Подложка под текстом нужна на всех кадрах: на первом плитки плотные
+   и среди них есть светлые, дальше их всё меньше и остаётся фото. */
 .heroseq__text::before{
   content:''; position:absolute; inset:0; z-index:-1;
-  background:radial-gradient(ellipse 72% 58% at 50% 50%, rgba(8,7,7,.58), transparent 72%);
-  opacity:0; transition:opacity .9s ease;
+  background:radial-gradient(ellipse 88% 66% at 50% 50%, rgba(8,7,7,.72), rgba(8,7,7,.5) 55%, transparent 82%);
+  opacity:1; transition:opacity .9s ease;
 }
-.heroseq[data-step="2"] .heroseq__text::before{ opacity:.7 }
+.heroseq[data-step="2"] .heroseq__text::before{ opacity:1 }
 .heroseq[data-step="3"] .heroseq__text::before{ opacity:1 }
 .heroseq__frame{
   grid-area:1 / 1; width:100%;
