@@ -26,6 +26,9 @@
 
   --display:'Cormorant', 'Times New Roman', Georgia, serif;
   --text:   'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  /* Заголовки вариантов первого экрана */
+  --geo:    'Onest', 'Golos Text', -apple-system, Arial, sans-serif;
+  --narrow: 'Bebas Neue Cyrillic', 'Golos Text', Arial, sans-serif;
 
   --wrap:1400px;
   --gut: clamp(16px, 3.4vw, 40px);
@@ -153,16 +156,21 @@ ul{ padding:0; list-style:none }
     max-width:clamp(360px,40vw,560px);
     margin-inline-start:auto; margin-inline-end:0;
   }
-  .hdr-shrink-mode .hdr__nav a[data-minor],
+  .hdr-shrink-mode .hdr__nav a,
   .hdr-shrink-mode .hdr__phone{
     display:inline-block; overflow:hidden; white-space:nowrap; max-width:240px;
     transition:opacity .35s ease,
                max-width .6s cubic-bezier(.4,0,.2,1),
                margin-inline-start .6s cubic-bezier(.4,0,.2,1);
   }
-  .hdr-shrink-mode .hdr.is-shrink .hdr__nav a[data-minor],
+  /* В сжатом виде остаются логотип, Instagram и кнопка */
+  .hdr-shrink-mode .hdr.is-shrink .hdr__nav a,
   .hdr-shrink-mode .hdr.is-shrink .hdr__phone{
     opacity:0; max-width:0; margin-inline-start:0; pointer-events:none;
+  }
+  .hdr-shrink-mode .hdr.is-shrink .hdr__nav{ padding-inline-start:0 }
+  .hdr-shrink-mode .hdr.is-shrink .hdr__inner{
+    max-width:clamp(300px,26vw,360px);
   }
 }
 /* Ниже первого экрана фон светлый, поэтому стекло уплотняется —
@@ -661,11 +669,16 @@ ul{ padding:0; list-style:none }
   .usp__grid{ grid-template-columns:1fr; gap:12px }
   .usp__card{ min-height:190px; padding:20px 18px; border-radius:12px }
   .usp__icon{
-    position:absolute; left:50%; top:50%; width:48px; height:48px;
-    transform:translate(-50%,-50%);
+    width:48px; height:48px; margin-bottom:14px; overflow:hidden;
+    transition:height .45s cubic-bezier(.4,0,.2,1),
+               margin-bottom .45s cubic-bezier(.4,0,.2,1),
+               opacity .3s ease, transform .45s cubic-bezier(.4,0,.2,1);
   }
+  /* В раскрытом виде иконка уезжает вверх и отдаёт свою высоту тексту */
   .usp__card:focus-within .usp__icon,
-  .usp__card.is-open .usp__icon{ transform:translate(-50%,-50%) translateY(-210%); opacity:0 }
+  .usp__card.is-open .usp__icon{
+    height:0; margin-bottom:0; opacity:0; transform:translateY(-40%);
+  }
   .usp__title{ margin-top:0; transform:none }
   .usp__card:focus-within .usp__title,
   .usp__card.is-open .usp__title{ font-size:20px; transform:none }
@@ -796,31 +809,52 @@ ul{ padding:0; list-style:none }
 .heroseq[data-step="3"] .heroseq__media img:nth-of-type(3){ opacity:1 }
 
 /* ---------- Плитки поверх кадра ------------------------------
-   Сетка квадратов без пропусков: ширина колонки задана в vw,
-   высота строки — тем же значением, поэтому ячейка квадратная.
-   Шаг 1 — плотная сетка, шаг 2 — плиток вдвое меньше,
-   шаг 3 — остаются единицы и еле видны.                        */
+   Клетки квадратные, расставляет их скрипт под размер экрана.
+   Заливка слабая — кадр читается сквозь сетку. По мере прокрутки
+   плитки гаснут поштучно, к последнему кадру остаются единицы.   */
 .heroseq__grid{
   position:absolute; inset:0; z-index:1; overflow:hidden;
   display:grid;
-  grid-template-columns:repeat(8,1fr);
-  grid-auto-rows:12.5vw;
+  grid-auto-rows:var(--tile,120px);
+  grid-template-columns:repeat(var(--cols,12), 1fr);
 }
-.heroseq__grid span{
-  opacity:1;
-  transition:opacity .9s ease;
+.heroseq__grid i{
+  display:block;
+  opacity:var(--a,.26);
+  transition:opacity .7s cubic-bezier(.4,0,.2,1);
 }
-.heroseq__grid span:nth-child(5n+1){ background:rgba(80,7,17,.62) }
-.heroseq__grid span:nth-child(5n+2){ background:rgba(171,135,86,.5) }
-.heroseq__grid span:nth-child(5n+3){ background:rgba(18,18,18,.6) }
-.heroseq__grid span:nth-child(5n+4){ background:rgba(56,5,12,.68) }
-.heroseq__grid span:nth-child(5n+5){ background:rgba(246,241,234,.2) }
+.heroseq__grid i.is-gone{ opacity:0 }
+/* Плитки, которые остаются до конца, к финалу еле заметны */
+.heroseq[data-step="3"] .heroseq__grid i.is-last{ opacity:calc(var(--a,.26) * .45) }
 
-.heroseq[data-step="1"] .heroseq__grid span{ opacity:1 }
-.heroseq[data-step="2"] .heroseq__grid span{ opacity:0 }
-.heroseq[data-step="2"] .heroseq__grid span:nth-child(2n+1){ opacity:.6 }
-.heroseq[data-step="3"] .heroseq__grid span{ opacity:0 }
-.heroseq[data-step="3"] .heroseq__grid span:nth-child(7n+2){ opacity:.24 }
+.heroseq__grid i[data-t="0"]{ background:var(--wine) }
+.heroseq__grid i[data-t="1"]{ background:var(--brass) }
+.heroseq__grid i[data-t="2"]{ background:var(--near) }
+.heroseq__grid i[data-t="3"]{ background:var(--wine-deep) }
+.heroseq__grid i[data-t="4"]{ background:var(--sand) }
+
+@media (prefers-reduced-motion:reduce){
+  .heroseq__grid i{ transition:none }
+}
+
+/* ---------- Подсказка «листайте вниз» ------------------------ */
+.scrollcue{
+  position:absolute; z-index:3; left:50%; bottom:clamp(18px,2.4vw,34px);
+  width:clamp(40px,3.4vw,50px); height:clamp(40px,3.4vw,50px);
+  transform:translateX(-50%); color:#fff; pointer-events:none;
+  opacity:.9; transition:opacity .5s ease;
+}
+.scrollcue svg{ width:100%; height:100% }
+.scrollcue__arrow{ animation:cueNudge 1.8s cubic-bezier(.4,0,.2,1) infinite }
+@keyframes cueNudge{
+  0%,100%{ transform:translateY(-3px); opacity:.55 }
+  45%    { transform:translateY(3px);  opacity:1 }
+}
+/* На последнем кадре листать уже некуда */
+.heroseq[data-step="3"] .scrollcue{ opacity:0 }
+@media (prefers-reduced-motion:reduce){
+  .scrollcue__arrow{ animation:none }
+}
 
 /* ---------- Кадры текста ------------------------------------- */
 .heroseq__text{
@@ -852,7 +886,7 @@ ul{ padding:0; list-style:none }
 /* Крупный жирный набор без капса — как в референсе */
 .heroseq__head{
   max-width:20ch;
-  font-family:var(--text); font-weight:700;
+  font-family:var(--geo); font-weight:700;
   font-size:clamp(30px,4.4vw,66px); line-height:1.06;
   letter-spacing:-.015em; text-wrap:balance;
 }
@@ -917,10 +951,10 @@ ul{ padding:0; list-style:none }
   color:rgba(255,255,255,.88);
 }
 .herofull__title{
-  max-width:20ch;
-  font-family:var(--text); font-weight:500;
-  font-size:clamp(26px,3.4vw,52px); line-height:1.14;
-  letter-spacing:.04em; text-transform:uppercase; text-wrap:balance;
+  max-width:18ch;
+  font-family:var(--narrow); font-weight:400;
+  font-size:clamp(38px,5vw,78px); line-height:.94;
+  letter-spacing:.03em; text-transform:uppercase; text-wrap:balance;
   text-shadow:0 2px 24px rgba(8,7,7,.55);
 }
 .herofull__note{
@@ -998,11 +1032,12 @@ ul{ padding:0; list-style:none }
 
 /* В этом варианте шапка-островок не нужна: её роль играет угловое меню */
 .hero-corner-mode .hdr{ display:none }
-/* Меню закреплено по кромкам, поэтому содержимое страницы отводим
-   внутрь, чтобы текст не заходил под него. Первый экран остаётся
-   во всю ширину. */
+/* Меню закреплено по кромкам. Ниже первого экрана содержимое
+   отводим внутрь ровно настолько, чтобы текст не заходил под боковые
+   кромки; сами блоки при этом остаются такими же, как в других
+   вариантах. Первый экран — во всю ширину. */
 .hero-corner-mode main > .section,
-.hero-corner-mode .stub{ padding-inline:clamp(72px,8vw,132px) }
+.hero-corner-mode .stub{ padding-inline:clamp(34px,4vw,64px) }
 /* Кнопка вариантов не должна закрывать угловую букву */
 .hero-corner-mode .switch{ bottom:clamp(96px,11vw,132px) }
 
@@ -1033,23 +1068,29 @@ ul{ padding:0; list-style:none }
   .switch{ right:12px; bottom:12px }
   .switch__panel{ min-width:0; width:min(80vw,280px) }
   .heroseq__track{ height:300svh }
-  .heroseq__grid{ grid-template-columns:repeat(4,1fr); grid-auto-rows:25vw }
   .heroseq__btns{ flex-direction:column; width:100% }
   .heroseq__btns .btn{ width:100% }
   .herofull__center{ padding-inline:clamp(48px,14vw,70px) }
-  .herofull__title{ font-size:21px; letter-spacing:.04em }
+  .herofull__title{ font-size:34px; letter-spacing:.03em; line-height:.96 }
   .herofull__note{ bottom:118px; width:min(84%,34ch); font-size:11px }
-  /* На телефоне вертикальные кромки съедают всю ширину, поэтому
-     разделы переезжают вниз по центру, а поля страницы меньше */
-  .corner__logo{ width:46px }
-  .corner__side{
-    writing-mode:horizontal-tb; top:auto; bottom:var(--pad);
-    font-size:11px; letter-spacing:.12em;
-  }
-  .corner__side--l{ left:50%; transform:translateX(-112%) }
-  .corner__side--r{ right:50%; transform:translateX(112%) }
-  .corner__letter{ font-size:40px }
+  /* Разделы остаются на боковых кромках, как на десктопе; прижимаем
+     их вплотную к краю, чтобы они умещались в поля страницы */
+  .corner{ --pad:10px }
+  .corner__logo{ width:46px; left:16px; top:16px }
+  .corner__ig{ right:16px; top:16px; width:36px; height:36px }
+  .corner__side{ font-size:10px; letter-spacing:.12em }
+  .corner__letter{ font-size:44px }
+  .hero-corner-mode .switch{ bottom:76px }
+  /* На телефоне поля страницы не расширяем: блоки должны быть такими же,
+     как в остальных вариантах, а кромки умещаются в поле */
   .hero-corner-mode main > .section,
-  .hero-corner-mode .stub{ padding-inline:44px }
-  .hero-corner-mode .switch{ bottom:72px }
+  .hero-corner-mode .stub{ padding-inline:0 }
+  /* Ниже первого экрана кромки ложатся на карточки, поэтому получают
+     светлую подложку, а угловые буквы — часть композиции первого
+     экрана — там уже не нужны */
+  .corner.is-light .corner__side{
+    background:rgba(246,241,234,.92); padding:10px 3px; border-radius:99px;
+  }
+  .corner.is-light .corner__letter{ opacity:0 }
+  .corner__letter{ transition:opacity .35s ease }
 }

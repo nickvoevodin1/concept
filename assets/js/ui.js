@@ -118,8 +118,67 @@
   buildSwitch();
 
   /* ------------------------------------------------------------------
-     Первый экран, вариант 2: кадр и строка меняются по мере прокрутки.
+     Первый экран, вариант 2: кадр и строка меняются по мере прокрутки,
+     а сетка плиток гаснет поштучно.
      ------------------------------------------------------------------ */
+  var tiles = [];          // клетки, отсортированные по моменту угасания
+  var tilesGone = 0;       // сколько уже погасло
+
+  /* Одна и та же последовательность при каждой сборке: плитки гаснут
+     вразнобой, но предсказуемо, без дёрганья при изменении размера. */
+  function scatter(i) {
+    var x = Math.sin(i * 12.9898) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  function buildGrid() {
+    /* Сетка нужна только когда второй вариант действительно показан */
+    var seq = document.querySelector('.heroseq.is-active');
+    if (!seq) return;
+    var grid = seq.querySelector('.heroseq__grid');
+    if (!grid) return;
+
+    var wide = window.innerWidth > 760;
+    var cols = wide ? 14 : 6;
+    var tile = Math.ceil(window.innerWidth / cols);
+    var rows = Math.ceil(window.innerHeight / tile) + 1;
+    var total = cols * rows;
+
+    grid.style.setProperty('--cols', cols);
+    grid.style.setProperty('--tile', tile + 'px');
+
+    var html = '';
+    for (var i = 0; i < total; i++) {
+      var r = scatter(i);
+      /* Примерно каждая двенадцатая клетка остаётся до конца */
+      var last = scatter(i + 7777) > 0.92;
+      /* Заливка слабая, чтобы кадр читался сквозь сетку */
+      var alpha = (0.16 + scatter(i + 31) * 0.2).toFixed(3);
+      html += '<i data-t="' + (i % 5) +
+              '" style="--a:' + alpha + '"' +
+              (last ? ' class="is-last"' : '') + '></i>';
+    }
+    grid.innerHTML = html;
+
+    tiles = [].slice.call(grid.children).map(function (el, i) {
+      /* Плитки с пометкой is-last не гаснут: порог заведомо больше единицы */
+      return { el: el, at: el.classList.contains('is-last') ? 2 : 0.04 + scatter(i) * 0.92 };
+    }).sort(function (a, b) { return a.at - b.at; });
+    tilesGone = 0;
+  }
+
+  function fadeTiles(progress) {
+    if (!tiles || !tiles.length) return;
+    while (tilesGone < tiles.length && tiles[tilesGone].at <= progress) {
+      tiles[tilesGone].el.classList.add('is-gone');
+      tilesGone++;
+    }
+    while (tilesGone > 0 && tiles[tilesGone - 1].at > progress) {
+      tilesGone--;
+      tiles[tilesGone].el.classList.remove('is-gone');
+    }
+  }
+
   function syncSequence() {
     var seq = document.querySelector('.heroseq.is-active');
     if (!seq) return;
@@ -130,9 +189,14 @@
     var progress = Math.min(Math.max(-track.getBoundingClientRect().top / span, 0), 1);
     var step = progress < 0.34 ? 1 : progress < 0.67 ? 2 : 3;
     if (seq.dataset.step !== String(step)) seq.dataset.step = String(step);
+    fadeTiles(progress);
   }
   window.addEventListener('scroll', syncSequence, { passive: true });
-  window.addEventListener('resize', syncSequence);
+  window.addEventListener('resize', function () {
+    buildGrid();
+    syncSequence();
+  });
+  buildGrid();
 
   /* ------------------------------------------------------------------
      Первый экран, вариант 3: центральная и нижняя подписи уходят,
@@ -143,7 +207,7 @@
   function syncFull() {
     var full = document.querySelector('.herofull.is-active');
     if (!full) return;
-    var past = window.scrollY > window.innerHeight * 0.12;
+    var past = window.scrollY > window.innerHeight * 0.55;
     full.classList.toggle('is-past', past);
     /* Угловое меню закреплено на весь сайт, но ниже первого экрана
        фон светлый — белый набор там не читается. */
