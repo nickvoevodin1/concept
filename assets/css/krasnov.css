@@ -802,7 +802,7 @@ ul{ padding:0; list-style:none }
   grid-template-columns:repeat(var(--cols,12), 1fr);
 }
 .heroseq__grid i{
-  --a:.9;                       /* до прокрутки плитки почти непрозрачные */
+  --a:.8;                       /* до прокрутки плитки почти непрозрачные */
   display:block;
   opacity:var(--a);
   transition:opacity .8s cubic-bezier(.4,0,.2,1);
