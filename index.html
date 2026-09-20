@@ -49,7 +49,25 @@
      ============================================================ -->
 <div class="variants" data-block="hero" data-label="Первый экран">
 
-<section class="hero on-dark" data-variant="1">
+<section class="herofull on-dark" data-variant="1">
+
+  <div class="herofull__media">
+    <img src="assets/photo/hero-1.jpg" alt="Интерьер кафе: мягкие диваны, арочное окно, живые растения и тёплый свет" width="2000" height="1250">
+    <img src="assets/photo/hero-2.jpg" alt="" loading="lazy" width="2000" height="1250">
+    <img src="assets/photo/hero-3.jpg" alt="" loading="lazy" width="2000" height="1250">
+  </div>
+
+  <div class="herofull__center">
+    <p class="herofull__over">Дизайн и реализация коммерческих интерьеров</p>
+    <h1 class="herofull__title">Ведём объект от первой встречи до открытия</h1>
+  </div>
+
+  <p class="herofull__note">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
+
+</section>
+
+<!-- Вариант 2: кадры и текст сменяются при прокрутке -->
+<section class="hero on-dark" data-variant="2">
   <!-- Кадры сменяют друг друга по кругу -->
   <div class="hero__media">
     <img src="assets/photo/hero-1.jpg" alt="Интерьер кафе: мягкие диваны, арочное окно, живые растения и тёплый свет" fetchpriority="high" width="2000" height="1250">
@@ -73,8 +91,8 @@
   </div>
 </section>
 
-<!-- Вариант 2: кадры и текст сменяются при прокрутке -->
-<section class="heroseq on-dark" data-variant="2" data-step="1">
+<!-- Вариант 3: полноэкранный кадр, подписи разведены по углам -->
+<section class="heroseq on-dark" data-variant="3" data-step="1">
   <div class="heroseq__track">
     <div class="heroseq__stage">
 
@@ -121,24 +139,6 @@
 
     </div>
   </div>
-</section>
-
-<!-- Вариант 3: полноэкранный кадр, подписи разведены по углам -->
-<section class="herofull on-dark" data-variant="3">
-
-  <div class="herofull__media">
-    <img src="assets/photo/hero-1.jpg" alt="Интерьер кафе: мягкие диваны, арочное окно, живые растения и тёплый свет" width="2000" height="1250">
-    <img src="assets/photo/hero-2.jpg" alt="" loading="lazy" width="2000" height="1250">
-    <img src="assets/photo/hero-3.jpg" alt="" loading="lazy" width="2000" height="1250">
-  </div>
-
-  <div class="herofull__center">
-    <p class="herofull__over">Дизайн и реализация коммерческих интерьеров</p>
-    <h1 class="herofull__title">Ведём объект от первой встречи до открытия</h1>
-  </div>
-
-  <p class="herofull__note">Проектируем удалённо по всей России&nbsp;· Сейчас есть свободный слот на старт</p>
-
 </section>
 
 </div>
@@ -318,7 +318,7 @@
           </summary>
           <div class="price__body">
             <ul class="plist">
-              <li><b>до 100 м²</b><span>3 500 ₽ за м² с ремонтом&nbsp;· 7 000 ₽ за м² без ремонта</span></li>
+              <li><b>до 100 м²</b><span>3 500 ₽ за м² с ремонтом&nbsp;· 5 000 ₽ за м² без ремонта</span></li>
               <li><b>от 100 до 200 м²</b><span>2 500 ₽ за м² с ремонтом&nbsp;· 5 000 ₽ за м² без ремонта</span></li>
               <li><b>от 200 до 500 м²</b><span>2 000 ₽ за м² с ремонтом&nbsp;· 4 000 ₽ за м² без ремонта</span></li>
               <li><b>от 500 м²</b><span>Обсуждается</span></li>
@@ -458,7 +458,7 @@
     <div class="works__grid">
 
       <article class="work work--wide work--r w1" tabindex="0">
-        <h3 class="work__title">Кофейня, 84 м², Москва</h3>
+        <h3 class="work__title">Кофейня, 84 м², Сочи</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца · визуализации</p>
         <div class="work__media">
           <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
@@ -494,9 +494,6 @@
           </button>
           <button class="work__card" type="button" data-full="assets/photo/works/hookah-bar/04.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/hookah-bar/04.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/hookah-bar/wide.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/hookah-bar/wide.jpg" alt="" loading="lazy">
           </button>
         </div>
       </article>
@@ -539,31 +536,19 @@
           <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/03.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/mid-lounge/03.jpg" alt="" loading="lazy">
           </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/04.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
+          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/05.jpg" aria-label="Открыть фото объекта">
+            <img src="assets/photo/works/mid-lounge/05.jpg" alt="" loading="lazy">
           </button>
         </div>
       </article>
 
-      <article class="work work--flat work--r w5" tabindex="0">
-        <h3 class="work__title">Кофейня, 120 м², Сочи</h3>
-        <p class="work__meta">Дизайн-проект · визуализации</p>
+      <!-- ЗАГЛУШКА: объект заменим, когда клиент пришлёт фото и текст.
+           Подписи здесь временные, в документе «Тексты CONCEPT» их нет. -->
+      <article class="work work--flat work--r work--stub w5">
+        <h3 class="work__title">Объект готовим к публикации</h3>
+        <p class="work__meta">Фото и описание добавим, когда они будут готовы</p>
         <div class="work__media">
-          <img src="assets/photo/works/krym-cafe/03.jpg" alt="Кофейня: барная стойка и витрина с десертами" loading="lazy" width="1600" height="1000">
-        </div>
-        <div class="work__cards">
-          <button class="work__card" type="button" data-full="assets/photo/works/krym-cafe/01.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/krym-cafe/01.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/krym-cafe/02.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/krym-cafe/02.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/krym-cafe/04.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/krym-cafe/04.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/krym-cafe/wide.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/krym-cafe/wide.jpg" alt="" loading="lazy">
-          </button>
+          <img class="work__stub-mark" src="assets/logo/concept-mark.svg" alt="" width="165" height="170" loading="lazy">
         </div>
       </article>
 

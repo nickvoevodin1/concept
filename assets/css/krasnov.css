@@ -555,6 +555,18 @@ ul{ padding:0; list-style:none }
 .work--flat   .work__media{ aspect-ratio:16/10 }
 .work--square .work__media{ aspect-ratio:1/1 }
 
+/* Место под объект, которого ещё нет: фото и текст пришлёт клиент */
+.work--stub .work__media{
+  display:grid; place-items:center;
+  background:var(--sand);
+  box-shadow:inset 0 0 0 1px rgba(80,7,17,.22);
+}
+.work--stub .work__media img,
+.work--stub:hover .work__media img{
+  width:clamp(64px,7vw,96px); height:auto; object-fit:contain;
+  opacity:.16; transform:none; transition:none;
+}
+
 /* Фотокарточки объекта: выезжают поверх нижнего края фото и вбок,
    в свободное место сетки. Клик открывает полный кадр. */
 .work__cards{
@@ -729,7 +741,7 @@ ul{ padding:0; list-style:none }
 
 .variants > [data-variant]{ display:none }
 /* Пока скрипт не отработал, показываем первый вариант */
-.variants:not([data-ready]) > [data-variant="1"]{ display:flex }
+.variants:not([data-ready]) > [data-variant="1"]{ display:block }
 .variants > [data-variant].is-active{ display:flex }
 .variants > .herofull[data-variant].is-active{ display:block }
 .variants > .heroseq[data-variant].is-active{ display:block }

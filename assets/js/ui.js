@@ -29,7 +29,7 @@
      Варианты блоков: рядом в разметке лежит несколько версий одного
      блока, показываем выбранную. Выбор запоминается в браузере.
      ------------------------------------------------------------------ */
-  var STORE = 'concept-variants';
+  var STORE = 'concept-variants-2';
   var groups = [].slice.call(document.querySelectorAll('.variants'));
   var chosen = {};
 
@@ -43,11 +43,15 @@
     group.setAttribute('data-ready', '');
     chosen[group.dataset.block] = index;
     if (group.dataset.block === 'hero') {
-      document.body.classList.toggle('hdr-shrink-mode', index === 1);
-      document.body.classList.toggle('hero-corner-mode', index === 2);
+      /* Смотрим на сам вариант, а не на его номер: порядок вариантов
+         меняется по просьбе клиента, номера вместе с ним. */
+      var active = options[index];
+      var corners = !!active && active.classList.contains('herofull');
+      document.body.classList.toggle('hdr-shrink-mode', !!active && active.classList.contains('heroseq'));
+      document.body.classList.toggle('hero-corner-mode', corners);
       var chrome = document.querySelector('.corner');
       if (chrome) {
-        if (index === 2) chrome.removeAttribute('hidden');
+        if (corners) chrome.removeAttribute('hidden');
         else chrome.setAttribute('hidden', '');
       }
     }
