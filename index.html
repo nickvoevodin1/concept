@@ -148,12 +148,12 @@
      ============================================================ -->
 <section class="section usp">
   <div class="wrap">
-    <p class="eyebrow">Как мы работаем</p>
+    <p class="eyebrow eyebrow--center rise">Как мы работаем</p>
 
     <div class="usp__grid">
 
       <!-- Один договор: лист договора с печатью -->
-      <article class="usp__card" tabindex="0">
+      <article class="usp__card rise">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
           <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
             <path d="M6 4h24l12 12v34H6z"/>
@@ -168,7 +168,7 @@
       </article>
 
       <!-- Открытые цены: ценник со знаком рубля -->
-      <article class="usp__card" tabindex="0">
+      <article class="usp__card rise">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
           <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
             <path d="M22 12h28a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4H22L8 32z"/>
@@ -182,7 +182,7 @@
       </article>
 
       <!-- Камера 24/7: камера на кронштейне и часы -->
-      <article class="usp__card" tabindex="0">
+      <article class="usp__card rise">
         <svg class="usp__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
           <g stroke="#500711" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
             <path d="M16 7h24"/>
@@ -206,17 +206,19 @@
 <!-- ============================================================
      БЛОК 2 — РАСЧЁТ СТОИМОСТИ И ЦЕНЫ
      ============================================================ -->
-<section class="section section--sand" id="calc-section">
+<section class="section" id="calc-section">
   <div class="wrap">
 
-    <form class="calc" id="calc" novalidate>
+    <div class="sec-head col rise">
+      <p class="eyebrow">Расчёт стоимости</p>
+      <h2 class="h2">Рассчитайте стоимость</h2>
+      <p class="lead sec-head__aside">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
+    </div>
 
-      <!-- Левая половина: заголовок и поля без рамок -->
+    <form class="calc rise" id="calc" novalidate>
+
+      <!-- Левая половина: поля без рамок -->
       <div class="calc__fields">
-        <div class="calc__head">
-          <p class="eyebrow">Расчёт стоимости</p>
-          <h2 class="h2">Рассчитайте стоимость</h2>
-        </div>
 
         <div class="calc__grid">
 
@@ -256,10 +258,9 @@
           <span class="calc__scale"><span>20 м²</span><span>300 м²</span><span>600 м²</span></span>
         </span>
 
-        <p class="note">Выберите формат работы и укажите площадь помещения. Сумму покажем сразу, без формы и без звонка.</p>
       </div>
 
-      <!-- Правая половина: тёмная фигура с расчётом -->
+      <!-- Правая половина: тот же лист, отделён линией -->
       <div class="calc__panel">
         <!-- Результат при выборе «дизайн-проект и ремонт» -->
         <div id="calc-result-full" aria-live="polite">
@@ -289,19 +290,16 @@
 
         <div class="calc__ask">
           <p class="note">Это ориентировочный расчёт. Точную стоимость назовём после обмеров и согласования объёма работ.</p>
-          <a class="btn btn--light" href="#contacts">Обсудить проект</a>
+          <a class="link" href="#contacts">Обсудить проект</a>
         </div>
       </div>
 
     </form>
 
     <!-- Цены -->
-    <div class="price">
+    <div class="price rise">
       <div class="price__aside">
         <p class="eyebrow">Цены</p>
-        <div class="price__mark" aria-hidden="true">
-          <img src="assets/logo/concept-mark.svg" alt="" width="300" height="298">
-        </div>
       </div>
 
       <div class="price__rows">
@@ -325,7 +323,7 @@
             </ul>
             <h4 class="h4">Проект дешевле, если ремонт выполняем мы</h4>
             <p class="note">Когда мы делаем и проект, и ремонт, часть работы окупается на самом ремонте — поэтому проектирование стоит дешевле. Если ремонт выполняет ваша бригада, стоимость считается по второй колонке.</p>
-            <a class="btn" href="#contacts">Обсудить проект</a>
+            <a class="link" href="#contacts">Обсудить проект</a>
           </div>
         </details>
 
@@ -341,7 +339,7 @@
               <li><b>Авторский надзор</b><span class="plist__note">Регулярные выезды на объект, контроль соответствия проекту</span><span>50 000 ₽ в месяц</span></li>
               <li><b>Комплектация материалами</b><span class="plist__note">Подбор, согласование и закупка чистовых материалов</span><span>Условия ниже</span></li>
             </ul>
-            <a class="btn" href="#contacts">Обсудить проект</a>
+            <a class="link" href="#contacts">Обсудить проект</a>
           </div>
         </details>
 
@@ -388,7 +386,7 @@
               <li>контроль наличия, сроков и комплектности</li>
               <li>организация поставок на объект</li>
             </ul>
-            <a class="btn" href="#contacts">Обсудить проект</a>
+            <a class="link" href="#contacts">Обсудить проект</a>
           </div>
         </details>
       </div>
@@ -405,64 +403,21 @@
      Формат подписи взят из «Тексты CONCEPT», раздел 3.
      ============================================================ -->
 <section class="section works" id="works">
-
-  <!-- Фон: градиентные свечения и тонкие узоры в пустотах -->
-  <div class="works__bg" aria-hidden="true">
-    <span class="glow glow--a"></span>
-    <span class="glow glow--b"></span>
-    <span class="glow glow--c"></span>
-
-    <svg class="ornament ornament--a" viewBox="0 0 200 200" fill="none">
-      <circle cx="100" cy="100" r="96" stroke="#500711" stroke-width=".7" opacity=".5"/>
-      <circle cx="100" cy="100" r="74" stroke="#AB8756" stroke-width=".7"/>
-      <circle cx="100" cy="100" r="52" stroke="#500711" stroke-width=".7" opacity=".6"/>
-      <g stroke="#AB8756" stroke-width=".7">
-        <path d="M100 4v192M4 100h192M32 32l136 136M168 32L32 168"/>
-      </g>
-      <circle cx="100" cy="100" r="16" stroke="#500711" stroke-width="1"/>
-    </svg>
-
-    <svg class="ornament ornament--b" viewBox="-14 -14 228 228" fill="none">
-      <g stroke="#500711" stroke-width=".7" opacity=".7">
-        <rect x="26" y="26" width="148" height="148"/>
-        <rect x="26" y="26" width="148" height="148" transform="rotate(15 100 100)"/>
-        <rect x="26" y="26" width="148" height="148" transform="rotate(30 100 100)"/>
-        <rect x="26" y="26" width="148" height="148" transform="rotate(45 100 100)"/>
-      </g>
-      <circle cx="100" cy="100" r="46" stroke="#AB8756" stroke-width=".9"/>
-    </svg>
-
-    <svg class="ornament ornament--c" viewBox="0 0 200 200" fill="none">
-      <g stroke="#AB8756" stroke-width=".7">
-        <path d="M100 8 L182 54 V146 L100 192 L18 146 V54 Z"/>
-        <path d="M100 42 L152 72 V132 L100 162 L48 132 V72 Z"/>
-        <path d="M18 54 L182 146M182 54L18 146M100 8v184"/>
-      </g>
-      <circle cx="100" cy="100" r="28" stroke="#500711" stroke-width=".9"/>
-      <circle cx="100" cy="100" r="6" fill="#500711" opacity=".5"/>
-    </svg>
-  </div>
-
   <div class="wrap">
 
-    <div class="sec-head">
-      <div>
-        <p class="eyebrow">Познакомьтесь с проектами</p>
-        <h2 class="h2">Что мы уже сделали</h2>
-      </div>
-      <div class="sec-head__aside">
-        <p class="lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
-      </div>
+    <div class="sec-head col rise">
+      <p class="eyebrow">Познакомьтесь с проектами</p>
+      <h2 class="h2 works__head">Что мы уже сделали</h2>
+      <p class="lead works__lead">Реализованные объекты и проекты в работе. Под каждым указано, что входило в нашу задачу.</p>
     </div>
 
-    <div class="works__grid">
-
-      <article class="work work--wide work--r w1" tabindex="0">
+    <div class="works__list">
+      <article class="work work--wide rise">
+        <button class="work__shot" type="button" data-full="assets/photo/works/krym-cafe/wide.jpg" aria-label="Открыть фото объекта">
+          <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy">
+        </button>
         <h3 class="work__title">Кофейня, 84 м², Сочи</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 3 месяца · визуализации</p>
-        <div class="work__media">
-          <img src="assets/photo/works/krym-cafe/wide.jpg" alt="Кофейня: зал с деревом, плетёными креслами и панорамным остеклением" loading="lazy" width="1600" height="1067">
-        </div>
         <div class="work__cards">
           <button class="work__card" type="button" data-full="assets/photo/works/krym-cafe/01.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/krym-cafe/01.jpg" alt="" loading="lazy">
@@ -479,12 +434,12 @@
         </div>
       </article>
 
-      <article class="work work--tall work--l w2" tabindex="0">
+      <article class="work work--narrow rise">
+        <button class="work__shot" type="button" data-full="assets/photo/works/hookah-bar/01.jpg" aria-label="Открыть фото объекта">
+          <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy">
+        </button>
         <h3 class="work__title">Кальянная, 180 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 4 месяца</p>
-        <div class="work__media">
-          <img src="assets/photo/works/hookah-bar/01.jpg" alt="Кальянная: барная стойка с тёплой подсветкой и мягкие кресла" loading="lazy" width="1050" height="1400">
-        </div>
         <div class="work__cards">
           <button class="work__card" type="button" data-full="assets/photo/works/hookah-bar/02.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/hookah-bar/02.jpg" alt="" loading="lazy">
@@ -498,12 +453,12 @@
         </div>
       </article>
 
-      <article class="work work--square work--r w3" tabindex="0">
+      <article class="work work--narrow rise">
+        <button class="work__shot" type="button" data-full="assets/photo/works/sales-office/01.jpg" aria-label="Открыть фото объекта">
+          <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy">
+        </button>
         <h3 class="work__title">Офис продаж, 140 м², Москва</h3>
         <p class="work__meta">Дизайн-проект · визуализации</p>
-        <div class="work__media">
-          <img src="assets/photo/works/sales-office/01.jpg" alt="Офис продаж: переговорная с длинным столом и панорамными окнами" loading="lazy" width="1120" height="1400">
-        </div>
         <div class="work__cards">
           <button class="work__card" type="button" data-full="assets/photo/works/sales-office/02.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/sales-office/02.jpg" alt="" loading="lazy">
@@ -520,12 +475,12 @@
         </div>
       </article>
 
-      <article class="work work--flat work--l w4" tabindex="0">
+      <article class="work work--wide rise">
+        <button class="work__shot" type="button" data-full="assets/photo/works/mid-lounge/wide.jpg" aria-label="Открыть фото объекта">
+          <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy">
+        </button>
         <h3 class="work__title">Кальянная, 210 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев · визуализации</p>
-        <div class="work__media">
-          <img src="assets/photo/works/mid-lounge/wide.jpg" alt="Кальянная: зал с барной зоной и неоновой подсветкой" loading="lazy" width="1600" height="1067">
-        </div>
         <div class="work__cards">
           <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/01.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
@@ -544,20 +499,20 @@
 
       <!-- ЗАГЛУШКА: объект заменим, когда клиент пришлёт фото и текст.
            Подписи здесь временные, в документе «Тексты CONCEPT» их нет. -->
-      <article class="work work--flat work--r work--stub w5">
+      <article class="work work--narrow work--stub rise">
+        <span class="work__shot">
+          <img src="assets/logo/concept-mark.svg" alt="" width="165" height="170" loading="lazy">
+        </span>
         <h3 class="work__title">Объект готовим к публикации</h3>
         <p class="work__meta">Фото и описание добавим, когда они будут готовы</p>
-        <div class="work__media">
-          <img class="work__stub-mark" src="assets/logo/concept-mark.svg" alt="" width="165" height="170" loading="lazy">
-        </div>
       </article>
 
-      <article class="work work--tall work--l w6" tabindex="0">
+      <article class="work work--narrow rise">
+        <button class="work__shot" type="button" data-full="assets/photo/works/mid-lounge/03.jpg" aria-label="Открыть фото объекта">
+          <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy">
+        </button>
         <h3 class="work__title">Кальянная, 240 м², Москва</h3>
         <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев</p>
-        <div class="work__media">
-          <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1050" height="1400">
-        </div>
         <div class="work__cards">
           <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/01.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
@@ -576,8 +531,8 @@
 
     </div>
 
-    <div class="works__cta">
-      <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
+    <div class="works__cta rise">
+      <a class="link link--lg" href="#works">Посмотреть работы</a>
     </div>
 
   </div>
@@ -588,7 +543,7 @@
 <!-- Заглушка: блоки 4–11 по структуре ещё не собраны -->
 <div class="stub" id="contacts">
   <div class="wrap">
-    <p>Дальше по структуре сайта идут блоки 4–11: услуги, как проходит работа, что упрощает вам работу, первый визуал в подарок, о студии, вопросы и ответы, заявка и контакты. В этой сборке показаны первые три блока.</p>
+    <p class="rise">Дальше по структуре сайта идут блоки 4–11: услуги, как проходит работа, что упрощает вам работу, первый визуал в подарок, о студии, вопросы и ответы, заявка и контакты. В этой сборке показаны первые три блока.</p>
   </div>
 </div>
 

@@ -4,8 +4,6 @@
 (function () {
   'use strict';
 
-  var isTouch = window.matchMedia('(hover: none)').matches;
-
   /* ------------------------------------------------------------------
      Шапка: закреплена на экране. Ниже первого экрана фон страницы
      светлый, поэтому стекло уплотняется — иначе белый текст не прочитать.
@@ -246,7 +244,7 @@
     var picture = lightbox.querySelector('.lightbox__img');
 
     document.addEventListener('click', function (event) {
-      var card = event.target.closest('.work__card');
+      var card = event.target.closest('[data-full]');
       if (!card) return;
       event.preventDefault();
       picture.src = card.dataset.full;
@@ -268,42 +266,24 @@
   }
 
   /* ------------------------------------------------------------------
-     Раскрытие по центру экрана. На тач-экранах нет наведения: блок
-     раскрывается сам, когда доходит до середины, и закрывается касанием.
+     Появление блоков при прокрутке: каждый поднимается снизу один раз.
      ------------------------------------------------------------------ */
-  if (!isTouch || !('IntersectionObserver' in window)) return;
+  var rises = document.querySelectorAll('.rise');
 
-  function revealOnScroll(selector, band, tapToggles, once) {
-    var items = document.querySelectorAll(selector);
-    if (!items.length) return;
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var el = entry.target;
-        if (once) {                       // раскрылось один раз и осталось
-          if (entry.isIntersecting) {
-            el.classList.add('is-open');
-            observer.unobserve(el);
-          }
-          return;
-        }
-        if (!entry.isIntersecting) delete el.dataset.touched;   // ушёл с экрана — снова слушаем прокрутку
-        if (el.dataset.touched) return;                          // им управляли касанием
-        el.classList.toggle('is-open', entry.isIntersecting);
-      });
-    }, { rootMargin: band, threshold: 0 });
-
-    [].forEach.call(items, function (el) {
-      observer.observe(el);
-      if (!tapToggles) return;
-      el.addEventListener('click', function (event) {
-        if (event.target.closest('a, button')) return;   // ссылки и фотокарточки работают как обычно
-        el.classList.toggle('is-open');
-        el.dataset.touched = '1';
-      });
-    });
+  if (!rises.length) return;
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    [].forEach.call(rises, function (el) { el.classList.add('is-in'); });
+    return;
   }
 
-  revealOnScroll('.usp__card', '-45% 0px -45% 0px', true);
-  revealOnScroll('.work', '-32% 0px -32% 0px', false, true);
+  var riseWatch = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      riseWatch.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+
+  [].forEach.call(rises, function (el) { riseWatch.observe(el); });
 })();
