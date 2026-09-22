@@ -49,6 +49,9 @@ body{
 }
 
 img{ display:block; max-width:100%; height:auto }
+/* Класс с display перебивает служебное правило браузера для [hidden],
+   поэтому закрепляем его явно */
+[hidden]{ display:none !important }
 a{ color:inherit; text-decoration:none }
 h1,h2,h3,h4,p,figure,ul,table{ margin:0 }
 ul{ padding:0; list-style:none }
@@ -623,6 +626,230 @@ ul{ padding:0; list-style:none }
 .stub p{ font-size:14px; line-height:1.6; max-width:78ch }
 
 /* ============================================================
+   БЛОК 4 — УСЛУГИ
+
+   Таблица сравнения форматов. На узком экране листается вбок,
+   первая колонка закреплена, иначе названия строк уезжают.
+   ============================================================ */
+
+.fmt__scroll{
+  margin-top:clamp(28px,3.4vw,52px);
+  overflow-x:auto; overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.fmt{ width:100%; min-width:620px; border-collapse:collapse; text-align:left }
+/* position:relative обязателен: внутри ячеек лежат подписи «да» и «нет»
+   для чтения вслух, а они абсолютные. Без позиционированного родителя
+   они цепляются за окно и растягивают страницу вбок на телефоне. */
+.fmt th,
+.fmt td{
+  position:relative;
+  padding:14px 16px; border-bottom:1px solid var(--rule); vertical-align:middle;
+}
+.fmt thead th{
+  padding-bottom:16px; border-bottom:1px solid var(--rule-strong);
+  font-size:12px; font-weight:600; line-height:1.3; color:var(--black);
+  vertical-align:bottom;
+}
+.fmt thead th:first-child{
+  font-size:11px; font-weight:500; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted);
+}
+.fmt tbody th{ font-size:15px; font-weight:400; width:40% }
+.fmt td{ width:20%; text-align:center }
+.fmt tbody tr:hover{ background:rgba(80,7,17,.035) }
+
+/* Галочка и прочерк рисуются фоном: в ячейке лежит только текст для чтения вслух */
+.fmt .is-yes::before,
+.fmt .is-no::before{ content:''; display:inline-block; width:16px; height:16px }
+.fmt .is-yes::before{
+  background:var(--wine);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+.fmt .is-no::before{
+  height:1px; width:12px; background:var(--rule-strong); vertical-align:middle;
+}
+
+.fmt__cards{
+  margin-top:clamp(30px,3.6vw,56px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,32px);
+}
+.fmt__card{
+  background:var(--white); padding:clamp(20px,2.2vw,30px);
+  border-top:3px solid var(--wine);
+}
+.fmt__card p{ margin-top:12px; font-size:14px; line-height:1.6; color:var(--muted) }
+
+/* ============================================================
+   БЛОК 5 — КАК ПРОХОДИТ РАБОТА
+   ============================================================ */
+
+.steps{ margin-top:clamp(28px,3.4vw,52px); counter-reset:step }
+.step{
+  display:grid; grid-template-columns:clamp(70px,8vw,130px) minmax(0,1fr);
+  gap:clamp(16px,3vw,48px);
+  padding-block:clamp(26px,3vw,44px); border-top:1px solid var(--rule);
+}
+.step:last-child{ border-bottom:1px solid var(--rule) }
+.step__num{
+  font-family:var(--display); font-weight:500;
+  font-size:clamp(30px,3.6vw,54px); line-height:.9; color:var(--brass);
+}
+.step__body > p{ margin-top:12px; font-size:15px; line-height:1.65; color:var(--muted); max-width:78ch }
+.step__forks{
+  margin-top:clamp(20px,2.4vw,32px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,30px);
+}
+.step__fork{ padding-top:14px; border-top:1px solid var(--rule) }
+.step__fork p{ margin-top:8px; font-size:14px; line-height:1.6; color:var(--muted) }
+
+/* ============================================================
+   БЛОК 6 — ЧТО УПРОЩАЕТ ВАМ РАБОТУ
+   ============================================================ */
+
+.tools{
+  margin-top:clamp(28px,3.4vw,52px);
+  display:grid; grid-template-columns:repeat(3,1fr);
+  column-gap:clamp(20px,2.6vw,44px); row-gap:clamp(26px,3vw,48px);
+}
+.tool{ padding-top:clamp(18px,2vw,26px); border-top:1px solid var(--rule) }
+.tool__text{ margin-top:10px; font-size:14px; line-height:1.65; color:var(--muted) }
+
+/* ============================================================
+   БЛОК 7 — ПЕРВЫЙ ВИЗУАЛ В ПОДАРОК
+   ============================================================ */
+
+.gift__grid{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,72px); align-items:center;
+}
+.gift__media{ margin:0; overflow:hidden; background:var(--sand) }
+.gift__media img{ width:100%; aspect-ratio:4/5; object-fit:cover }
+.gift__text .h2{ margin-top:16px }
+.gift__text > p{ margin-top:clamp(14px,1.6vw,22px); font-size:15px; line-height:1.7; color:var(--muted) }
+.gift__why{
+  margin-top:clamp(22px,2.6vw,36px);
+  padding:clamp(18px,2vw,26px); background:var(--sand);
+}
+.gift__why p{ margin-top:10px; font-size:14px; line-height:1.65; color:var(--muted) }
+
+/* ============================================================
+   БЛОК 8 — О СТУДИИ
+   ============================================================ */
+
+.about{
+  display:grid; grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,80px); align-items:start;
+}
+/* Место под портрет: фотографию заказчик пока не передал */
+.about__photo{
+  display:grid; place-items:center; aspect-ratio:4/5;
+  background:var(--white); box-shadow:inset 0 0 0 1px rgba(80,7,17,.18);
+}
+.about__photo img{ width:clamp(70px,8vw,110px); height:auto; opacity:.16 }
+.about__name{ margin-top:18px; font-size:17px; font-weight:600 }
+.about__role{ margin-top:4px; font-size:13px; color:var(--muted) }
+.about__text .h2{ margin-top:16px }
+.about__text > p{ margin-top:clamp(14px,1.6vw,22px); font-size:15px; line-height:1.7; color:var(--muted) }
+.about__sub{
+  margin-top:clamp(24px,3vw,40px); padding-top:16px;
+  border-top:1px solid var(--rule);
+}
+
+/* ============================================================
+   БЛОК 9 — ВОПРОСЫ И ОТВЕТЫ
+   ============================================================ */
+
+.faq{ margin-top:clamp(28px,3.4vw,52px); border-top:1px solid var(--rule-strong) }
+.faq__row{ border-bottom:1px solid var(--rule) }
+.faq__row > summary{
+  display:flex; align-items:center; gap:clamp(16px,3vw,40px);
+  padding-block:clamp(18px,2vw,28px); cursor:pointer; list-style:none;
+}
+.faq__row > summary::-webkit-details-marker{ display:none }
+.faq__q{
+  flex:1 1 auto;
+  font-size:clamp(16px,1.6vw,21px); font-weight:500; line-height:1.3;
+  transition:color .25s;
+}
+.faq__row:hover .faq__q{ color:var(--wine) }
+.faq__row .price__plus{ flex:0 0 clamp(32px,2.6vw,40px); width:clamp(32px,2.6vw,40px); height:clamp(32px,2.6vw,40px) }
+.faq__row .price__plus::before{ width:14px }
+.faq__row .price__plus::after{ height:14px }
+.faq__a{ padding-bottom:clamp(20px,2.4vw,32px); max-width:88ch }
+.faq__a p{ font-size:15px; line-height:1.7; color:var(--muted) }
+
+/* ============================================================
+   БЛОК 10 — ЗАЯВКА И КОНТАКТЫ
+   ============================================================ */
+
+.lead-form{
+  display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,80px); align-items:start;
+}
+.lead-form__text .h2{ margin-top:16px }
+.lead-form__text .lead{ margin-top:clamp(14px,1.6vw,22px) }
+
+.contacts{ margin-top:clamp(24px,3vw,40px); border-top:1px solid var(--rule) }
+.contacts li{
+  display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+  padding-block:13px; border-bottom:1px solid var(--rule);
+}
+.contacts li > span{
+  font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+}
+.contacts li > a{ font-size:15px; font-weight:500; border-bottom:1px solid transparent; transition:border-color .2s }
+.contacts li > a:hover{ border-bottom-color:currentColor }
+
+.form__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,1.8vw,24px) }
+.field{ display:block; min-width:0 }
+.field--wide{ grid-column:1 / -1 }
+.field__label{
+  display:block; margin-bottom:8px;
+  font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+}
+.field__label b{ color:var(--wine); font-weight:500 }
+.field input,
+.field textarea{
+  width:100%; border:0; border-bottom:1px solid var(--rule-strong);
+  background:none; padding:0 0 9px; font:inherit; font-size:16px; color:var(--black);
+  border-radius:0; resize:vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder{ color:#9A9A9A }
+.field input:focus,
+.field textarea:focus{ outline:none; border-bottom-color:var(--wine) }
+.field__err{ display:block; margin-top:7px; font-size:12px; color:var(--wine) }
+.field.is-bad input,
+.field.is-bad textarea{ border-bottom-color:var(--wine) }
+
+.form__consent{ margin-top:clamp(18px,2vw,26px) }
+.form__submit{ margin-top:clamp(16px,1.8vw,24px) }
+.form .note:last-of-type{ margin-top:14px }
+.form__msg{
+  margin-top:18px; padding:14px 16px;
+  font-size:14px; line-height:1.55;
+  background:var(--white); border-left:3px solid var(--wine);
+}
+
+/* ============================================================
+   БЛОК 11 — ПОДВАЛ
+   ============================================================ */
+
+.foot{
+  background:var(--near); color:rgba(255,255,255,.72);
+  padding-block:clamp(40px,5vw,72px);
+  border-top:3px solid var(--wine);
+}
+.foot__inner{ display:flex; flex-direction:column; align-items:flex-start; gap:clamp(18px,2.2vw,30px) }
+.foot__logo img{ height:clamp(48px,4.4vw,60px); width:auto }
+.foot__about{ font-size:15px; line-height:1.6; max-width:62ch; color:#fff }
+.foot__legal{ font-size:13px; line-height:1.7 }
+.foot__legal a{ border-bottom:1px solid rgba(255,255,255,.35); transition:border-color .2s }
+.foot__legal a:hover{ border-bottom-color:#fff }
+
+/* ============================================================
    АДАПТИВ
    ============================================================ */
 
@@ -634,6 +861,14 @@ ul{ padding:0; list-style:none }
 
 @media (max-width:1024px){
   .hero__bottom{ grid-template-columns:1fr; align-items:start }
+  .fmt__cards{ grid-template-columns:1fr }
+  .step__forks{ grid-template-columns:1fr }
+  .tools{ grid-template-columns:1fr 1fr }
+  .gift__grid{ grid-template-columns:1fr }
+  .gift__media img{ aspect-ratio:16/10 }
+  .about{ grid-template-columns:1fr }
+  .about__photo{ aspect-ratio:16/10 }
+  .lead-form{ grid-template-columns:1fr }
   .hero__title{ max-width:none }
   .sec-head{ grid-template-columns:1fr }
   .calc{ grid-template-columns:1fr }
@@ -721,6 +956,22 @@ ul{ padding:0; list-style:none }
   .plist li{ flex-direction:column; gap:6px }
   .plist span{ text-align:left; white-space:normal }
   .split{ grid-template-columns:1fr }
+
+  /* Таблица форматов листается вбок, первая колонка держится на месте */
+  .fmt{ min-width:540px }
+  .fmt th,.fmt td{ padding:12px 10px }
+  .fmt tbody th{ width:auto; min-width:200px; font-size:14px }
+  .fmt thead th:first-child,
+  .fmt tbody th{
+    position:sticky; left:0; z-index:1;
+    background:var(--sand); box-shadow:1px 0 0 var(--rule);
+  }
+
+  .step{ grid-template-columns:1fr; gap:10px }
+  .step__num{ font-size:28px }
+  .tools{ grid-template-columns:1fr }
+  .form__grid{ grid-template-columns:1fr }
+
   .btn{ width:100%; justify-content:space-between }
   .calc__ask .btn{ align-self:stretch }
   .hdr .btn{ width:auto; flex:none; justify-content:center }
