@@ -1187,13 +1187,62 @@
 <!-- ============================================================
      БЛОК 7 — ПЕРВЫЙ ВИЗУАЛ В ПОДАРОК
      ============================================================ -->
-<section class="section gift">
+<div class="variants" data-block="gift" data-label="Первый визуал">
+<section class="section gift" data-variant="1">
+  <div class="wrap gift__grid">
+
+    <!-- Примеры первых визуалов: веер из четырёх объектов. По клику на обложку
+         или кнопку открываются все кадры объекта.
+         Подписи «Визуализация 1–4» — новые, в «Тексты CONCEPT» их нет. -->
+    <div class="gift__media viz viz--projects">
+      <div class="viz__stack">
+        <button class="viz__card" type="button" data-viz="0" style="--i:0" aria-label="Визуализация 1: смотреть все кадры">
+          <img src="assets/photo/visuals/house-200/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        </button>
+        <button class="viz__card" type="button" data-viz="1" style="--i:1" aria-label="Визуализация 2: смотреть все кадры">
+          <img src="assets/photo/visuals/loft-2k/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        </button>
+        <button class="viz__card" type="button" data-viz="2" style="--i:2" aria-label="Визуализация 3: смотреть все кадры">
+          <img src="assets/photo/visuals/euro-62/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        </button>
+        <button class="viz__card" type="button" data-viz="3" style="--i:3" aria-label="Визуализация 4: смотреть все кадры">
+          <img src="assets/photo/visuals/apart-145/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        </button>
+      </div>
+      <div class="viz__btns">
+        <button class="viz__btn" type="button" data-viz="0" data-dir="assets/photo/visuals/house-200" data-count="17">Визуализация 1</button>
+        <button class="viz__btn" type="button" data-viz="1" data-dir="assets/photo/visuals/loft-2k" data-count="10">Визуализация 2</button>
+        <button class="viz__btn" type="button" data-viz="2" data-dir="assets/photo/visuals/euro-62" data-count="25">Визуализация 3</button>
+        <button class="viz__btn" type="button" data-viz="3" data-dir="assets/photo/visuals/apart-145" data-count="12">Визуализация 4</button>
+      </div>
+    </div>
+
+    <div class="gift__text">
+      <p class="eyebrow">Первый визуал в подарок</p>
+      <h2 class="h2">Показываем направление работ до подписания договора</h2>
+      <p>После первого разговора мы готовим набросок визуального образа вашего объекта. Это происходит до подписания договора и ни к чему вас не обязывает.</p>
+      <p>Это не проработанная концепция и не дизайн-проект. Это ощущение будущего пространства: настроение, характер, направление, в котором можно двигаться. Достаточно, чтобы понять, совпадаем ли мы во вкусе.</p>
+      <p>Полноценные визуализации появляются позже, на третьем этапе работы.</p>
+
+      <div class="gift__why">
+        <h3 class="h4">Зачем это нужно</h3>
+        <p>Выбирать студию по чужому портфолио сложно: удачные объекты есть у всех, но совпадёт ли вкус именно на вашем помещении, до начала работы непонятно. Набросок снимает этот вопрос заранее.</p>
+      </div>
+
+      <p class="gift__cta"><a class="btn" href="#contacts">Получить первый визуал</a></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Вариант 2: пример первого визуала — концепция Sabbia -->
+<section class="section gift" data-variant="2">
   <div class="wrap gift__grid">
 
     <!-- Пример первого визуала: концепция кофейного острова Sabbia, 8 страниц.
          Веер из четырёх страниц; по клику — все кадры с этой страницы.
          Подпись «Смотреть визуализацию» — новая, в «Тексты CONCEPT» её нет. -->
-    <div class="gift__media viz" data-dir="assets/photo/visuals/sabbia" data-count="8">
+    <div class="gift__media viz viz--pages" data-dir="assets/photo/visuals/sabbia" data-count="8">
       <div class="viz__stack">
         <button class="viz__card" type="button" data-start="4" style="--i:0" aria-label="Смотреть визуализацию с кадра 5">
           <img src="assets/photo/visuals/sabbia/card-05.jpg" alt="" width="900" height="637" loading="lazy">
@@ -1230,6 +1279,7 @@
 
   </div>
 </section>
+</div>
 
 <!-- ============================================================
      БЛОК 8 — О СТУДИИ

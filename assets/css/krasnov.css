@@ -2278,15 +2278,67 @@ ul{ padding:0; list-style:none }
 }
 
 /* ============================================================
-   ПЕРВЫЙ ВИЗУАЛ — ПРИМЕР КОНЦЕПЦИИ
+   ПЕРВЫЙ ВИЗУАЛ, ВАРИАНТ 1 — ЧЕТЫРЕ ОБЪЕКТА
+
+   Веер из четырёх обложек. При наведении раскрывается, обложка
+   кнопки, над которой курсор, выходит вперёд. По клику — все
+   кадры объекта в просмотрщике.
+   ============================================================ */
+
+.viz--projects{ background:none; overflow:visible }
+.viz--projects .viz__stack{
+  position:relative; aspect-ratio:1 / 1.02;
+  margin-inline:auto; width:min(100%,560px);
+}
+.viz--projects .viz__card{
+  --r:0deg; --x:0%; --y:0%;
+  position:absolute; left:16%; top:6%; width:68%;
+  padding:8px; border:0; cursor:zoom-in;
+  background:var(--white);
+  box-shadow:0 18px 40px rgba(26,12,10,.18), 0 2px 6px rgba(26,12,10,.08);
+  transform:translate(var(--x),var(--y)) rotate(var(--r));
+  transition:transform .55s cubic-bezier(.3,.7,.3,1), box-shadow .3s;
+  z-index:calc(10 - var(--i));
+}
+.viz--projects .viz__card img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover }
+.viz--projects .viz__card[data-viz="0"]{ --r:-3deg }
+.viz--projects .viz__card[data-viz="1"]{ --r:5deg;  --x:9%;  --y:2% }
+.viz--projects .viz__card[data-viz="2"]{ --r:-8deg; --x:-10%; --y:4% }
+.viz--projects .viz__card[data-viz="3"]{ --r:10deg; --x:15%; --y:7% }
+@media (hover:hover){
+  .viz--projects .viz__stack:hover .viz__card[data-viz="0"]{ --x:-4%; --y:-2% }
+  .viz--projects .viz__stack:hover .viz__card[data-viz="1"]{ --x:20%; --y:0% }
+  .viz--projects .viz__stack:hover .viz__card[data-viz="2"]{ --x:-22%; --y:6% }
+  .viz--projects .viz__stack:hover .viz__card[data-viz="3"]{ --x:28%; --y:10% }
+  .viz--projects .viz__card:hover{ box-shadow:0 26px 60px rgba(26,12,10,.26), 0 2px 6px rgba(26,12,10,.08) }
+}
+/* Обложка выбранной кнопки — вперёд и ровно */
+.viz--projects .viz__card.is-front{ z-index:20; --r:0deg; --x:0%; --y:-3% }
+.viz--projects .viz__stack:hover .viz__card.is-front{ --x:0%; --y:-3% }
+
+.viz--projects .viz__btns{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  margin-top:clamp(28px,3vw,44px);
+}
+.viz--projects .viz__btn{
+  min-height:44px; padding:0 10px; cursor:pointer;
+  border:1px solid var(--rule-strong); background:none; color:var(--black);
+  font:inherit; font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  transition:background .2s, color .2s, border-color .2s;
+}
+.viz--projects .viz__btn:hover,
+.viz--projects .viz__btn:focus-visible{ background:var(--wine); border-color:var(--wine); color:#fff }
+
+/* ============================================================
+   ПЕРВЫЙ ВИЗУАЛ, ВАРИАНТ 2 — КОНЦЕПЦИЯ SABBIA
 
    Веер из горизонтальных страниц. При наведении раскрывается,
    страница под курсором поднимается. По клику — все кадры.
    ============================================================ */
 
-.viz{ background:none; overflow:visible }
-.viz__stack{ position:relative; aspect-ratio:1 / .92; width:100% }
-.viz__card{
+.viz--pages{ background:none; overflow:visible }
+.viz--pages .viz__stack{ position:relative; aspect-ratio:1 / .92; width:100% }
+.viz--pages .viz__card{
   --r:0deg; --x:0%; --y:0%;
   position:absolute; left:9%; top:33%; width:82%;
   padding:7px; border:0; cursor:zoom-in;
@@ -2296,28 +2348,28 @@ ul{ padding:0; list-style:none }
   transition:transform .55s cubic-bezier(.3,.7,.3,1), box-shadow .3s;
   z-index:calc(10 - var(--i));
 }
-.viz__card img{ display:block; width:100%; height:auto; aspect-ratio:1684 / 1191; object-fit:cover }
-.viz__card[style*="--i:0"]{ --r:-2deg }
-.viz__card[style*="--i:1"]{ --r:4deg;  --x:5%;  --y:-14% }
-.viz__card[style*="--i:2"]{ --r:-6deg; --x:-6%; --y:-26% }
-.viz__card[style*="--i:3"]{ --r:7deg;  --x:8%;  --y:-36% }
+.viz--pages .viz__card img{ display:block; width:100%; height:auto; aspect-ratio:1684 / 1191; object-fit:cover }
+.viz--pages .viz__card[style*="--i:0"]{ --r:-2deg }
+.viz--pages .viz__card[style*="--i:1"]{ --r:4deg;  --x:5%;  --y:-14% }
+.viz--pages .viz__card[style*="--i:2"]{ --r:-6deg; --x:-6%; --y:-26% }
+.viz--pages .viz__card[style*="--i:3"]{ --r:7deg;  --x:8%;  --y:-36% }
 @media (hover:hover){
-  .viz__stack:hover .viz__card[style*="--i:0"]{ --y:6%; --r:-1deg }
-  .viz__stack:hover .viz__card[style*="--i:1"]{ --x:8%; --y:-22% }
-  .viz__stack:hover .viz__card[style*="--i:2"]{ --x:-10%; --y:-38% }
-  .viz__stack:hover .viz__card[style*="--i:3"]{ --x:12%; --y:-52% }
-  .viz__card:hover{ z-index:20; box-shadow:0 26px 60px rgba(26,12,10,.26), 0 2px 6px rgba(26,12,10,.08) }
+  .viz--pages .viz__stack:hover .viz__card[style*="--i:0"]{ --y:6%; --r:-1deg }
+  .viz--pages .viz__stack:hover .viz__card[style*="--i:1"]{ --x:8%; --y:-22% }
+  .viz--pages .viz__stack:hover .viz__card[style*="--i:2"]{ --x:-10%; --y:-38% }
+  .viz--pages .viz__stack:hover .viz__card[style*="--i:3"]{ --x:12%; --y:-52% }
+  .viz--pages .viz__card:hover{ z-index:20; box-shadow:0 26px 60px rgba(26,12,10,.26), 0 2px 6px rgba(26,12,10,.08) }
 }
 
-.viz__btns{ display:flex; justify-content:center; margin-top:clamp(20px,2.4vw,36px) }
-.viz__btn{
+.viz--pages .viz__btns{ display:flex; justify-content:center; margin-top:clamp(20px,2.4vw,36px) }
+.viz--pages .viz__btn{
   min-height:48px; padding:0 26px; cursor:pointer;
   border:1px solid var(--rule-strong); background:none; color:var(--black);
   font:inherit; font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
   transition:background .2s, color .2s, border-color .2s;
 }
-.viz__btn:hover,
-.viz__btn:focus-visible{ background:var(--wine); border-color:var(--wine); color:#fff }
+.viz--pages .viz__btn:hover,
+.viz--pages .viz__btn:focus-visible{ background:var(--wine); border-color:var(--wine); color:#fff }
 
 /* Листание в просмотрщике — только для галерей */
 .lightbox__nav{ display:none }
@@ -2344,9 +2396,12 @@ ul{ padding:0; list-style:none }
 }
 
 @media (max-width:1024px){
-  .viz__stack{ width:min(100%,560px); margin-inline:auto }
+  .viz--projects .viz__stack{ width:min(78%,460px) }
+  .viz--pages .viz__stack{ width:min(100%,560px); margin-inline:auto }
 }
 @media (max-width:760px){
+  .viz--projects .viz__stack{ width:74% }
+  .viz--projects .viz__btns{ grid-template-columns:1fr 1fr }
   .viz__btn{ width:100% }
   .lightbox__prev,
   .lightbox__next{ top:auto; bottom:14px; margin-top:0; width:46px; height:46px }

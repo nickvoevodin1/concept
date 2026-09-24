@@ -439,21 +439,28 @@
   }
 
   /* ------------------------------------------------------------------
-     Первый визуал: веер страниц концепции. Страница или кнопка
-     открывает все кадры в просмотрщике; листание стрелками,
-     клавишами и свайпом.
+     Первый визуал, оба варианта. Вариант 1 — четыре объекта: обложка
+     или кнопка «Визуализация N» открывает все кадры объекта, наведение
+     на кнопку выводит её обложку вперёд. Вариант 2 — концепция:
+     страница веера открывает просмотр с этой страницы.
+     Листание стрелками, клавишами и свайпом.
      ------------------------------------------------------------------ */
-  var viz = document.querySelector('.viz');
+  var vizs = all('.viz');
   var box = document.querySelector('.lightbox');
 
-  if (viz && box) {
+  if (vizs.length && box) {
     var picture = box.querySelector('.lightbox__img');
     var counter = box.querySelector('.lightbox__count');
     var frames = [];
-    for (var n = 1; n <= Number(viz.dataset.count); n++) {
-      frames.push(viz.dataset.dir + '/' + (n < 10 ? '0' : '') + n + '.jpg');
-    }
     var at = 0;
+
+    function framesOf(source) {
+      var list = [];
+      for (var n = 1; n <= Number(source.dataset.count); n++) {
+        list.push(source.dataset.dir + '/' + (n < 10 ? '0' : '') + n + '.jpg');
+      }
+      return list;
+    }
 
     function showFrame(k) {
       at = (k + frames.length) % frames.length;
@@ -465,14 +472,31 @@
       });
     }
 
-    viz.addEventListener('click', function (event) {
-      var trigger = event.target.closest('[data-start]');
-      if (!trigger) return;
-      box.classList.add('is-gallery');
-      box.removeAttribute('hidden');
-      document.body.classList.add('is-lightbox');
-      document.body.style.overflow = 'hidden';
-      showFrame(Number(trigger.dataset.start));
+    vizs.forEach(function (viz) {
+      var buttons = all('.viz__btn[data-viz]', viz);
+      var covers = all('.viz__card[data-viz]', viz);
+
+      viz.addEventListener('click', function (event) {
+        var trigger = event.target.closest('[data-viz], [data-start]');
+        if (!trigger) return;
+        var source = trigger.hasAttribute('data-viz') ? buttons[Number(trigger.dataset.viz)] : viz;
+        frames = framesOf(source);
+        box.classList.add('is-gallery');
+        box.removeAttribute('hidden');
+        document.body.classList.add('is-lightbox');
+        document.body.style.overflow = 'hidden';
+        showFrame(Number(trigger.dataset.start || 0));
+      });
+
+      function front(i) {
+        covers.forEach(function (c, k) { c.classList.toggle('is-front', k === i); });
+      }
+      buttons.forEach(function (b, i) {
+        b.addEventListener('mouseenter', function () { front(i); });
+        b.addEventListener('focus', function () { front(i); });
+        b.addEventListener('mouseleave', function () { front(-1); });
+        b.addEventListener('blur', function () { front(-1); });
+      });
     });
 
     box.querySelector('.lightbox__prev').addEventListener('click', function () { showFrame(at - 1); });
