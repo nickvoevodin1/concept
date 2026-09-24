@@ -1190,29 +1190,26 @@
 <section class="section gift">
   <div class="wrap gift__grid">
 
-    <!-- Примеры первых визуалов: веер из четырёх объектов. По клику на обложку
-         или кнопку открываются все кадры объекта.
-         Подписи «Визуализация 1–4» — новые, в «Тексты CONCEPT» их нет. -->
-    <div class="gift__media viz">
+    <!-- Пример первого визуала: концепция кофейного острова Sabbia, 8 страниц.
+         Веер из четырёх страниц; по клику — все кадры с этой страницы.
+         Подпись «Смотреть визуализацию» — новая, в «Тексты CONCEPT» её нет. -->
+    <div class="gift__media viz" data-dir="assets/photo/visuals/sabbia" data-count="8">
       <div class="viz__stack">
-        <button class="viz__card" type="button" data-viz="0" style="--i:0" aria-label="Визуализация 1: смотреть все кадры">
-          <img src="assets/photo/visuals/house-200/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        <button class="viz__card" type="button" data-start="4" style="--i:0" aria-label="Смотреть визуализацию с кадра 5">
+          <img src="assets/photo/visuals/sabbia/card-05.jpg" alt="" width="900" height="637" loading="lazy">
         </button>
-        <button class="viz__card" type="button" data-viz="1" style="--i:1" aria-label="Визуализация 2: смотреть все кадры">
-          <img src="assets/photo/visuals/loft-2k/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        <button class="viz__card" type="button" data-start="0" style="--i:1" aria-label="Смотреть визуализацию с кадра 1">
+          <img src="assets/photo/visuals/sabbia/card-01.jpg" alt="" width="900" height="637" loading="lazy">
         </button>
-        <button class="viz__card" type="button" data-viz="2" style="--i:2" aria-label="Визуализация 3: смотреть все кадры">
-          <img src="assets/photo/visuals/euro-62/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        <button class="viz__card" type="button" data-start="5" style="--i:2" aria-label="Смотреть визуализацию с кадра 6">
+          <img src="assets/photo/visuals/sabbia/card-06.jpg" alt="" width="900" height="637" loading="lazy">
         </button>
-        <button class="viz__card" type="button" data-viz="3" style="--i:3" aria-label="Визуализация 4: смотреть все кадры">
-          <img src="assets/photo/visuals/apart-145/cover.jpg" alt="" width="720" height="900" loading="lazy">
+        <button class="viz__card" type="button" data-start="2" style="--i:3" aria-label="Смотреть визуализацию с кадра 3">
+          <img src="assets/photo/visuals/sabbia/card-03.jpg" alt="" width="900" height="637" loading="lazy">
         </button>
       </div>
       <div class="viz__btns">
-        <button class="viz__btn" type="button" data-viz="0" data-dir="assets/photo/visuals/house-200" data-count="17">Визуализация 1</button>
-        <button class="viz__btn" type="button" data-viz="1" data-dir="assets/photo/visuals/loft-2k" data-count="10">Визуализация 2</button>
-        <button class="viz__btn" type="button" data-viz="2" data-dir="assets/photo/visuals/euro-62" data-count="25">Визуализация 3</button>
-        <button class="viz__btn" type="button" data-viz="3" data-dir="assets/photo/visuals/apart-145" data-count="12">Визуализация 4</button>
+        <button class="viz__btn" type="button" data-start="0">Смотреть визуализацию</button>
       </div>
     </div>
 

@@ -439,9 +439,9 @@
   }
 
   /* ------------------------------------------------------------------
-     Первый визуал: веер визуализаций. Обложка или кнопка открывает
-     все кадры объекта в просмотрщике; листание стрелками, клавишами
-     и свайпом. Наведение на кнопку выводит её обложку вперёд.
+     Первый визуал: веер страниц концепции. Страница или кнопка
+     открывает все кадры в просмотрщике; листание стрелками,
+     клавишами и свайпом.
      ------------------------------------------------------------------ */
   var viz = document.querySelector('.viz');
   var box = document.querySelector('.lightbox');
@@ -449,19 +449,11 @@
   if (viz && box) {
     var picture = box.querySelector('.lightbox__img');
     var counter = box.querySelector('.lightbox__count');
-    var buttons = all('.viz__btn', viz);
-    var covers = all('.viz__card', viz);
     var frames = [];
-    var at = 0;
-
-    function framesOf(i) {
-      var b = buttons[i];
-      var list = [];
-      for (var n = 1; n <= Number(b.dataset.count); n++) {
-        list.push(b.dataset.dir + '/' + (n < 10 ? '0' : '') + n + '.jpg');
-      }
-      return list;
+    for (var n = 1; n <= Number(viz.dataset.count); n++) {
+      frames.push(viz.dataset.dir + '/' + (n < 10 ? '0' : '') + n + '.jpg');
     }
+    var at = 0;
 
     function showFrame(k) {
       at = (k + frames.length) % frames.length;
@@ -473,28 +465,14 @@
       });
     }
 
-    function openViz(i) {
-      frames = framesOf(i);
+    viz.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-start]');
+      if (!trigger) return;
       box.classList.add('is-gallery');
       box.removeAttribute('hidden');
       document.body.classList.add('is-lightbox');
       document.body.style.overflow = 'hidden';
-      showFrame(0);
-    }
-
-    viz.addEventListener('click', function (event) {
-      var trigger = event.target.closest('[data-viz]');
-      if (trigger) openViz(Number(trigger.dataset.viz));
-    });
-
-    function front(i) {
-      covers.forEach(function (c, k) { c.classList.toggle('is-front', k === i); });
-    }
-    buttons.forEach(function (b, i) {
-      b.addEventListener('mouseenter', function () { front(i); });
-      b.addEventListener('focus', function () { front(i); });
-      b.addEventListener('mouseleave', function () { front(-1); });
-      b.addEventListener('blur', function () { front(-1); });
+      showFrame(Number(trigger.dataset.start));
     });
 
     box.querySelector('.lightbox__prev').addEventListener('click', function () { showFrame(at - 1); });
