@@ -1866,6 +1866,73 @@
     </div>
   </div>
 </section>
+
+<!-- Вариант 3 (Terminal Industries): форма прямо на странице — заголовок по центру,
+     слева форматы и контакты, справа тёмная карточка с формой -->
+<section class="section ld3" data-variant="3">
+  <div class="wrap">
+    <div class="ld3__head">
+      <p class="eyebrow">Заявка</p>
+      <h2 class="ld3__h">Расскажите про объект</h2>
+    </div>
+    <div class="ld3__grid">
+      <div class="ld3__info">
+        <p class="ld3__lead">Напишите пару слов о помещении и задаче. Свяжемся, ответим на вопросы и предложим подходящий формат работы.</p>
+        <ul class="ld3__list">
+          <li>Только дизайн-проект</li>
+          <li>Проект с авторским надзором</li>
+          <li>Дизайн-проект и ремонт</li>
+        </ul>
+        <ul class="contacts">
+        <li><span>Телефон</span><a href="tel:+79054087000">+7 (905) 408-70-00</a></li>
+        <li><span>WhatsApp</span><a href="https://wa.me/79054087000" target="_blank" rel="noopener">+7 (905) 408-70-00</a></li>
+        <li><span>Telegram</span><a href="https://t.me/Finko8800" target="_blank" rel="noopener">@Finko8800</a></li>
+        <li><span>Instagram</span><a href="https://instagram.com/studio.design.concept" target="_blank" rel="noopener">@studio.design.concept</a></li>
+      </ul>
+      </div>
+      <div class="ld3__card">
+        <form class="form form--dark" novalidate>
+      <div class="form__grid">
+        <label class="field field--wide">
+          <span class="field__label">Имя <b aria-hidden="true">*</b></span>
+          <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
+          <span class="field__err" hidden>Заполните поле</span>
+        </label>
+
+        <label class="field field--wide">
+          <span class="field__label">Телефон или мессенджер <b aria-hidden="true">*</b></span>
+          <input type="tel" name="phone" placeholder="+7 900 000-00-00" autocomplete="tel" required>
+          <span class="field__err" hidden>Заполните поле</span>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Тип объекта</span>
+          <input type="text" name="kind" placeholder="Кафе, салон, офис, магазин…">
+        </label>
+
+        <label class="field">
+          <span class="field__label">Площадь</span>
+          <input type="text" name="area" placeholder="м²" inputmode="numeric">
+        </label>
+
+        <label class="field field--wide">
+          <span class="field__label">Что нужно сделать</span>
+          <textarea name="task" rows="3" placeholder="Ремонт с нуля, обновление, только проект…"></textarea>
+        </label>
+      </div>
+
+      <p class="note form__consent">Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности и обработкой персональных данных.</p>
+
+      <button class="btn form__submit form__glass" type="submit">Отправить</button>
+
+      <p class="note">Отвечаем в рабочее время с 9 до 20, воскресенье — выходной.</p>
+
+      <p class="form__msg" role="status" hidden></p>
+    </form>
+      </div>
+    </div>
+  </div>
+</section>
 </div>
 
 </main>
@@ -1891,16 +1958,14 @@
   </div>
 </footer>
 
-<!-- Вариант 2 (Cotool + Sunday): тёмный подвал, внизу горизонтальный логотип;
-     в конце страницы белый кадр сайта сжимается, из-под него выходит латунное поле -->
-<footer class="ft2" data-variant="2" data-tone="dark" data-body="foot-reveal-mode">
+<!-- Вариант 2 (Sunday): светлый подвал. В конце страницы кадр сайта
+     сжимается и скругляется, из-под него выходит латунное поле -->
+<footer class="ft2" data-variant="2" data-body="foot-reveal-mode">
   <div class="wrap">
     <div class="ft2__top">
-      <div class="ft2__lead">
-        <p class="ft2__big">CONCEPT — студия дизайна и реализации <em>коммерческих интерьеров</em></p>
-        <p class="ft2__small">Проектируем по всей России</p>
-        <a class="btn btn--light" href="#contacts">Обсудить проект</a>
-      </div>
+      <a class="ft2__logo" href="#top" aria-label="CONCEPT — на главную">
+        <img src="assets/logo/concept-lockup.svg" alt="CONCEPT" width="136" height="84" loading="lazy">
+      </a>
       <nav class="ft2__cols" aria-label="Подвал">
         <ul>
           <li><a href="#calc-section">Расчёт стоимости</a></li>
@@ -1917,10 +1982,46 @@
         </ul>
       </nav>
     </div>
-    <a class="ft2__logo" href="#top" aria-label="CONCEPT — на главную">
+    <div class="ft2__bottom">
+      <p>CONCEPT — студия дизайна и реализации коммерческих интерьеров&nbsp;· Проектируем по всей России</p>
+      <p class="ft2__legal">
+      [Реквизиты]&nbsp;·
+      <a href="#contacts">Политика конфиденциальности</a>&nbsp;·
+      <a href="#contacts">Согласие на обработку персональных данных</a>
+    </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Вариант 3 (Cotool): тёмный подвал, внизу горизонтальный логотип -->
+<footer class="ft3" data-variant="3" data-tone="dark">
+  <div class="wrap">
+    <div class="ft3__top">
+      <div class="ft3__lead">
+        <p class="ft3__big">CONCEPT — студия дизайна и реализации <em>коммерческих интерьеров</em></p>
+        <p class="ft3__small">Проектируем по всей России</p>
+        <a class="btn btn--light" href="#contacts">Обсудить проект</a>
+      </div>
+      <nav class="ft3__cols" aria-label="Подвал">
+        <ul>
+          <li><a href="#calc-section">Расчёт стоимости</a></li>
+          <li><a href="#works">Работы</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#process">Как работаем</a></li>
+          <li><a href="#about">О студии</a></li>
+        </ul>
+        <ul>
+          <li><a href="tel:+79054087000">Телефон</a></li>
+          <li><a href="https://wa.me/79054087000" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://t.me/Finko8800" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://instagram.com/studio.design.concept" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </nav>
+    </div>
+    <a class="ft3__logo" href="#top" aria-label="CONCEPT — на главную">
       <img src="assets/logo/concept-horizontal-light.svg" alt="CONCEPT" width="525" height="120" loading="lazy">
     </a>
-    <p class="ft2__legal">
+    <p class="ft3__legal">
       [Реквизиты]&nbsp;·
       <a href="#contacts">Политика конфиденциальности</a>&nbsp;·
       <a href="#contacts">Согласие на обработку персональных данных</a>
