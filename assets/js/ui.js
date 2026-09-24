@@ -37,6 +37,8 @@
 
   function applyVariant(group, index) {
     var options = group.querySelectorAll(':scope > [data-variant]');
+    /* Запомненного варианта может уже не быть — тогда первый */
+    if (!(index >= 0 && index < options.length)) index = 0;
     [].forEach.call(options, function (el, i) {
       el.classList.toggle('is-active', i === index);
     });
