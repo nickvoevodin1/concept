@@ -80,26 +80,86 @@
   function syncRails() { rails.forEach(function (update) { update(); }); }
 
   /* ------------------------------------------------------------------
-     Этапы, вариант 2: этап выше экрана не прилипает — иначе
-     следующий закрыл бы его низ.
+     Таблица форматов на телефоне: слева пункты, справа один формат.
+     Стрелки сверху и снизу переключают формат, чтобы сравнивать.
+     ------------------------------------------------------------------ */
+  var ARROW = '<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>';
+
+  all('.fmt').forEach(function (table) {
+    var scroller = table.closest('.fmt__scroll');
+    var cells = all('thead th', table);
+    var label = cells[0].textContent.trim();
+    var names = cells.slice(1).map(function (th) {
+      return th.innerHTML.replace(/<br\s*\/?>/g, ' ').replace(/<[^>]+>/g, '').trim();
+    });
+    var col = 0;
+
+    function bar(where) {
+      var el = document.createElement('div');
+      el.className = 'fmt__pager fmt__pager--' + where;
+      el.innerHTML = '<span class="fmt__label">' + (where === 'top' ? label : '') + '</span>' +
+        '<span class="fmt__switch">' +
+        '<button class="fmt__arr fmt__arr--prev" type="button" data-step="-1" aria-label="Предыдущий формат">' + ARROW + '</button>' +
+        '<span class="fmt__name"' + (where === 'top' ? ' aria-live="polite"' : '') + '></span>' +
+        '<button class="fmt__arr" type="button" data-step="1" aria-label="Следующий формат">' + ARROW + '</button>' +
+        '</span>';
+      el.addEventListener('click', function (event) {
+        var button = event.target.closest('.fmt__arr');
+        if (!button) return;
+        col = (col + Number(button.dataset.step) + names.length) % names.length;
+        show();
+      });
+      return el;
+    }
+
+    var top = bar('top');
+    var bottom = bar('bottom');
+    scroller.parentNode.insertBefore(top, scroller);
+    scroller.parentNode.insertBefore(bottom, scroller.nextSibling);
+
+    function show() {
+      table.dataset.col = String(col + 1);
+      [top, bottom].forEach(function (b) {
+        b.querySelector('.fmt__name').innerHTML = names[col] + ' <small>' + (col + 1) + '/' + names.length + '</small>';
+      });
+    }
+    show();
+  });
+
+  /* ------------------------------------------------------------------
+     Этапы, вариант 2: карточки липнут и наезжают друг на друга —
+     и на десктопе, и на телефоне. Чтобы следующая целиком закрывала
+     предыдущую, высоты идут по нарастающей. Карточка выше экрана
+     прилипает нижним краем: сначала дочитывается, потом её накрывают.
      ------------------------------------------------------------------ */
   function syncStepsStack() {
     var cards = all('.stp2.is-active .stp2__card');
     if (!cards.length) return;
-    var room = window.innerHeight - 140;
+    var hdr = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 76;
+    var base = hdr + (window.innerWidth <= 760 ? 30 : 64);
     cards.forEach(function (card) {
-      card.classList.remove('is-tall');
-      card.classList.toggle('is-tall', card.offsetHeight > room);
+      card.style.minHeight = '';
+      card.style.top = '';
+    });
+    var tallest = 0;
+    cards.forEach(function (card) {
+      tallest = Math.max(tallest, card.offsetHeight);
+      card.style.minHeight = tallest + 'px';
+      card.style.top = Math.min(base, window.innerHeight - tallest - 12) + 'px';
     });
   }
 
   /* ------------------------------------------------------------------
-     Этапы, вариант 3: аккордеон, который на широком экране
-     раскрывается прокруткой. Открыт всегда один этап.
+     Этапы, вариант 3: этапы раскрываются по мере прокрутки, пока
+     блок стоит на месте. Если кадр выше экрана, он встаёт нижним
+     краем. На десктопе раскрытая часть одной высоты у всех этапов,
+     на телефоне — у каждого своя, без пустот.
      ------------------------------------------------------------------ */
   var stp3 = document.querySelector('.stp3');
   var stp3Rows = stp3 ? all('.stp3__row', stp3) : [];
   var stp3Open = 0;
+  var stp3Span = 0;
+  var stp3Top = 0;
 
   function openStep(index) {
     stp3Open = index;
@@ -111,85 +171,158 @@
 
   function layoutSteps() {
     if (!stp3 || !shown(stp3)) return;
-    var card = stp3.querySelector('.stp3__card');
     var track = stp3.querySelector('.stp3__track');
     var frame = stp3.querySelector('.stp3__frame');
+    var wide = window.innerWidth > 760;
 
-    /* Высота раскрытой части — по самому длинному этапу,
-       чтобы карточка не прыгала при смене этапа */
     var tallest = 0;
-    stp3Rows.forEach(function (row) {
-      tallest = Math.max(tallest, row.querySelector('.stp3__inner').offsetHeight);
+    var heights = stp3Rows.map(function (row) {
+      var h = row.querySelector('.stp3__inner').offsetHeight;
+      tallest = Math.max(tallest, h);
+      return h;
     });
-    card.style.setProperty('--panel-h', tallest + 'px');
+    stp3Rows.forEach(function (row, i) {
+      row.style.setProperty('--h', (wide ? tallest : heights[i]) + 'px');
+    });
 
-    stp3.classList.remove('is-pinned');
-    track.style.height = '';
-    if (window.innerWidth <= 1024) return;
+    var openPanel = stp3Rows[stp3Open].querySelector('.stp3__panel');
+    frame.style.paddingTop = '';
+    var frameMax = frame.offsetHeight - openPanel.offsetHeight + tallest;
 
-    /* Встаёт на место, только если кадр целиком помещается в экран */
-    stp3.classList.add('is-pinned');
-    var head = stp3.querySelector('.stp3__head');
-    var bars = stp3Rows.length * stp3Rows[0].querySelector('.stp3__bar').offsetHeight;
-    var styles = getComputedStyle(frame);
-    var need = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom) +
-               head.offsetHeight + parseFloat(getComputedStyle(card).marginTop) + bars + tallest + 8;
-    if (need > window.innerHeight) {
-      stp3.classList.remove('is-pinned');
-      return;
+    /* Не помещается по высоте — сначала ужимаем воздух над заголовком
+       (но не под островок шапки), и только потом кадр уходит вверх */
+    var over = frameMax - window.innerHeight;
+    if (over > 0) {
+      var pad = parseFloat(getComputedStyle(frame).paddingTop);
+      var hdr = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 76;
+      var floor = wide ? hdr + 22 + 24 : 56;
+      var cut = Math.min(over, Math.max(0, pad - floor));
+      frame.style.paddingTop = (pad - cut) + 'px';
+      frameMax -= cut;
     }
-    track.style.height = (window.innerHeight + stp3Rows.length * window.innerHeight * 0.42) + 'px';
+    stp3Top = Math.min(0, window.innerHeight - frameMax);
+    frame.style.top = stp3Top + 'px';
+    stp3Span = stp3Rows.length * window.innerHeight * (wide ? 0.42 : 0.36);
+    track.style.height = (frameMax + stp3Span) + 'px';
     scrollSteps();
   }
 
   function scrollSteps() {
-    if (!stp3 || !stp3.classList.contains('is-pinned') || !shown(stp3)) return;
+    if (!stp3 || !stp3Span || !shown(stp3)) return;
     var track = stp3.querySelector('.stp3__track');
-    var span = track.offsetHeight - window.innerHeight;
-    var progress = Math.min(Math.max(-track.getBoundingClientRect().top / span, 0), 0.9999);
+    var progress = (stp3Top - track.getBoundingClientRect().top) / stp3Span;
+    progress = Math.min(Math.max(progress, 0), 0.9999);
     var index = Math.floor(progress * stp3Rows.length);
     if (index !== stp3Open) openStep(index);
   }
 
   stp3Rows.forEach(function (row, i) {
     row.querySelector('.stp3__bar').addEventListener('click', function () {
-      if (stp3.classList.contains('is-pinned')) {
-        /* Прокручиваем к середине отрезка этого этапа */
-        var track = stp3.querySelector('.stp3__track');
-        var span = track.offsetHeight - window.innerHeight;
-        var top = track.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: top + span * (i + 0.5) / stp3Rows.length, behavior: reduce ? 'auto' : 'smooth' });
-      } else {
-        openStep(i);
-      }
+      /* Прокручиваем к середине отрезка этого этапа */
+      var track = stp3.querySelector('.stp3__track');
+      var start = track.getBoundingClientRect().top + window.scrollY - stp3Top;
+      window.scrollTo({ top: start + stp3Span * (i + 0.5) / stp3Rows.length, behavior: reduce ? 'auto' : 'smooth' });
     });
   });
 
   /* ------------------------------------------------------------------
-     Вопросы, вариант 2: латунная волна по буквам.
-     Текст остаётся целым для чтения вслух, буквы — копия для глаз.
+     Вопросы, все варианты: ответ выезжает сверху из-под вопроса.
+     <details> раскрывается мгновенно, поэтому ведём его вручную.
      ------------------------------------------------------------------ */
+  function afterToggle(row, open, quiet) {
+    var list = row.closest('.fq4__list');
+    if (!list) return;
+    /* Вариант 4: открыт один вопрос, остальные размываются */
+    if (open) {
+      all('.faq__row', list).forEach(function (other) {
+        if (other !== row && other.open && !other.classList.contains('is-closing')) toggleRow(other, false, true);
+      });
+      list.classList.add('has-open');
+    } else if (!quiet) {
+      list.classList.remove('has-open');
+    }
+  }
+
+  function toggleRow(row, open, quiet) {
+    var answer = row.querySelector('.faq__a');
+    if (row._anim) { row._anim.cancel(); row._anim = null; }
+    row.classList.toggle('is-closing', !open);
+    afterToggle(row, open, quiet);
+    if (reduce || !answer || !answer.animate) {
+      row.open = open;
+      row.classList.remove('is-closing');
+      return;
+    }
+    if (open) row.open = true;
+    var styles = getComputedStyle(answer);
+    var full = { height: answer.scrollHeight + 'px', paddingTop: styles.paddingTop, paddingBottom: styles.paddingBottom, opacity: 1, transform: 'none' };
+    var none = { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0, transform: 'translateY(-16px)' };
+    answer.style.overflow = 'hidden';
+    var anim = answer.animate(open ? [none, full] : [full, none],
+                              { duration: open ? 460 : 300, easing: 'cubic-bezier(.3,.7,.3,1)' });
+    row._anim = anim;
+    anim.onfinish = function () {
+      answer.style.overflow = '';
+      row._anim = null;
+      if (!open) { row.open = false; row.classList.remove('is-closing'); }
+    };
+  }
+
+  all('details.faq__row').forEach(function (row) {
+    row.querySelector('summary').addEventListener('click', function (event) {
+      event.preventDefault();
+      toggleRow(row, !row.open || row.classList.contains('is-closing'));
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     Вопросы, вариант 2: по вопросу пробегает смена гарнитур — каждая
+     буква по очереди перебирает шрифты и латунью возвращается в свой.
+     Ширина букв закреплена, поэтому строка не дёргается. Текст для
+     чтения вслух лежит целым, буквы — копия для глаз.
+     ------------------------------------------------------------------ */
+  var FACES = ['f1', 'f2', 'f3', 'f4'];
+  var letterSets = [];
+
   all('.fq2 [data-wave]').forEach(function (q) {
     var text = q.textContent;
-    var n = 0;
     var words = text.split(' ').map(function (word) {
-      var letters = word.split('').map(function (ch) {
-        return '<i style="--i:' + (n++) + '">' + ch + '</i>';
-      }).join('');
-      n++;
-      return '<span class="wv__w">' + letters + '</span>';
+      return '<span class="wv__w">' + word.split('').map(function (ch) { return '<i>' + ch + '</i>'; }).join('') + '</span>';
     }).join(' ');
     q.innerHTML = '<span class="visually-hidden">' + text + '</span><span aria-hidden="true">' + words + '</span>';
 
-    var summary = q.closest('summary');
+    var letters = all('i', q);
+    letterSets.push(letters);
+    var timers = [];
+
     function run() {
-      q.classList.remove('is-wave');
-      void q.offsetWidth;          // перезапуск анимации
-      q.classList.add('is-wave');
+      timers.forEach(clearTimeout);
+      timers = [];
+      if (reduce) return;
+      letters.forEach(function (letter, i) {
+        for (var k = 0; k < 4; k++) {
+          (function (k) {
+            timers.push(setTimeout(function () {
+              letter.className = k < 3 ? 'is-flip ' + FACES[(i + k * 3 + Math.floor(Math.random() * 4)) % FACES.length] : '';
+            }, i * 24 + k * 75));
+          })(k);
+        }
+      });
     }
+    var summary = q.closest('summary');
     summary.addEventListener('mouseenter', run);
     summary.addEventListener('focus', run);
+    summary.addEventListener('click', run);
   });
+
+  function fixLetters() {
+    letterSets.forEach(function (letters) {
+      if (!letters.length || !shown(letters[0].closest('summary'))) return;
+      letters.forEach(function (l) { l.style.width = ''; });
+      var widths = letters.map(function (l) { return l.getBoundingClientRect().width; });
+      letters.forEach(function (l, i) { l.style.width = widths[i] + 'px'; });
+    });
+  }
 
   /* ------------------------------------------------------------------
      Вопросы, вариант 3: темы слева переключают набор вопросов
@@ -310,6 +443,7 @@
      ------------------------------------------------------------------ */
   function relayout() {
     fitLines();
+    fixLetters();
     syncRails();
     syncStepsStack();
     layoutSteps();

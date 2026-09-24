@@ -656,6 +656,7 @@ ul{ padding:0; list-style:none }
   font-size:12px; font-weight:600; line-height:1.3; color:var(--black);
   vertical-align:bottom;
 }
+.fmt thead th:not(:first-child){ text-align:center }
 .fmt thead th:first-child{
   font-size:11px; font-weight:500; letter-spacing:.1em;
   text-transform:uppercase; color:var(--muted);
@@ -690,7 +691,7 @@ ul{ padding:0; list-style:none }
    БЛОК 5 — КАК ПРОХОДИТ РАБОТА
    ============================================================ */
 
-.steps{ margin-top:clamp(28px,3.4vw,52px); counter-reset:step }
+.steps{ margin-top:clamp(28px,3.4vw,52px); padding:0; list-style:none; counter-reset:step }
 .step{
   display:grid; grid-template-columns:clamp(70px,8vw,130px) minmax(0,1fr);
   gap:clamp(16px,3vw,48px);
@@ -719,6 +720,7 @@ ul{ padding:0; list-style:none }
   column-gap:clamp(20px,2.6vw,44px); row-gap:clamp(26px,3vw,48px);
 }
 .tool{ padding-top:clamp(18px,2vw,26px); border-top:1px solid var(--rule) }
+.tool__icon{ display:block; width:30px; height:30px; margin-bottom:14px; color:var(--wine) }
 .tool__text{ margin-top:10px; font-size:14px; line-height:1.65; color:var(--muted) }
 
 /* ============================================================
@@ -783,6 +785,7 @@ ul{ padding:0; list-style:none }
 .faq__row .price__plus{ flex:0 0 clamp(32px,2.6vw,40px); width:clamp(32px,2.6vw,40px); height:clamp(32px,2.6vw,40px) }
 .faq__row .price__plus::before{ width:14px }
 .faq__row .price__plus::after{ height:14px }
+.faq__row[open]:not(.is-closing) .price__plus{ transform:rotate(45deg) }
 .faq__a{ padding-bottom:clamp(20px,2.4vw,32px); max-width:88ch }
 .faq__a p{ font-size:15px; line-height:1.7; color:var(--muted) }
 
@@ -1451,16 +1454,17 @@ ul{ padding:0; list-style:none }
 .svc2__rail{ min-width:0 }
 .svc2__cards{ grid-auto-columns:calc((100% - 24px) / 3); gap:12px }
 .svc2__card{
-  display:flex; flex-direction:column; justify-content:space-between; gap:28px;
+  display:flex; flex-direction:column; gap:clamp(40px,4vw,64px);
   min-height:clamp(400px,34vw,500px); padding:clamp(22px,2vw,30px);
   background:#F7F5F2;
 }
 .svc2__card:nth-child(2){ background:#F3EADC }
 .svc2__icon{ width:36px; height:36px; color:var(--wine) }
 .svc2__title{ font-size:clamp(17px,1.35vw,20px); font-weight:600; line-height:1.25; color:var(--wine) }
+.svc2__body{ display:flex; flex-direction:column; align-items:flex-start; flex:1 }
 .svc2__body p{ margin-top:10px; font-size:13.5px; line-height:1.55; color:#55504C }
 .svc2__more{
-  display:inline-flex; align-items:center; gap:8px; margin-top:18px;
+  display:inline-flex; align-items:center; gap:8px; margin-top:auto; padding-top:22px;
   font-size:13px; font-weight:600; color:var(--wine);
 }
 .svc2__more .ico--arrow{ width:14px; height:14px; transition:transform .2s }
@@ -1473,15 +1477,17 @@ ul{ padding:0; list-style:none }
 
 .svc3__grid{
   margin-top:clamp(28px,3.4vw,52px);
-  display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.4vw,20px);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0 clamp(12px,1.4vw,20px);
 }
+/* Строки сетки общие для всех карточек: заголовки выравниваются
+   по одной линии, даже если у одного две строки, у другого одна */
 .svc3__card{
-  display:flex; flex-direction:column; overflow:hidden;
+  display:grid; grid-row:span 3; grid-template-rows:subgrid; row-gap:0; overflow:hidden;
   padding:clamp(20px,2vw,28px) clamp(20px,2vw,28px) 0;
   background:#EFECE7; border-radius:16px;
 }
 .svc3__title{
-  display:inline-flex; align-items:center; gap:12px; align-self:flex-start;
+  display:inline-flex; align-items:center; gap:12px; align-self:center; justify-self:start;
   font-size:clamp(20px,1.9vw,28px); font-weight:500; letter-spacing:-.015em; line-height:1.12;
   transition:color .25s;
 }
@@ -1496,7 +1502,7 @@ ul{ padding:0; list-style:none }
 .svc3__title:hover .svc3__dot{ background:var(--wine); transform:rotate(-45deg) }
 .svc3__card > p{ margin:12px 0 clamp(22px,2.6vw,36px); font-size:14px; line-height:1.6; color:#3F3B38 }
 .svc3__ph{
-  margin:auto calc(-1 * clamp(20px,2vw,28px)) 0;
+  align-self:end; margin:0 calc(-1 * clamp(20px,2vw,28px));
   aspect-ratio:4/3; border-radius:0 0 16px 16px;
 }
 .svc3 .fmt__scroll{ margin-top:clamp(44px,4.8vw,80px) }
@@ -1547,17 +1553,21 @@ ul{ padding:0; list-style:none }
 .stp2__head .h2{ font-size:clamp(28px,2.9vw,44px) }
 .stp2__list,
 .stp3__card{ list-style:none; padding:0 }
+/* Запас под последним этапом: он доезжает до верха и задерживается.
+   Нужен именно элемент внутри списка — отступы (и списка, и самой
+   карточки) браузер при залипании не засчитывает */
+.stp2__list::after{ content:''; display:block; height:22vh }
 .stp2__card{
   position:sticky; top:calc(var(--hdr) + 64px);
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr);
   gap:clamp(20px,3vw,48px);
   padding-block:clamp(24px,2.6vw,36px);
   background:var(--white); border-top:1px solid var(--rule-strong);
-  box-shadow:0 -30px 40px -34px rgba(0,0,0,.22);
+  /* Белая кайма по бокам: на дробной границе иначе проглядывает
+     сглаженный край текста предыдущего этапа */
+  box-shadow:-6px 0 0 var(--white), 6px 0 0 var(--white);
 }
-.stp2__card:first-child{ box-shadow:none }
 .stp2__card + .stp2__card{ margin-top:clamp(140px,26vh,260px) }
-.stp2__card.is-tall{ position:relative; top:auto }
 .stp2__num{
   display:inline-block; padding:6px 12px; border-radius:999px;
   background:var(--sand); font-size:12px; font-weight:600; color:var(--wine);
@@ -1590,10 +1600,9 @@ ul{ padding:0; list-style:none }
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath d='M0 .5h128M.5 0v128' fill='none' stroke='%23AB8756' stroke-opacity='.28' stroke-dasharray='6 6'/%3E%3C/svg%3E");
 }
-.stp3__frame{ padding-block:var(--sect) }
-.stp3.is-pinned .stp3__frame{
-  position:sticky; top:0; height:100svh; overflow:hidden;
-  padding-top:calc(var(--hdr) + 22px + clamp(22px,3.4vh,40px)); padding-bottom:clamp(18px,3vh,32px);
+.stp3__frame{
+  position:sticky; top:0;
+  padding-top:calc(var(--hdr) + 22px + clamp(48px,8vh,96px)); padding-bottom:clamp(24px,4vh,48px);
 }
 .stp3__head{
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.7fr);
@@ -1620,7 +1629,7 @@ ul{ padding:0; list-style:none }
 .stp3__bar:hover .stp3__name{ color:var(--brass) }
 .stp3__count i{ font-style:normal; color:var(--brass) }
 .stp3__panel{ height:0; overflow:hidden; transition:height .5s cubic-bezier(.4,0,.2,1) }
-.stp3__row.is-open .stp3__panel{ height:var(--panel-h,auto) }
+.stp3__row.is-open .stp3__panel{ height:var(--h,auto) }
 .stp3__inner{
   display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1fr);
   gap:clamp(20px,3vw,56px);
@@ -1645,23 +1654,27 @@ ul{ padding:0; list-style:none }
 .tl2__head .lead{ margin-top:16px }
 .tl2__track{
   margin-top:clamp(36px,4.4vw,72px);
-  grid-auto-columns:clamp(300px,31vw,440px); gap:clamp(28px,3.4vw,60px);
+  grid-auto-columns:clamp(300px,30vw,430px); gap:clamp(12px,1.2vw,18px);
   scroll-snap-type:x proximity; cursor:grab;
 }
+.tl2__item{
+  display:flex; flex-direction:column;
+  min-height:clamp(300px,25vw,380px); padding:clamp(24px,2.4vw,36px);
+  background:#F4F0EA;
+}
+.tl2__item:nth-child(3n+2){ background:#EFE6D8 }
 .tl2__track.is-drag{ cursor:grabbing; scroll-snap-type:none; user-select:none }
 .tl2__title{
   display:flex; align-items:center; gap:14px;
   font-size:clamp(15px,1.25vw,18px); font-weight:600; letter-spacing:.03em; line-height:1.25;
   text-transform:uppercase;
+  flex-direction:column; align-items:flex-start; gap:clamp(22px,2.6vw,40px);
 }
-.tl2__icon{ width:32px; height:32px; flex:none; color:var(--wine) }
+.tl2__icon{ width:40px; height:40px; flex:none; color:var(--wine) }
 .tl2__body{
-  display:grid; grid-template-columns:clamp(84px,7.6vw,110px) minmax(0,1fr);
-  gap:clamp(14px,1.6vw,22px); align-items:start;
-  margin-top:clamp(16px,1.8vw,24px);
+  margin-top:14px;
 }
-.tl2__ph{ aspect-ratio:1 }
-.tl2__body p{ font-size:14.5px; line-height:1.6; color:#2D2D2D }
+.tl2__body p{ font-size:14.5px; line-height:1.6; color:#4A4541 }
 .tl2 .rail__nav{ margin-top:clamp(28px,3vw,44px) }
 
 /* ============================================================
@@ -1669,14 +1682,14 @@ ul{ padding:0; list-style:none }
    ============================================================ */
 
 .tl3__grid{
-  display:grid; grid-template-columns:minmax(280px,.3fr) minmax(0,1fr);
+  display:grid; grid-template-columns:minmax(320px,.4fr) minmax(0,1fr);
   gap:clamp(14px,1.6vw,22px); align-items:stretch;
 }
 .tl3__lead{
   display:flex; flex-direction:column; overflow:hidden;
   background:var(--wine); color:#fff; border-radius:10px;
 }
-.tl3__lead-ph{ aspect-ratio:4/3.2 }
+.tl3__lead-ph{ aspect-ratio:16/9 }
 .tl3__lead-text{ display:flex; flex-direction:column; gap:14px; flex:1; padding:clamp(18px,2vw,26px) }
 .tl3__lead .eyebrow{ color:#fff }
 .tl3__lead .eyebrow::before{ background:var(--brass) }
@@ -1689,10 +1702,10 @@ ul{ padding:0; list-style:none }
 .tl3__rail{ display:flex; flex-direction:column; min-width:0 }
 .tl3__track{
   grid-template-rows:repeat(2,auto);
-  grid-auto-columns:calc((100% - clamp(14px,1.6vw,22px) * 2) / 2.25);
+  grid-auto-columns:calc((100% - clamp(14px,1.6vw,22px) * 2) / 2.6);
   gap:clamp(18px,2vw,28px) clamp(14px,1.6vw,22px);
 }
-.tl3__ph{ aspect-ratio:16/10; border-radius:8px }
+.tl3__ph{ aspect-ratio:16/8; border-radius:8px }
 .tl3__title{ margin-top:14px; font-size:16px; font-weight:600; line-height:1.3 }
 .tl3__card p{ margin-top:6px; font-size:13.5px; line-height:1.55; color:var(--muted) }
 .tl3 .rail__nav{ justify-content:flex-end; margin-top:auto; padding-top:20px }
@@ -1786,7 +1799,7 @@ ul{ padding:0; list-style:none }
    ============================================================ */
 
 [class*="__plus"] > .ico{ transition:transform .3s cubic-bezier(.4,0,.2,1) }
-.faq__row[open] [class*="__plus"] > .ico{ transform:rotate(45deg) }
+.faq__row[open]:not(.is-closing) [class*="__plus"] > .ico{ transform:rotate(45deg) }
 
 /* ---------- Вариант 2 (good-fella) ----------------------------
    По вопросу пробегает латунная волна: буквы по очереди
@@ -1816,17 +1829,16 @@ ul{ padding:0; list-style:none }
 .fq2 .fq2__row:hover .faq__q,
 .fq2 .fq2__row[open] .faq__q{ color:#fff }
 .fq2__plus{ color:rgba(255,255,255,.6) }
-.fq2 .faq__a{ padding:4px 0 24px }
+.fq2 .faq__a{ padding:18px 0 28px }
 .fq2 .faq__a p{ color:rgba(255,255,255,.66) }
 .wv__w{ white-space:nowrap }
-.wv__w i{ display:inline-block; font-style:normal }
-.is-wave .wv__w i{ animation:fqWave .75s cubic-bezier(.3,.7,.3,1) both; animation-delay:calc(var(--i) * 16ms) }
-@keyframes fqWave{
-  0%  { transform:none }
-  35% { color:var(--brass); transform:translateY(-3px) }
-  100%{ transform:none }
-}
-@media (prefers-reduced-motion:reduce){ .is-wave .wv__w i{ animation:none } }
+.wv__w i{ display:inline-block; font-style:normal; text-align:center; transition:color .25s }
+/* Гарнитуры, которые перебирает буква: все четыре есть на сайте */
+.wv__w i.is-flip{ color:var(--brass) }
+.wv__w i.f1{ font-family:var(--display); font-weight:600 }
+.wv__w i.f2{ font-family:var(--narrow); font-weight:400 }
+.wv__w i.f3{ font-family:var(--geo); font-weight:300; font-style:italic }
+.wv__w i.f4{ font-family:Georgia,'Times New Roman',serif; font-style:italic }
 
 /* ---------- Вариант 3 (petspan) ------------------------------ */
 .fq3{ background:#F8F6F2 }
@@ -1884,10 +1896,11 @@ ul{ padding:0; list-style:none }
 .fq4 .faq__a{ padding:0 0 24px 23px }
 .fq4 .faq__a p{ color:rgba(255,255,255,.62) }
 @media (hover:hover){
-  .fq4__row{ transition:filter .35s, opacity .35s }
-  .fq4__list:hover .fq4__row:not(:hover){ filter:blur(3px); opacity:.42 }
   .fq4__row:hover > summary{ transform:translateX(14px) }
 }
+.fq4__row{ transition:filter .4s, opacity .4s }
+.fq4__list.has-open .fq4__row:not([open]),
+.fq4__list.has-open .fq4__row.is-closing{ filter:blur(3px); opacity:.4 }
 
 /* ============================================================
    ЗАЯВКА — ВАРИАНТ 2 (Cotool) И ОКНО ФОРМЫ (Terminal)
@@ -1901,7 +1914,7 @@ ul{ padding:0; list-style:none }
   background:var(--wine); color:#fff; border-radius:10px;
 }
 .ld2__pattern{
-  position:absolute; top:0; bottom:0; right:clamp(-150px,-5vw,0px);
+  position:absolute; top:0; bottom:0; right:clamp(0px,4vw,60px);
   display:flex; align-items:center; width:clamp(420px,46vw,640px);
 }
 .ld2__pattern img{ width:100%; height:auto }
@@ -1968,9 +1981,14 @@ ul{ padding:0; list-style:none }
 .is-modal{ overflow:hidden }
 
 /* Заявка, вариант 3: та же раскладка, что в окне, но прямо на странице */
-.ld3__head{ text-align:center }
-.ld3__head .eyebrow{ justify-content:center }
-.ld3__h{ margin-top:14px }
+.ld3__h{ margin:14px 0 0; max-width:none; text-align:left }
+.ld3__grid{
+  grid-template-areas:"info card" "contacts card";
+  grid-template-rows:auto 1fr; row-gap:clamp(24px,3vw,40px);
+}
+.ld3__info{ grid-area:info }
+.ld3__card{ grid-area:card }
+.ld3__contacts{ grid-area:contacts }
 
 /* Форма на тёмной карточке: подписи обычным регистром, поля — линия снизу */
 .form--dark .form__grid{ column-gap:2.5rem; row-gap:1.9rem }
@@ -2190,4 +2208,68 @@ ul{ padding:0; list-style:none }
   .ft3__legal{ font-size:12px }
 
   .hero-corner-mode .variants:not([data-block="hero"]) > [data-variant]{ padding-inline:0 }
+}
+
+/* ============================================================
+   ПРАВКИ ПОСЛЕ ПРОСМОТРА — ТЕЛЕФОН
+   ============================================================ */
+
+.fmt__pager{ display:none }
+
+@media (max-width:760px){
+  /* Таблица: пункты слева мелким шрифтом, справа один формат.
+     Стрелки сверху и снизу меняют формат. */
+  .fmt__pager{
+    display:grid; grid-template-columns:minmax(0,56%) minmax(0,44%); align-items:center;
+  }
+  .fmt__pager--top{ margin-top:clamp(28px,7vw,40px); padding-bottom:10px; border-bottom:1px solid var(--rule-strong) }
+  .fmt__pager--bottom{ padding-top:12px }
+  .fmt__label{ padding-left:10px; font-size:11px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--muted) }
+  .fmt__switch{ display:flex; align-items:center; gap:4px }
+  .fmt__name{ flex:1; min-width:0; text-align:center; font-size:12px; font-weight:600; line-height:1.25 }
+  .fmt__name small{ display:block; margin-top:2px; font-size:10px; font-weight:500; color:var(--muted) }
+  .fmt__arr{
+    display:grid; place-items:center; flex:none; width:30px; height:30px; cursor:pointer;
+    border:1px solid var(--rule-strong); background:none; color:var(--wine);
+  }
+  .fmt__arr svg{ width:13px; height:13px }
+  .fmt__arr--prev svg{ transform:rotate(180deg) }
+  .fmt__scroll{ margin-top:0; overflow:visible }
+  .svc2 .fmt__pager--top,
+  .svc3 .fmt__pager--top{ margin-top:clamp(40px,10vw,56px) }
+  .svc4__table .fmt__pager--top{ margin-top:6px }
+  .fmt{ min-width:0; table-layout:fixed }
+  .fmt thead{ display:none }
+  .fmt tbody th{
+    position:static; width:56%; min-width:0; box-shadow:none; background:none !important;
+    font-size:13px; line-height:1.35;
+  }
+  .fmt td{ display:none; width:44% }
+  .fmt[data-col="1"] td:nth-of-type(1),
+  .fmt[data-col="2"] td:nth-of-type(2),
+  .fmt[data-col="3"] td:nth-of-type(3){ display:table-cell }
+
+  /* Этапы 2: наезд карточек и на телефоне, высоту ставит скрипт */
+  .stp2__card{ position:sticky }
+  .stp2__card + .stp2__card{ margin-top:clamp(90px,24vh,180px) }
+
+  /* Этапы 3: блок встаёт на место и на телефоне */
+  .stp3__frame{ padding-top:72px; padding-bottom:24px }
+
+  /* Инструменты 2 */
+  .tl2__track{ grid-auto-columns:80%; gap:10px }
+  .tl2__item{ min-height:0; padding:22px }
+  .tl2__title{ gap:18px }
+
+  /* Инструменты 3: плашка во всю ширину, фото ниже */
+  .tl3__lead-ph{ aspect-ratio:16/7 }
+
+  /* Заявка 3: сначала текст, потом форма, контакты — после неё */
+  .ld3__grid{ grid-template-areas:"info" "card" "contacts"; grid-template-rows:auto }
+  .ld2__pattern{ right:auto }
+}
+
+@media (min-width:761px) and (max-width:1024px){
+  .svc3__grid{ row-gap:14px }
+  .ld3__grid{ grid-template-areas:"info" "card" "contacts"; grid-template-rows:auto }
 }
