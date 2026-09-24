@@ -56,8 +56,22 @@
       }
     }
     try { localStorage.setItem(STORE, JSON.stringify(chosen)); } catch (e) { /* приватный режим */ }
+    syncBodyModes();
     syncHeader();
     syncSequence();
+    document.dispatchEvent(new CustomEvent('variants:change', { detail: { block: group.dataset.block } }));
+  }
+
+  /* Некоторым вариантам нужен режим на всю страницу (окно заявки,
+     поле за кадром в подвале). Вариант пишет его в data-body. */
+  function syncBodyModes() {
+    var modes = {};
+    [].forEach.call(document.querySelectorAll('.variants > [data-variant][data-body]'), function (el) {
+      modes[el.dataset.body] = modes[el.dataset.body] || el.classList.contains('is-active');
+    });
+    Object.keys(modes).forEach(function (mode) {
+      document.body.classList.toggle(mode, modes[mode]);
+    });
   }
 
   function buildSwitch() {
@@ -101,10 +115,16 @@
       var block = button.closest('.switch__row').dataset.block;
       var group = multi.filter(function (g) { return g.dataset.block === block; })[0];
       /* Блок меняется на месте: соседние блоки остаются как есть,
-         поэтому варианты можно смешивать. Прокрутка сбрасывается —
-         высота у вариантов разная. */
-      window.scrollTo(0, 0);
+         поэтому варианты можно смешивать. Страница встаёт на начало
+         блока: высота у вариантов разная. */
       applyVariant(group, Number(button.dataset.set));
+      function land() {
+        if (block === 'hero') window.scrollTo(0, 0);
+        else window.scrollTo(0, group.getBoundingClientRect().top + window.scrollY - 24);
+      }
+      land();
+      /* Соседние варианты пересчитывают высоту следом — встаём ещё раз */
+      requestAnimationFrame(function () { requestAnimationFrame(land); });
       markActive();
       buildGrid();
       syncSequence();
@@ -228,7 +248,24 @@
     full.classList.toggle('is-past', past);
     /* Угловое меню закреплено на весь сайт, но ниже первого экрана
        фон светлый — белый набор там не читается. */
-    if (corner) corner.classList.toggle('is-light', full.getBoundingClientRect().bottom < 120);
+    if (corner) {
+      var below = full.getBoundingClientRect().bottom < 120;
+      corner.classList.toggle('is-below', below);
+      corner.classList.toggle('is-light', below && !darkUnderCorner());
+    }
+  }
+
+  /* Под кромкой меню тёмный блок? Смотрим у левого края посередине
+     экрана, пропуская само меню. Не у самой кромки: в конце страницы
+     кадр сайта сжимается, и там уже поле за кадром. */
+  function darkUnderCorner() {
+    if (!document.elementsFromPoint) return false;
+    var stack = document.elementsFromPoint(60, window.innerHeight / 2);
+    for (var i = 0; i < stack.length; i++) {
+      if (stack[i].closest('.corner')) continue;
+      return !!stack[i].closest('[data-tone="dark"]');
+    }
+    return false;
   }
   window.addEventListener('scroll', syncFull, { passive: true });
   window.addEventListener('resize', syncFull);
