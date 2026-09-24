@@ -1898,6 +1898,8 @@ ul{ padding:0; list-style:none }
 .fq4 .faq__a p{ color:rgba(255,255,255,.62) }
 @media (hover:hover){
   .fq4__row:hover > summary{ transform:translateX(14px) }
+  /* На десктопе размытие и при наведении, не только по клику */
+  .fq4__list:hover .fq4__row:not(:hover){ filter:blur(3px); opacity:.4 }
 }
 .fq4__row{ transition:filter .4s, opacity .4s }
 .fq4__list.has-open .fq4__row:not([open]),
@@ -2362,3 +2364,7 @@ ul{ padding:0; list-style:none }
   .lightbox__next{ top:auto; bottom:14px; margin-top:0; width:46px; height:46px }
   .lightbox__count{ bottom:28px }
 }
+
+/* Сноска про Instagram во всех вариантах подвала */
+.meta-note{ margin-top:14px; max-width:78ch; font-size:12px; line-height:1.55; opacity:.6 }
+.ft2 .meta-note{ margin-top:12px }
