@@ -1005,31 +1005,33 @@ ul{ padding:0; list-style:none }
 
 /* ---------- Кнопка переключения ---------------------------- */
 
-.switch{ position:fixed; right:16px; bottom:16px; z-index:80; display:flex; flex-direction:column; align-items:flex-end; gap:10px }
+.switch{ position:fixed; right:16px; bottom:16px; z-index:80; display:flex; flex-direction:column; align-items:flex-end; gap:6px }
 .switch__toggle{
   border:0; cursor:pointer;
-  padding:11px 18px; background:var(--wine); color:#fff;
-  font:inherit; font-size:11px; font-weight:600;
+  padding:7px 12px; background:var(--wine); color:#fff;
+  font:inherit; font-size:10px; font-weight:600;
   letter-spacing:.1em; text-transform:uppercase;
   box-shadow:0 10px 30px rgba(0,0,0,.28);
 }
 .switch__toggle:hover{ background:var(--wine-deep) }
+/* Строк восемь, поэтому панель плотная и при нехватке высоты листается */
 .switch__panel{
-  background:var(--near); color:#fff; padding:18px 20px;
-  box-shadow:0 18px 50px rgba(0,0,0,.4); min-width:250px;
+  background:var(--near); color:#fff; padding:10px 12px;
+  box-shadow:0 12px 34px rgba(0,0,0,.4); min-width:0;
+  max-height:calc(100svh - 80px); overflow-y:auto; overscroll-behavior:contain;
 }
 .switch__title{
-  font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-  color:rgba(255,255,255,.6); margin-bottom:14px;
+  font-size:9px; letter-spacing:.1em; text-transform:uppercase;
+  color:rgba(255,255,255,.6); margin-bottom:6px;
 }
-.switch__row{ display:flex; align-items:center; justify-content:space-between; gap:16px }
-.switch__row + .switch__row{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,.14) }
-.switch__row span{ font-size:13px }
-.switch__btns{ display:flex; gap:6px }
+.switch__row{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+.switch__row + .switch__row{ margin-top:5px; padding-top:5px; border-top:1px solid rgba(255,255,255,.12) }
+.switch__row span{ font-size:11px; white-space:nowrap }
+.switch__btns{ display:flex; gap:3px }
 .switch__btns button{
-  width:30px; height:30px; cursor:pointer;
+  width:21px; height:21px; padding:0; cursor:pointer;
   border:1px solid rgba(255,255,255,.28); background:none; color:#fff;
-  font:inherit; font-size:12px; font-weight:600;
+  font:inherit; font-size:10px; font-weight:600;
   transition:background .2s, border-color .2s, color .2s;
 }
 .switch__btns button:hover{ border-color:#fff }
@@ -1326,7 +1328,7 @@ ul{ padding:0; list-style:none }
 
 @media (max-width:760px){
   .switch{ right:12px; bottom:12px }
-  .switch__panel{ min-width:0; width:min(80vw,280px) }
+  .switch__panel{ min-width:0; width:auto }
   .heroseq__track{ height:300svh }
   .heroseq__btns{ flex-direction:column; width:100% }
   .heroseq__btns .btn{ width:100% }
