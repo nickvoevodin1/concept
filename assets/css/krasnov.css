@@ -717,10 +717,10 @@ ul{ padding:0; list-style:none }
 .tools{
   margin-top:clamp(28px,3.4vw,52px);
   display:grid; grid-template-columns:repeat(3,1fr);
-  column-gap:clamp(20px,2.6vw,44px); row-gap:clamp(26px,3vw,48px);
+  column-gap:clamp(28px,3.6vw,64px); row-gap:clamp(44px,4.6vw,80px);
 }
-.tool{ padding-top:clamp(18px,2vw,26px); border-top:1px solid var(--rule) }
-.tool__icon{ display:block; width:30px; height:30px; margin-bottom:14px; color:var(--wine) }
+.tool{ padding-top:clamp(24px,2.6vw,36px); border-top:1px solid var(--rule) }
+.tool__icon{ display:block; width:36px; height:36px; margin-bottom:20px; color:var(--wine) }
 .tool__text{ margin-top:10px; font-size:14px; line-height:1.65; color:var(--muted) }
 
 /* ============================================================
@@ -1318,6 +1318,7 @@ ul{ padding:0; list-style:none }
 }
 .lightbox[hidden]{ display:none }
 .is-lightbox .hdr,
+.is-lightbox .corner,
 .is-lightbox .switch{ opacity:0; pointer-events:none }
 .lightbox__img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain }
 .lightbox__close{
@@ -1838,7 +1839,7 @@ ul{ padding:0; list-style:none }
 .wv__w i.f1{ font-family:var(--display); font-weight:600 }
 .wv__w i.f2{ font-family:var(--narrow); font-weight:400 }
 .wv__w i.f3{ font-family:var(--geo); font-weight:300; font-style:italic }
-.wv__w i.f4{ font-family:Georgia,'Times New Roman',serif; font-style:italic }
+.wv__w i.f4{ font-family:var(--text); font-weight:800 }
 
 /* ---------- Вариант 3 (petspan) ------------------------------ */
 .fq3{ background:#F8F6F2 }
@@ -1914,10 +1915,10 @@ ul{ padding:0; list-style:none }
   background:var(--wine); color:#fff; border-radius:10px;
 }
 .ld2__pattern{
-  position:absolute; top:0; bottom:0; right:clamp(0px,4vw,60px);
+  position:absolute; top:0; bottom:0; right:clamp(-150px,-5vw,0px);
   display:flex; align-items:center; width:clamp(420px,46vw,640px);
 }
-.ld2__pattern img{ width:100%; height:auto }
+.ld2__pattern img{ width:100%; height:auto; opacity:.55 }
 .ld2__text{ position:relative; max-width:520px }
 .ld2 .h2{ margin-top:16px; color:var(--sand) }
 .ld2__lead{ margin-top:18px; font-size:16px; line-height:1.6; color:rgba(255,255,255,.74) }
@@ -2062,9 +2063,9 @@ ul{ padding:0; list-style:none }
 .ft3__cols{ display:grid; grid-template-columns:repeat(2,auto); gap:clamp(28px,4vw,72px) }
 .ft3__cols a{ font-size:14px; line-height:1.95; color:rgba(255,255,255,.76); transition:color .2s }
 .ft3__cols a:hover{ color:#fff }
-.ft3__logo{ display:block; margin-top:clamp(56px,7vw,120px) }
+.ft3__logo{ display:block; width:clamp(220px,30vw,420px); margin-bottom:clamp(28px,3vw,48px) }
 .ft3__logo img{ display:block; width:100%; height:auto }
-.ft3__legal{ margin-top:clamp(20px,2.4vw,32px); font-size:13px; line-height:1.7; color:rgba(255,255,255,.55) }
+.ft3__legal{ margin-top:clamp(48px,5vw,80px); font-size:13px; line-height:1.7; color:rgba(255,255,255,.55) }
 .ft3__legal a{ border-bottom:1px solid rgba(255,255,255,.3); transition:border-color .2s }
 .ft3__legal a:hover{ border-bottom-color:#fff }
 
@@ -2272,4 +2273,92 @@ ul{ padding:0; list-style:none }
 @media (min-width:761px) and (max-width:1024px){
   .svc3__grid{ row-gap:14px }
   .ld3__grid{ grid-template-areas:"info" "card" "contacts"; grid-template-rows:auto }
+}
+
+/* ============================================================
+   ПЕРВЫЙ ВИЗУАЛ — ПРИМЕРЫ ВИЗУАЛИЗАЦИЙ
+
+   Веер из четырёх обложек. При наведении раскрывается, обложка
+   кнопки, над которой курсор, выходит вперёд. По клику — все
+   кадры объекта в просмотрщике.
+   ============================================================ */
+
+.viz{ background:none; overflow:visible }
+.viz__stack{
+  position:relative; aspect-ratio:1 / 1.02;
+  margin-inline:auto; width:min(100%,560px);
+}
+.viz__card{
+  --r:0deg; --x:0%; --y:0%;
+  position:absolute; left:16%; top:6%; width:68%;
+  padding:8px; border:0; cursor:zoom-in;
+  background:var(--white);
+  box-shadow:0 18px 40px rgba(26,12,10,.18), 0 2px 6px rgba(26,12,10,.08);
+  transform:translate(var(--x),var(--y)) rotate(var(--r));
+  transition:transform .55s cubic-bezier(.3,.7,.3,1), box-shadow .3s;
+  z-index:calc(10 - var(--i));
+}
+.viz__card img{ display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover }
+.viz__card[data-viz="0"]{ --r:-3deg }
+.viz__card[data-viz="1"]{ --r:5deg;  --x:9%;  --y:2% }
+.viz__card[data-viz="2"]{ --r:-8deg; --x:-10%; --y:4% }
+.viz__card[data-viz="3"]{ --r:10deg; --x:15%; --y:7% }
+@media (hover:hover){
+  .viz__stack:hover .viz__card[data-viz="0"]{ --x:-4%; --y:-2% }
+  .viz__stack:hover .viz__card[data-viz="1"]{ --x:20%; --y:0% }
+  .viz__stack:hover .viz__card[data-viz="2"]{ --x:-22%; --y:6% }
+  .viz__stack:hover .viz__card[data-viz="3"]{ --x:28%; --y:10% }
+  .viz__card:hover{ box-shadow:0 26px 60px rgba(26,12,10,.26), 0 2px 6px rgba(26,12,10,.08) }
+}
+/* Обложка выбранной кнопки — вперёд и ровно */
+.viz__card.is-front{ z-index:20; --r:0deg; --x:0%; --y:-3% }
+.viz__stack:hover .viz__card.is-front{ --x:0%; --y:-3% }
+
+.viz__btns{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  margin-top:clamp(28px,3vw,44px);
+}
+.viz__btn{
+  min-height:44px; padding:0 10px; cursor:pointer;
+  border:1px solid var(--rule-strong); background:none; color:var(--black);
+  font:inherit; font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  transition:background .2s, color .2s, border-color .2s;
+}
+.viz__btn:hover,
+.viz__btn:focus-visible{ background:var(--wine); border-color:var(--wine); color:#fff }
+
+/* Листание в просмотрщике — только для галерей */
+.lightbox__nav{ display:none }
+.lightbox.is-gallery .lightbox__nav{ display:grid }
+.lightbox__prev,
+.lightbox__next{
+  position:absolute; top:50%; place-items:center;
+  width:52px; height:52px; margin-top:-26px; cursor:pointer;
+  border:1px solid rgba(255,255,255,.4); background:rgba(8,7,7,.35); color:#fff;
+  transition:background .2s, color .2s;
+}
+.lightbox__prev{ left:clamp(8px,2vw,28px) }
+.lightbox__next{ right:clamp(8px,2vw,28px) }
+.lightbox__prev svg{ transform:rotate(180deg) }
+.lightbox__prev svg,
+.lightbox__next svg{ width:18px; height:18px }
+@media (hover:hover){
+  .lightbox__prev:hover,
+  .lightbox__next:hover{ background:#fff; color:var(--black) }
+}
+.lightbox__count{
+  position:absolute; left:50%; bottom:clamp(12px,2vw,24px); transform:translateX(-50%);
+  margin:0; color:rgba(255,255,255,.75); font-size:13px; letter-spacing:.08em;
+}
+
+@media (max-width:1024px){
+  .viz__stack{ width:min(78%,460px) }
+}
+@media (max-width:760px){
+  .viz__stack{ width:74% }
+  .viz__btns{ grid-template-columns:1fr 1fr }
+  .viz__btn{ width:100% }
+  .lightbox__prev,
+  .lightbox__next{ top:auto; bottom:14px; margin-top:0; width:46px; height:46px }
+  .lightbox__count{ bottom:28px }
 }

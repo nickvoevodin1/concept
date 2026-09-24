@@ -289,6 +289,7 @@
       if (!card) return;
       event.preventDefault();
       picture.src = card.dataset.full;
+      lightbox.classList.remove('is-gallery');
       lightbox.removeAttribute('hidden');
       document.body.classList.add('is-lightbox');
       document.body.style.overflow = 'hidden';
@@ -300,7 +301,10 @@
       document.body.classList.remove('is-lightbox');
       document.body.style.overflow = '';
     }
-    lightbox.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target.closest('.lightbox__nav')) return;   // листание галереи
+      closeLightbox();
+    });
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && !lightbox.hasAttribute('hidden')) closeLightbox();
     });

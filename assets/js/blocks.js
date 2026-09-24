@@ -439,6 +439,89 @@
   }
 
   /* ------------------------------------------------------------------
+     Первый визуал: веер визуализаций. Обложка или кнопка открывает
+     все кадры объекта в просмотрщике; листание стрелками, клавишами
+     и свайпом. Наведение на кнопку выводит её обложку вперёд.
+     ------------------------------------------------------------------ */
+  var viz = document.querySelector('.viz');
+  var box = document.querySelector('.lightbox');
+
+  if (viz && box) {
+    var picture = box.querySelector('.lightbox__img');
+    var counter = box.querySelector('.lightbox__count');
+    var buttons = all('.viz__btn', viz);
+    var covers = all('.viz__card', viz);
+    var frames = [];
+    var at = 0;
+
+    function framesOf(i) {
+      var b = buttons[i];
+      var list = [];
+      for (var n = 1; n <= Number(b.dataset.count); n++) {
+        list.push(b.dataset.dir + '/' + (n < 10 ? '0' : '') + n + '.jpg');
+      }
+      return list;
+    }
+
+    function showFrame(k) {
+      at = (k + frames.length) % frames.length;
+      picture.src = frames[at];
+      counter.textContent = (at + 1) + ' / ' + frames.length;
+      /* соседние кадры подгружаются заранее — листается без пауз */
+      [at + 1, at - 1].forEach(function (j) {
+        new Image().src = frames[(j + frames.length) % frames.length];
+      });
+    }
+
+    function openViz(i) {
+      frames = framesOf(i);
+      box.classList.add('is-gallery');
+      box.removeAttribute('hidden');
+      document.body.classList.add('is-lightbox');
+      document.body.style.overflow = 'hidden';
+      showFrame(0);
+    }
+
+    viz.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-viz]');
+      if (trigger) openViz(Number(trigger.dataset.viz));
+    });
+
+    function front(i) {
+      covers.forEach(function (c, k) { c.classList.toggle('is-front', k === i); });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener('mouseenter', function () { front(i); });
+      b.addEventListener('focus', function () { front(i); });
+      b.addEventListener('mouseleave', function () { front(-1); });
+      b.addEventListener('blur', function () { front(-1); });
+    });
+
+    box.querySelector('.lightbox__prev').addEventListener('click', function () { showFrame(at - 1); });
+    box.querySelector('.lightbox__next').addEventListener('click', function () { showFrame(at + 1); });
+
+    document.addEventListener('keydown', function (event) {
+      if (box.hasAttribute('hidden') || !box.classList.contains('is-gallery')) return;
+      if (event.key === 'ArrowRight') showFrame(at + 1);
+      if (event.key === 'ArrowLeft') showFrame(at - 1);
+    });
+
+    /* Свайп: короткое касание по-прежнему закрывает просмотр */
+    var touchX = null;
+    box.addEventListener('touchstart', function (event) {
+      touchX = event.touches[0].clientX;
+    }, { passive: true });
+    box.addEventListener('touchend', function (event) {
+      if (touchX === null || !box.classList.contains('is-gallery')) return;
+      var dx = event.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) < 40) return;
+      event.preventDefault();          // не даём касанию закрыть просмотр
+      showFrame(at + (dx < 0 ? 1 : -1));
+    });
+  }
+
+  /* ------------------------------------------------------------------
      Общие обновления
      ------------------------------------------------------------------ */
   function relayout() {
