@@ -738,6 +738,7 @@ ul{ padding:0; list-style:none }
   padding:clamp(18px,2vw,26px); background:var(--sand);
 }
 .gift__why p{ margin-top:10px; font-size:14px; line-height:1.65; color:var(--muted) }
+.gift__cta{ margin-top:clamp(20px,2.4vw,30px) }
 
 /* ============================================================
    БЛОК 8 — О СТУДИИ
