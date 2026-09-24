@@ -30,6 +30,11 @@
   --geo:    'Onest', 'Golos Text', -apple-system, Arial, sans-serif;
   --narrow: 'Bebas Neue Cyrillic', 'Golos Text', Arial, sans-serif;
 
+  /* Угловое меню первого варианта: от этих двух значений считается
+     и сам набор по углам, и отступ контента, чтобы они не наезжали */
+  --corner-pad: clamp(14px,1.8vw,28px);
+  --corner-rail:clamp(44px,3.2vw,56px);
+
   --wrap:1400px;
   --gut: clamp(16px, 3.4vw, 40px);
   --sect:clamp(56px, 6.5vw, 104px);
@@ -1229,7 +1234,7 @@ ul{ padding:0; list-style:none }
 .corner{
   position:fixed; inset:0; z-index:60; pointer-events:none;
   color:#fff;
-  --pad:clamp(16px,2.2vw,34px);
+  --pad:var(--corner-pad);
 }
 .corner[hidden]{ display:none }
 .corner > *{ pointer-events:auto; position:absolute }
@@ -1237,7 +1242,7 @@ ul{ padding:0; list-style:none }
 
 .corner__logo{
   left:var(--pad); top:var(--pad);
-  width:clamp(58px,5vw,78px);
+  width:var(--corner-rail);
   display:flex; flex-direction:column; gap:8px;
 }
 .corner__mark,
@@ -1268,7 +1273,7 @@ ul{ padding:0; list-style:none }
 .corner__letter{
   bottom:calc(var(--pad) - .08em);
   font-family:var(--display); font-weight:400;
-  font-size:clamp(64px,7.4vw,112px); line-height:.78;
+  font-size:clamp(50px,5.2vw,80px); line-height:.78;
 }
 .corner__letter--l{ left:var(--pad) }
 .corner__letter--r{ right:var(--pad) }
@@ -1288,7 +1293,10 @@ ul{ padding:0; list-style:none }
    кромки; сами блоки при этом остаются такими же, как в других
    вариантах. Первый экран — во всю ширину. */
 .hero-corner-mode main > .section,
-.hero-corner-mode .stub{ padding-inline:clamp(34px,4vw,64px) }
+.hero-corner-mode .stub,
+.hero-corner-mode .foot{
+  padding-inline:max(0px, calc(var(--corner-pad) + var(--corner-rail) + 30px - var(--gut)));
+}
 /* Кнопка вариантов не должна закрывать угловую букву */
 .hero-corner-mode .switch{ bottom:clamp(96px,11vw,132px) }
 
@@ -1327,21 +1335,22 @@ ul{ padding:0; list-style:none }
   /* Разделы остаются на боковых кромках, как на десктопе; прижимаем
      их вплотную к краю, чтобы они умещались в поля страницы */
   .corner{ --pad:10px }
-  .corner__logo{ width:46px; left:16px; top:16px }
-  .corner__tg{ right:16px; top:16px; width:36px; height:36px }
+  .corner__logo{ width:42px; left:14px; top:14px }
+  .corner__tg{ right:14px; top:14px; width:34px; height:34px }
   .corner__side{ font-size:10px; letter-spacing:.12em }
-  .corner__letter{ font-size:44px }
+  .corner__letter{ font-size:40px }
   .hero-corner-mode .switch{ bottom:76px }
   /* На телефоне поля страницы не расширяем: блоки должны быть такими же,
-     как в остальных вариантах, а кромки умещаются в поле */
+     как в остальных вариантах */
   .hero-corner-mode main > .section,
-  .hero-corner-mode .stub{ padding-inline:0 }
-  /* Ниже первого экрана кромки ложатся на карточки, поэтому получают
-     светлую подложку, а угловые буквы — часть композиции первого
-     экрана — там уже не нужны */
-  .corner.is-light .corner__side{
-    background:rgba(246,241,234,.92); padding:10px 3px; border-radius:99px;
-  }
-  .corner.is-light .corner__letter{ opacity:0 }
+  .hero-corner-mode .stub,
+  .hero-corner-mode .foot{ padding-inline:0 }
+  /* Ниже первого экрана раздвинуть блоки некуда, а кромки и буквы
+     ложились прямо на текст и срезали слова. Это часть композиции
+     первого экрана, поэтому дальше они уходят; закреплёнными остаются
+     логотип и Telegram. */
+  .corner.is-light .corner__side,
+  .corner.is-light .corner__letter{ opacity:0; pointer-events:none }
+  .corner__side,
   .corner__letter{ transition:opacity .35s ease }
 }
