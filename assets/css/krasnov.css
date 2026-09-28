@@ -2217,41 +2217,8 @@ ul{ padding:0; list-style:none }
    ПРАВКИ ПОСЛЕ ПРОСМОТРА — ТЕЛЕФОН
    ============================================================ */
 
-.fmt__pager{ display:none }
 
 @media (max-width:760px){
-  /* Таблица: пункты слева мелким шрифтом, справа один формат.
-     Стрелки сверху и снизу меняют формат. */
-  .fmt__pager{
-    display:grid; grid-template-columns:minmax(0,56%) minmax(0,44%); align-items:center;
-  }
-  .fmt__pager--top{ margin-top:clamp(28px,7vw,40px); padding-bottom:10px; border-bottom:1px solid var(--rule-strong) }
-  .fmt__pager--bottom{ padding-top:12px }
-  .fmt__label{ padding-left:10px; font-size:11px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--muted) }
-  .fmt__switch{ display:flex; align-items:center; gap:4px }
-  .fmt__name{ flex:1; min-width:0; text-align:center; font-size:12px; font-weight:600; line-height:1.25 }
-  .fmt__name small{ display:block; margin-top:2px; font-size:10px; font-weight:500; color:var(--muted) }
-  .fmt__arr{
-    display:grid; place-items:center; flex:none; width:30px; height:30px; cursor:pointer;
-    border:1px solid var(--rule-strong); background:none; color:var(--wine);
-  }
-  .fmt__arr svg{ width:13px; height:13px }
-  .fmt__arr--prev svg{ transform:rotate(180deg) }
-  .fmt__scroll{ margin-top:0; overflow:visible }
-  .svc2 .fmt__pager--top,
-  .svc3 .fmt__pager--top{ margin-top:clamp(40px,10vw,56px) }
-  .svc4__table .fmt__pager--top{ margin-top:6px }
-  .fmt{ min-width:0; table-layout:fixed }
-  .fmt thead{ display:none }
-  .fmt tbody th{
-    position:static; width:56%; min-width:0; box-shadow:none; background:none !important;
-    font-size:13px; line-height:1.35;
-  }
-  .fmt td{ display:none; width:44% }
-  .fmt[data-col="1"] td:nth-of-type(1),
-  .fmt[data-col="2"] td:nth-of-type(2),
-  .fmt[data-col="3"] td:nth-of-type(3){ display:table-cell }
-
   /* Этапы 2: наезд карточек и на телефоне, высоту ставит скрипт */
   .stp2__card{ position:sticky }
   .stp2__card + .stp2__card{ margin-top:clamp(90px,24vh,180px) }
@@ -2411,3 +2378,28 @@ ul{ padding:0; list-style:none }
 /* Сноска про Instagram во всех вариантах подвала */
 .meta-note{ margin-top:14px; max-width:78ch; font-size:12px; line-height:1.55; opacity:.6 }
 .ft2 .meta-note{ margin-top:12px }
+
+/* ============================================================
+   ФОРМАТЫ НА ТЕЛЕФОНЕ — «ЛЕСЕНКА» ВМЕСТО ТАБЛИЦЫ
+   ============================================================ */
+
+.fmtm{ display:none }
+
+@media (max-width:760px){
+  .svc2 .fmt__scroll{ display:none }
+  .fmtm{ display:grid; gap:10px; margin-top:clamp(40px,10vw,56px) }
+  .fmtm__card{ padding:18px 18px 20px; background:#F7F5F2; border-top:3px solid var(--wine) }
+  .fmtm__card:nth-child(2){ background:#F3EADC }
+  .fmtm__name{ font-size:17px; font-weight:600; line-height:1.25; color:var(--wine) }
+  .fmtm__base{ margin-top:6px; font-size:13px; line-height:1.4; color:var(--muted) }
+  .fmtm__list{ display:grid; gap:8px; margin-top:14px }
+  .fmtm__list li{ position:relative; padding-left:26px; font-size:14px; line-height:1.4 }
+  .fmtm__list li::before{
+    content:''; position:absolute; left:0; top:.2em; width:16px; height:16px; background:var(--wine);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
+  }
+}
+
+/* Главное фото объекта тоже открывает просмотр */
+.work:not(.work--stub) .work__media img{ cursor:zoom-in }

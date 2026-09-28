@@ -277,36 +277,108 @@
   syncHeader();
 
   /* ------------------------------------------------------------------
-     Полное фото объекта
+     Просмотр фото: объекты в «Что мы уже сделали» и визуализации.
+     Листается стрелками, клавишами ← → и свайпом. Открытый просмотр —
+     отдельный шаг истории: кнопка «Назад» на телефоне закрывает его
+     и оставляет на том же месте страницы, а не уводит с неё.
      ------------------------------------------------------------------ */
   var lightbox = document.querySelector('.lightbox');
 
   if (lightbox) {
     var picture = lightbox.querySelector('.lightbox__img');
+    var counter = lightbox.querySelector('.lightbox__count');
+    var frames = [];
+    var at = 0;
 
-    document.addEventListener('click', function (event) {
-      var card = event.target.closest('.work__card');
-      if (!card) return;
-      event.preventDefault();
-      picture.src = card.dataset.full;
-      lightbox.classList.remove('is-gallery');
+    function showFrame(k) {
+      at = (k + frames.length) % frames.length;
+      picture.src = frames[at];
+      if (counter) counter.textContent = (at + 1) + ' / ' + frames.length;
+      /* соседние кадры подгружаются заранее — листается без пауз */
+      if (frames.length > 1) {
+        [at + 1, at - 1].forEach(function (j) {
+          new Image().src = frames[(j + frames.length) % frames.length];
+        });
+      }
+    }
+
+    function openLightbox(list, start) {
+      frames = list;
+      lightbox.classList.toggle('is-gallery', list.length > 1);
+      showFrame(start || 0);
       lightbox.removeAttribute('hidden');
       document.body.classList.add('is-lightbox');
       document.body.style.overflow = 'hidden';
-    });
+      if (!(history.state && history.state.lightbox)) history.pushState({ lightbox: true }, '');
+    }
 
-    function closeLightbox() {
+    function hideLightbox() {
       lightbox.setAttribute('hidden', '');
       picture.src = '';
       document.body.classList.remove('is-lightbox');
       document.body.style.overflow = '';
     }
+
+    function closeLightbox() {
+      if (lightbox.hasAttribute('hidden')) return;
+      /* убираем свой шаг истории — закроет обработчик popstate */
+      if (history.state && history.state.lightbox) history.back();
+      else hideLightbox();
+    }
+
+    window.addEventListener('popstate', function () {
+      if (!lightbox.hasAttribute('hidden')) hideLightbox();
+    });
+
+    /* Для визуализаций в «Первом визуале» */
+    window.conceptLightbox = openLightbox;
+
+    /* Фото объекта: главное и маленькие карточки — одна лента */
+    document.addEventListener('click', function (event) {
+      var hit = event.target.closest('.work__card, .work__media img');
+      if (!hit) return;
+      var work = hit.closest('.work');
+      if (!work || work.classList.contains('work--stub')) return;
+      event.preventDefault();
+      var list = [];
+      var main = work.querySelector('.work__media img');
+      if (main) list.push(main.getAttribute('src'));
+      [].forEach.call(work.querySelectorAll('.work__card'), function (card) {
+        if (list.indexOf(card.dataset.full) < 0) list.push(card.dataset.full);
+      });
+      var src = hit.dataset.full || hit.getAttribute('src');
+      openLightbox(list, Math.max(0, list.indexOf(src)));
+    });
+
+    lightbox.querySelector('.lightbox__prev').addEventListener('click', function () { showFrame(at - 1); });
+    lightbox.querySelector('.lightbox__next').addEventListener('click', function () { showFrame(at + 1); });
+
+    /* Закрывает крестик и клик по тёмному полю; по самому фото — нет,
+       чтобы при листании не закрыть случайно */
     lightbox.addEventListener('click', function (event) {
-      if (event.target.closest('.lightbox__nav')) return;   // листание галереи
+      if (event.target.closest('.lightbox__nav') || event.target === picture) return;
       closeLightbox();
     });
+
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !lightbox.hasAttribute('hidden')) closeLightbox();
+      if (lightbox.hasAttribute('hidden')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (frames.length < 2) return;
+      if (event.key === 'ArrowRight') showFrame(at + 1);
+      if (event.key === 'ArrowLeft') showFrame(at - 1);
+    });
+
+    var touchX = null;
+    lightbox.addEventListener('touchstart', function (event) {
+      touchX = event.touches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', function (event) {
+      if (touchX === null) return;
+      var dx = event.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (frames.length < 2 || Math.abs(dx) < 40) return;
+      event.preventDefault();          // свайп — не касание, просмотр не закрываем
+      showFrame(at + (dx < 0 ? 1 : -1));
     });
   }
 

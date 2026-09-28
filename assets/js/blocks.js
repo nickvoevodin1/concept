@@ -80,53 +80,6 @@
   function syncRails() { rails.forEach(function (update) { update(); }); }
 
   /* ------------------------------------------------------------------
-     Таблица форматов на телефоне: слева пункты, справа один формат.
-     Стрелки сверху и снизу переключают формат, чтобы сравнивать.
-     ------------------------------------------------------------------ */
-  var ARROW = '<svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>';
-
-  all('.fmt').forEach(function (table) {
-    var scroller = table.closest('.fmt__scroll');
-    var cells = all('thead th', table);
-    var label = cells[0].textContent.trim();
-    var names = cells.slice(1).map(function (th) {
-      return th.innerHTML.replace(/<br\s*\/?>/g, ' ').replace(/<[^>]+>/g, '').trim();
-    });
-    var col = 0;
-
-    function bar(where) {
-      var el = document.createElement('div');
-      el.className = 'fmt__pager fmt__pager--' + where;
-      el.innerHTML = '<span class="fmt__label">' + (where === 'top' ? label : '') + '</span>' +
-        '<span class="fmt__switch">' +
-        '<button class="fmt__arr fmt__arr--prev" type="button" data-step="-1" aria-label="Предыдущий формат">' + ARROW + '</button>' +
-        '<span class="fmt__name"' + (where === 'top' ? ' aria-live="polite"' : '') + '></span>' +
-        '<button class="fmt__arr" type="button" data-step="1" aria-label="Следующий формат">' + ARROW + '</button>' +
-        '</span>';
-      el.addEventListener('click', function (event) {
-        var button = event.target.closest('.fmt__arr');
-        if (!button) return;
-        col = (col + Number(button.dataset.step) + names.length) % names.length;
-        show();
-      });
-      return el;
-    }
-
-    var top = bar('top');
-    var bottom = bar('bottom');
-    scroller.parentNode.insertBefore(top, scroller);
-    scroller.parentNode.insertBefore(bottom, scroller.nextSibling);
-
-    function show() {
-      table.dataset.col = String(col + 1);
-      [top, bottom].forEach(function (b) {
-        b.querySelector('.fmt__name').innerHTML = names[col] + ' <small>' + (col + 1) + '/' + names.length + '</small>';
-      });
-    }
-    show();
-  });
-
-  /* ------------------------------------------------------------------
      Этапы, вариант 2: карточки липнут и наезжают друг на друга —
      и на десктопе, и на телефоне. Чтобы следующая целиком закрывала
      предыдущую, высоты идут по нарастающей. Карточка выше экрана
@@ -439,20 +392,13 @@
   }
 
   /* ------------------------------------------------------------------
-     Первый визуал, оба варианта. Вариант 1 — четыре объекта: обложка
-     или кнопка «Визуализация N» открывает все кадры объекта, наведение
-     на кнопку выводит её обложку вперёд. Вариант 2 — концепция:
-     страница веера открывает просмотр с этой страницы.
-     Листание стрелками, клавишами и свайпом.
+     Первый визуал: обложка или кнопка «Визуализация N» открывает все
+     кадры объекта в общем просмотре; наведение на кнопку выводит её
+     обложку вперёд.
      ------------------------------------------------------------------ */
-  var vizs = all('.viz');
-  var box = document.querySelector('.lightbox');
-
-  if (vizs.length && box) {
-    var picture = box.querySelector('.lightbox__img');
-    var counter = box.querySelector('.lightbox__count');
-    var frames = [];
-    var at = 0;
+  all('.viz').forEach(function (viz) {
+    var buttons = all('.viz__btn[data-viz]', viz);
+    var covers = all('.viz__card[data-viz]', viz);
 
     function framesOf(source) {
       var list = [];
@@ -462,66 +408,23 @@
       return list;
     }
 
-    function showFrame(k) {
-      at = (k + frames.length) % frames.length;
-      picture.src = frames[at];
-      counter.textContent = (at + 1) + ' / ' + frames.length;
-      /* соседние кадры подгружаются заранее — листается без пауз */
-      [at + 1, at - 1].forEach(function (j) {
-        new Image().src = frames[(j + frames.length) % frames.length];
-      });
+    viz.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-viz], [data-start]');
+      if (!trigger || !window.conceptLightbox) return;
+      var source = trigger.hasAttribute('data-viz') ? buttons[Number(trigger.dataset.viz)] : viz;
+      window.conceptLightbox(framesOf(source), Number(trigger.dataset.start || 0));
+    });
+
+    function front(i) {
+      covers.forEach(function (c, k) { c.classList.toggle('is-front', k === i); });
     }
-
-    vizs.forEach(function (viz) {
-      var buttons = all('.viz__btn[data-viz]', viz);
-      var covers = all('.viz__card[data-viz]', viz);
-
-      viz.addEventListener('click', function (event) {
-        var trigger = event.target.closest('[data-viz], [data-start]');
-        if (!trigger) return;
-        var source = trigger.hasAttribute('data-viz') ? buttons[Number(trigger.dataset.viz)] : viz;
-        frames = framesOf(source);
-        box.classList.add('is-gallery');
-        box.removeAttribute('hidden');
-        document.body.classList.add('is-lightbox');
-        document.body.style.overflow = 'hidden';
-        showFrame(Number(trigger.dataset.start || 0));
-      });
-
-      function front(i) {
-        covers.forEach(function (c, k) { c.classList.toggle('is-front', k === i); });
-      }
-      buttons.forEach(function (b, i) {
-        b.addEventListener('mouseenter', function () { front(i); });
-        b.addEventListener('focus', function () { front(i); });
-        b.addEventListener('mouseleave', function () { front(-1); });
-        b.addEventListener('blur', function () { front(-1); });
-      });
+    buttons.forEach(function (b, i) {
+      b.addEventListener('mouseenter', function () { front(i); });
+      b.addEventListener('focus', function () { front(i); });
+      b.addEventListener('mouseleave', function () { front(-1); });
+      b.addEventListener('blur', function () { front(-1); });
     });
-
-    box.querySelector('.lightbox__prev').addEventListener('click', function () { showFrame(at - 1); });
-    box.querySelector('.lightbox__next').addEventListener('click', function () { showFrame(at + 1); });
-
-    document.addEventListener('keydown', function (event) {
-      if (box.hasAttribute('hidden') || !box.classList.contains('is-gallery')) return;
-      if (event.key === 'ArrowRight') showFrame(at + 1);
-      if (event.key === 'ArrowLeft') showFrame(at - 1);
-    });
-
-    /* Свайп: короткое касание по-прежнему закрывает просмотр */
-    var touchX = null;
-    box.addEventListener('touchstart', function (event) {
-      touchX = event.touches[0].clientX;
-    }, { passive: true });
-    box.addEventListener('touchend', function (event) {
-      if (touchX === null || !box.classList.contains('is-gallery')) return;
-      var dx = event.changedTouches[0].clientX - touchX;
-      touchX = null;
-      if (Math.abs(dx) < 40) return;
-      event.preventDefault();          // не даём касанию закрыть просмотр
-      showFrame(at + (dx < 0 ? 1 : -1));
-    });
-  }
+  });
 
   /* ------------------------------------------------------------------
      Общие обновления
