@@ -2380,25 +2380,36 @@ ul{ padding:0; list-style:none }
 .ft2 .meta-note{ margin-top:12px }
 
 /* ============================================================
-   ФОРМАТЫ НА ТЕЛЕФОНЕ — «ЛЕСЕНКА» ВМЕСТО ТАБЛИЦЫ
+   ФОРМАТЫ НА ТЕЛЕФОНЕ
+
+   Вместо ленты карточек и таблицы — по карточке на формат:
+   описание и что входит в одном месте, друг под другом.
    ============================================================ */
 
 .fmtm{ display:none }
 
 @media (max-width:760px){
+  .svc2__rail,
   .svc2 .fmt__scroll{ display:none }
-  .fmtm{ display:grid; gap:10px; margin-top:clamp(40px,10vw,56px) }
-  .fmtm__card{ padding:18px 18px 20px; background:#F7F5F2; border-top:3px solid var(--wine) }
+  .fmtm{ display:grid; gap:10px; margin-top:28px }
+  .fmtm__card{ padding:20px 18px 22px; background:#F7F5F2; border-top:3px solid var(--wine) }
   .fmtm__card:nth-child(2){ background:#F3EADC }
-  .fmtm__name{ font-size:17px; font-weight:600; line-height:1.25; color:var(--wine) }
+  .fmtm__icon{ display:block; width:28px; height:28px; color:var(--wine) }
+  .fmtm__name{ margin-top:14px; font-size:18px; font-weight:600; line-height:1.25; color:var(--wine) }
+  .fmtm__text{ margin-top:8px; font-size:13.5px; line-height:1.55; color:#55504C }
+  .fmtm__what{
+    margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);
+    font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--black);
+  }
   .fmtm__base{ margin-top:6px; font-size:13px; line-height:1.4; color:var(--muted) }
-  .fmtm__list{ display:grid; gap:8px; margin-top:14px }
+  .fmtm__list{ display:grid; gap:8px; margin-top:12px }
   .fmtm__list li{ position:relative; padding-left:26px; font-size:14px; line-height:1.4 }
   .fmtm__list li::before{
     content:''; position:absolute; left:0; top:.2em; width:16px; height:16px; background:var(--wine);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
             mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.6l4 4 8-9' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat center/contain;
   }
+  .fmtm .svc2__more{ margin-top:18px; padding-top:0 }
 }
 
 /* Главное фото объекта тоже открывает просмотр */

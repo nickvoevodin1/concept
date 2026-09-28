@@ -458,6 +458,10 @@
           <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/05.jpg" aria-label="Открыть фото объекта">
             <img src="assets/photo/works/mid-lounge/05.jpg" alt="" loading="lazy">
           </button>
+          <!-- в превью не показывается, но есть в листании -->
+          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/04.jpg" aria-label="Открыть фото объекта" hidden>
+            <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
+          </button>
         </div>
       </article>
 
@@ -471,25 +475,13 @@
         </div>
       </article>
 
-      <article class="work work--tall work--l w6" tabindex="0">
-        <h3 class="work__title">Кальянная, 240 м², Москва</h3>
-        <p class="work__meta">Дизайн-проект и ремонт · 5 месяцев</p>
+      <!-- ЗАГЛУШКА: оригинальных фото «Кальянной, 240 м²» нет — раньше здесь
+           стояли фото кальянной 210 м². Вернём объект, когда пришлют фото. -->
+      <article class="work work--tall work--l work--stub w6">
+        <h3 class="work__title">Объект готовим к публикации</h3>
+        <p class="work__meta">Фото и описание добавим, когда они будут готовы</p>
         <div class="work__media">
-          <img src="assets/photo/works/mid-lounge/03.jpg" alt="Кальянная: посадочная зона с диванами и декоративными нишами" loading="lazy" width="1050" height="1400">
-        </div>
-        <div class="work__cards">
-          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/01.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/mid-lounge/01.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/02.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/mid-lounge/02.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/04.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/mid-lounge/04.jpg" alt="" loading="lazy">
-          </button>
-          <button class="work__card" type="button" data-full="assets/photo/works/mid-lounge/wide.jpg" aria-label="Открыть фото объекта">
-            <img src="assets/photo/works/mid-lounge/wide.jpg" alt="" loading="lazy">
-          </button>
+          <img class="work__stub-mark" src="assets/logo/concept-mark.svg" alt="" width="165" height="170" loading="lazy">
         </div>
       </article>
 
@@ -579,12 +571,16 @@
       </table>
     </div>
 
-    <!-- На телефоне вместо таблицы: форматы вложены друг в друга, поэтому
-         «лесенкой» — у каждого следующего только то, что он добавляет.
-         Фраза «Всё из «…», плюс:» — новая, в «Тексты CONCEPT» её нет. -->
+    <!-- На телефоне вместо карточек с лентой и таблицы: по карточке на формат,
+         всё про него в одном месте — описание и что входит. Форматы вложены,
+         поэтому у второго и третьего только то, что они добавляют.
+         Новые подписи: «Что входит» (есть в шапке таблицы) и «Всё из «…», плюс:». -->
     <div class="fmtm">
         <article class="fmtm__card">
+          <svg class="fmtm__icon" aria-hidden="true" focusable="false"><use href="#i-plan"/></svg>
           <h3 class="fmtm__name">Только дизайн-проект</h3>
+          <p class="fmtm__text">Вы получаете полный комплект документации: визуализации, чертежи, спецификации. Дальше работаете с любой бригадой. Формат подходит, если у вас уже есть проверенные строители.</p>
+          <p class="fmtm__what">Что входит</p>
           <ul class="fmtm__list">
             <li>Обмеры и фотофиксация объекта</li>
             <li>Техническое задание</li>
@@ -594,25 +590,34 @@
             <li>Полный комплект рабочих чертежей</li>
             <li>Спецификации материалов и оборудования</li>
           </ul>
+          <a class="svc2__more" href="#contacts">Обсудить формат <svg class="ico ico--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
         </article>
         <article class="fmtm__card">
-          <h3 class="fmtm__name">Дизайн-проект + надзор</h3>
+          <svg class="fmtm__icon" aria-hidden="true" focusable="false"><use href="#i-loupe"/></svg>
+          <h3 class="fmtm__name">Проект с авторским надзором</h3>
+          <p class="fmtm__text">К проекту добавляются комплектация материалами и авторский надзор. Мы подбираем и закупаем материалы, регулярно бываем на объекте, сверяем ход работ с чертежами и даём рекомендации бригаде. За качество и сроки ремонта отвечает бригада, которую вы наняли: наша задача — следить за соответствием проекту и вовремя предупреждать об отклонениях.</p>
+          <p class="fmtm__what">Что входит</p>
           <p class="fmtm__base">Всё из «Только дизайн-проект», плюс:</p>
           <ul class="fmtm__list">
             <li>Подбор и закупка чистовых материалов</li>
             <li>Работа с поставщиками, скидки, поставки</li>
             <li>Авторский надзор на объекте</li>
           </ul>
+          <a class="svc2__more" href="#contacts">Обсудить формат <svg class="ico ico--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
         </article>
         <article class="fmtm__card">
-          <h3 class="fmtm__name">Дизайн-проект + ремонт</h3>
-          <p class="fmtm__base">Всё из «Дизайн-проект + надзор», плюс:</p>
+          <svg class="fmtm__icon" aria-hidden="true" focusable="false"><use href="#i-build"/></svg>
+          <h3 class="fmtm__name">Дизайн-проект и ремонт</h3>
+          <p class="fmtm__text">Берём объект целиком: от первого замера до подписания актов. Один договор, одна ответственность, камера на объекте. Вам не нужно согласовывать проект со сторонней бригадой и искать исполнителей.</p>
+          <p class="fmtm__what">Что входит</p>
+          <p class="fmtm__base">Всё из «Проект с авторским надзором», плюс:</p>
           <ul class="fmtm__list">
             <li>Ремонтные работы</li>
             <li>Организация и контроль работ</li>
             <li>Видеонаблюдение на объекте</li>
             <li>Финальная приёмка и сдача</li>
           </ul>
+          <a class="svc2__more" href="#contacts">Обсудить формат <svg class="ico ico--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
         </article>
     </div>
   </div>
